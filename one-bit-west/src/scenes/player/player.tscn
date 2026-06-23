@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bow3oaefcxhol" path="res://src/scripts/player/player.gd" id="1_swhsd"]
 [ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="2_qopur"]
+[ext_resource type="Script" uid="uid://yl1n54r6xpmb" path="res://src/scripts/systems/camera_shake.gd" id="3_n52bt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8qny"]
 size = Vector3(1, 1, 0.09814453)
@@ -18,5 +19,5 @@ shape = SubResource("BoxShape3D_c8qny")
 
 [node name="Head" type="Node3D" parent="." unique_id=1664977333]
 
-[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1181811111]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48002672, 0)
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=129504742]
+script = ExtResource("3_n52bt")
