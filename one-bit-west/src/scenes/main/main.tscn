@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cgrib7lxydwj2"]
+
+[node name="Main" type="Node" unique_id=845016061]
+
+[node name="Systems" type="Node" parent="." unique_id=2131432947]
+
+[node name="World" type="Node3D" parent="." unique_id=1072471363]
+
+[node name="HudLayout" type="CanvasLayer" parent="." unique_id=992616815]
+
+[node name="HudRoot" type="Control" parent="HudLayout" unique_id=28896329]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseLayout" type="CanvasLayer" parent="." unique_id=940167585]
+
+[node name="PauseRoot" type="Control" parent="PauseLayout" unique_id=922928701]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

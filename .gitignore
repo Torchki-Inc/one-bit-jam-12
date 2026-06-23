@@ -1,17 +1,28 @@
-# Godot 4+ specific ignores
-.godot/
-.nomedia
+# Godot 4+
+one-bit-west/.godot/
+one-bit-west/.nomedia
 
-# Godot-specific ignores
-.import/
-export.cfg
-export_credentials.cfg
+# Export files
+one-bit-west/export.cfg
+one-bit-west/export_credentials.cfg
+
+# Temporary files
 *.tmp
-
-# Imported translations (automatically generated from CSV files)
 *.translation
 
-# Mono-specific ignores
-.mono/
-data_*/
+# Mono (C#)
+one-bit-west/.mono/
+one-bit-west/data_*/
 mono_crash.*.json
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Builds
+build/
+exports/
