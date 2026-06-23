@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bow3oaefcxhol" path="res://src/scripts/player/player.gd" id="1_swhsd"]
 [ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="2_qopur"]
+[ext_resource type="PackedScene" uid="uid://cxeewwumw75h6" path="res://src/scenes/weapons/weapon.tscn" id="3_n52bt"]
 [ext_resource type="Script" uid="uid://yl1n54r6xpmb" path="res://src/scripts/systems/camera_shake.gd" id="3_n52bt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8qny"]
@@ -14,10 +15,13 @@ script = ExtResource("1_swhsd")
 texture = ExtResource("2_qopur")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1777880548]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27857363, -0.07006836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06690574, 0.13444579, 0.2100001)
 shape = SubResource("BoxShape3D_c8qny")
 
 [node name="Head" type="Node3D" parent="." unique_id=1664977333]
 
-[node name="Camera3D" type="Camera3D" parent="Head" unique_id=129504742]
-script = ExtResource("3_n52bt")
+[node name="Weapon" parent="Head" unique_id=876486780 instance=ExtResource("3_n52bt")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.1702058, 0, -0.32092685)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1181811111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48002672, 0)
