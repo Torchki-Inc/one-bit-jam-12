@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c8v7b2luia2lj"]
+
+[ext_resource type="Script" uid="uid://bow3oaefcxhol" path="res://src/scripts/player/player.gd" id="1_swhsd"]
+[ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="2_qopur"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c8qny"]
+size = Vector3(1, 1, 0.09814453)
+
+[node name="Player" type="CharacterBody3D" unique_id=986646973]
+script = ExtResource("1_swhsd")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=613253213]
+texture = ExtResource("2_qopur")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1777880548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27857363, -0.07006836)
+shape = SubResource("BoxShape3D_c8qny")
+
+[node name="Head" type="Node3D" parent="." unique_id=1664977333]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1181811111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48002672, 0)
