@@ -7,6 +7,9 @@ const SENSITIVITY: float = 0.004
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 
+@onready var weapon := $Head/Weapon
+
+var health := 100
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -22,6 +25,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			deg_to_rad(-70),
 			deg_to_rad(70),
 		)
+
+	if event.is_action_pressed("shoot"):
+		weapon.shoot(camera);
+
+	if event.is_action_pressed("change_weapon"):
+		match weapon.type:
+			weapon.WeaponType.REVOLVER:
+				weapon.type = weapon.WeaponType.SHOTGUN
+			weapon.WeaponType.SHOTGUN:
+				weapon.type = weapon.WeaponType.REVOLVER
 
 
 func _physics_process(delta: float) -> void:
@@ -47,3 +60,8 @@ func _physics_process(delta: float) -> void:
 	velocity.z = move_toward(velocity.z, target_velocity.z, ACCELERATION * delta)
 
 	move_and_slide()
+
+
+func take_damage(amount: int):
+	health -= amount
+	print(name, " took ", amount, " damage. HP: ", health)

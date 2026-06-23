@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cxeewwumw75h6"]
+
+[ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="1_hcdoj"]
+[ext_resource type="Script" uid="uid://csvvv2333k0xm" path="res://src/scripts/weapons/weapon.gd" id="2_atqnv"]
+
+[node name="Weapon" type="Sprite3D" unique_id=876486780]
+texture = ExtResource("1_hcdoj")
+script = ExtResource("2_atqnv")
