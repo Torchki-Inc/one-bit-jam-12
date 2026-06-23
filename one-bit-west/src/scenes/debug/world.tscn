@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ilop6igxmrm4"]
 
 [ext_resource type="PackedScene" uid="uid://c8v7b2luia2lj" path="res://src/scenes/player/player.tscn" id="1_5lxvg"]
+[ext_resource type="PackedScene" uid="uid://cpha5xer7byrt" path="res://src/scenes/enemies/enemy_template.tscn" id="2_5e4sf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lxvg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,3 +31,10 @@ size = Vector3(26.816711, 0.36572266, 25.93409)
 
 [node name="Player" parent="." unique_id=986646973 instance=ExtResource("1_5lxvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="EnemyRoot" type="Node" parent="." unique_id=494032929]
+
+[node name="Enemy" parent="EnemyRoot" unique_id=1865814944 instance=ExtResource("2_5e4sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.345692, 0.47683358, -3.481809)
+modulate = Color(1, 0.17254902, 1, 1)
+double_sided = false
