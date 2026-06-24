@@ -1,9 +1,10 @@
-class_name BanditRevolver
+class_name BanditShotgun
 extends BaseEnemy
 
 var sm: EnemySM
 @onready var shoot_point: Marker3D = $ShootPoint
-
+@export var shotgun_spread := 8.0
+@export var shotgun_pellets := 8
 
 
 func _ready():
@@ -33,33 +34,41 @@ func _physics_process(delta: float) -> void:
 
 
 func make_shot():
-	var space_state := get_world_3d().direct_space_state
+	for i in shotgun_pellets:
+		var space_state := get_world_3d().direct_space_state
 
-	var from := self.shoot_point.global_position
-	var direction := (player.global_position - from).normalized()
-	var to: Vector3 = from + direction * self.shoot_radius
+		var from := self.shoot_point.global_position
+		var direction := (player.global_position - from).normalized()
 
-	var query := PhysicsRayQueryParameters3D.create(from, to)
-	query.exclude = [self]
+		var spread_x := deg_to_rad(randf_range(-shotgun_spread, shotgun_spread))
+		var spread_y := deg_to_rad(randf_range(-shotgun_spread, shotgun_spread))
 
-	_draw_ray(from, to)
+		direction = direction.rotated(shoot_point.global_transform.basis.x, spread_y)
+		direction = direction.rotated(shoot_point.global_transform.basis.y, spread_x)
+		direction = direction.normalized()
 
-	var result := space_state.intersect_ray(query)
+		var to := from + direction * shoot_radius
+		_draw_ray(from, to)
+		var query := PhysicsRayQueryParameters3D.create(from, to)
+		query.exclude = [self]
 
-	if result:
-		var hit_object = result["collider"]
+		var result := space_state.intersect_ray(query)
 
-		if hit_object.has_method("take_damage"):
-			hit_object.take_damage(self.damage)
+		if result:
+			var hit_object = result["collider"]
 
-			print("Revolver hit: ", hit_object.name)
+			if hit_object.has_method("take_damage"):
+				hit_object.take_damage(damage)
 
-		elif hit_object.get_parent().has_method("take_damage"):
-			hit_object.get_parent().take_damage(self.damage)
+				print("Shotgun hit: ", hit_object.name)
 
-			print("Revolver hit: ", hit_object.name)
-	else:
-		print(self.get_instance_id(), " misses")
+			if hit_object.get_parent().has_method("take_damage"):
+				hit_object.get_parent().take_damage()
+
+				print("Shotgun hit: ", hit_object.get_parent().name)
+
+		else:
+			print("Miss")
 
 func _draw_ray(from: Vector3, to: Vector3):
 	var mesh_instance := MeshInstance3D.new()
@@ -67,7 +76,7 @@ func _draw_ray(from: Vector3, to: Vector3):
 	var material := StandardMaterial3D.new()
 
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.albedo_color = Color.RED
+	material.albedo_color = Color.BLUE
 
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
 	mesh.surface_add_vertex(from)

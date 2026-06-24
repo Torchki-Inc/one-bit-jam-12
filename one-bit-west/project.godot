@@ -37,6 +37,8 @@ enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://addons/": "red",
+"res://src/assets/": "orange",
 "res://src/scenes/debug/": "yellow",
 "res://src/scenes/enemies/": "purple"
 }
