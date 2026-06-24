@@ -27,10 +27,10 @@ func die():
 
 
 # calculate and move sprite toward player
-func move_toward_target(target_pos: Vector3, delta: float):
-	nav_agent.target_position = target_pos
-	var next = nav_agent.get_next_path_position()
-	var dir = (next - global_position).normalized()
+func move_toward_target(target_pos: Vector3, _delta: float):
+	var dir = (target_pos - global_position)
+	dir.y = 0
+	dir = dir.normalized()
 	velocity = dir * move_speed
 	move_and_slide()
 

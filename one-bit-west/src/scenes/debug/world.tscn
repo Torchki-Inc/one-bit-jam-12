@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c8v7b2luia2lj" path="res://src/scenes/player/player.tscn" id="1_5lxvg"]
 [ext_resource type="PackedScene" uid="uid://jb7cakgdqba4" path="res://src/scenes/enemies/enemy.tscn" id="2_5e4sf"]
+[ext_resource type="PackedScene" uid="uid://b3740d5fde3hb" path="res://src/scenes/enemies/revolver_bandit.tscn" id="3_h8hjv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lxvg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -36,3 +37,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Enemy" parent="EnemyRoot" unique_id=1612062943 instance=ExtResource("2_5e4sf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.963048, 0.9197631, -6.1683846)
+
+[node name="RevolverBandit" parent="EnemyRoot" unique_id=1517137777 instance=ExtResource("3_h8hjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.784851, 0, 0)
