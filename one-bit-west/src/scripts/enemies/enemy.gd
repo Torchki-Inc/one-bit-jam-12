@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends AnimatedSprite3D
 
 @export var health := 100
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cpha5xer7byrt"]
 
 [ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="1_jgcqs"]
+[ext_resource type="Script" uid="uid://b4hxn18e8nvot" path="res://src/scripts/enemies/enemy.gd" id="2_4c3jw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c8qny"]
 animations = [{
@@ -20,6 +21,7 @@ size = Vector3(1.2422919, 1.1590185, 0.044799805)
 billboard = 2
 transparent = false
 sprite_frames = SubResource("SpriteFrames_c8qny")
+script = ExtResource("2_4c3jw")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=914118426]
 
