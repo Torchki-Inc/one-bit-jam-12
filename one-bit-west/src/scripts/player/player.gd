@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var hud: Control
+
 const SPEED: float = 7.5
 const ACCELERATION: float = 25.0
 const SENSITIVITY: float = 0.004
@@ -13,6 +15,9 @@ var health := 100
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	hud.set_health(health)
+	weapon.ammo_changed.connect(hud.set_ammo)
+	weapon.update_ammo_display()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -35,6 +40,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				weapon.type = weapon.WeaponType.SHOTGUN
 			weapon.WeaponType.SHOTGUN:
 				weapon.type = weapon.WeaponType.REVOLVER
+
+		hud.set_ammo(weapon.get_current_ammo(), weapon.get_reserve_ammo())
 
 
 func _physics_process(delta: float) -> void:
@@ -65,3 +72,5 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int):
 	health -= amount
 	print(name, " took ", amount, " damage. HP: ", health)
+
+	hud.set_health(health)

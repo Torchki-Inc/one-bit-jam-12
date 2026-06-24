@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://blldwpcs2b7gb"]
+
+[ext_resource type="Texture2D" uid="uid://immhsi1ubmuh" path="res://src/assets/HUD/crosshair.svg" id="1_6of88"]
+[ext_resource type="Script" uid="uid://dbxusdm26dig6" path="res://src/scripts/ui/hud.gd" id="1_782su"]
+
+[node name="Hud" type="Control" unique_id=1821053354]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_782su")
+
+[node name="Crosshair" type="TextureRect" parent="." unique_id=1306785877]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_6of88")
+
+[node name="AmmoLabel" type="Label" parent="." unique_id=601093085]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 25.0
+offset_right = 483.0
+offset_bottom = 48.0
+
+[node name="HealthLabel" type="Label" parent="." unique_id=371745087]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 8.0
+offset_right = 194.0
+offset_bottom = 31.0

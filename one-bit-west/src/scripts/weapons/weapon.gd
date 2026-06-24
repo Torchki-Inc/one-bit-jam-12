@@ -30,6 +30,8 @@ enum WeaponType {
 var can_shoot := true
 var is_reloading := false
 
+signal ammo_changed(current: int, reserve: int)
+
 func shoot(camera:Camera3D):
 	if is_reloading:
 		print("Reloading")
@@ -45,6 +47,7 @@ func shoot(camera:Camera3D):
 
 	can_shoot = false
 	use_ammo(1)
+	emit_signal("ammo_changed", get_current_ammo(), get_reserve_ammo())
 
 	match type:
 		WeaponType.REVOLVER:
@@ -143,6 +146,7 @@ func reload() -> void:
 
 	add_current_ammo(ammo_to_load)
 	remove_reserve_ammo(ammo_to_load)
+	emit_signal("ammo_changed", get_current_ammo(), get_reserve_ammo())
 
 	is_reloading = false
 	can_shoot = true
@@ -222,3 +226,6 @@ func get_fire_rate() -> float:
 			return shotgun_fire_rate
 
 	return 0.5
+
+func update_ammo_display() -> void:
+	ammo_changed.emit(get_current_ammo(), get_reserve_ammo())

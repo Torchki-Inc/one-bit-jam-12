@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://cgrib7lxydwj2"]
 
+[ext_resource type="PackedScene" uid="uid://blldwpcs2b7gb" path="res://src/scenes/ui/HUD.tscn" id="1_45uaa"]
+[ext_resource type="Script" uid="uid://dkgnkfepnx5mi" path="res://src/scripts/ui/pause_layout.gd" id="2_vw57g"]
+[ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="3_fub2y"]
+[ext_resource type="PackedScene" uid="uid://0o282103f8ms" path="res://src/scenes/ui/main_menu.tscn" id="4_vw57g"]
+
 [node name="Main" type="Node" unique_id=845016061]
 
 [node name="Systems" type="Node" parent="." unique_id=2131432947]
@@ -8,16 +13,12 @@
 
 [node name="HudLayout" type="CanvasLayer" parent="." unique_id=992616815]
 
-[node name="HudRoot" type="Control" parent="HudLayout" unique_id=28896329]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Hud" parent="HudLayout" unique_id=1821053354 instance=ExtResource("1_45uaa")]
 
 [node name="PauseLayout" type="CanvasLayer" parent="." unique_id=940167585]
+process_mode = 3
+script = ExtResource("2_vw57g")
 
-[node name="PauseRoot" type="Control" parent="PauseLayout" unique_id=922928701]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PauseMenu" parent="PauseLayout" unique_id=1433678151 instance=ExtResource("3_fub2y")]
+visible = false
+main_menu_scene = ExtResource("4_vw57g")
