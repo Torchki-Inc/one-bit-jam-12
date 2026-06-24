@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bow3oaefcxhol" path="res://src/scripts/player/player.gd" id="1_swhsd"]
 [ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="2_qopur"]
 [ext_resource type="PackedScene" uid="uid://cxeewwumw75h6" path="res://src/scenes/weapons/weapon.tscn" id="3_n52bt"]
+[ext_resource type="Script" uid="uid://yl1n54r6xpmb" path="res://src/scripts/systems/camera_shake.gd" id="4_cx3ie"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8qny"]
 size = Vector3(1, 1, 0.118896484)
@@ -24,3 +25,4 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.89
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1181811111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48002672, 0)
+script = ExtResource("4_cx3ie")

@@ -11,12 +11,20 @@
 
 [node name="World" type="Node3D" parent="." unique_id=1072471363]
 
+[node name="EntityRoot" type="Node3D" parent="World" unique_id=1390327307]
+
+[node name="EffectRoot" type="Node3D" parent="World" unique_id=981164991]
+
+[node name="LevelRoot" type="Node3D" parent="World" unique_id=924270617]
+
 [node name="HudLayout" type="CanvasLayer" parent="." unique_id=992616815]
+layer = 10
 
 [node name="Hud" parent="HudLayout" unique_id=1821053354 instance=ExtResource("1_45uaa")]
 
 [node name="PauseLayout" type="CanvasLayer" parent="." unique_id=940167585]
 process_mode = 3
+layer = 20
 script = ExtResource("2_vw57g")
 
 [node name="PauseMenu" parent="PauseLayout" unique_id=1433678151 instance=ExtResource("3_fub2y")]
