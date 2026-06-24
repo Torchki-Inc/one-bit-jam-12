@@ -74,8 +74,14 @@ func shoot_revolver(camera:Camera3D):
 			hit_object.take_damage(revolver_damage)
 
 			print("Revolver hit: ", hit_object.name)
-		else:
-			print("Miss")
+
+		elif hit_object.get_parent().has_method("take_damage"):
+			hit_object.get_parent().take_damage(revolver_damage)
+
+			print("Revolver hit: ", hit_object.name)
+
+	else:
+		print("Miss")
 
 func shoot_shotgun(camera:Camera3D):
 	for i in shotgun_pellets:
@@ -105,8 +111,14 @@ func shoot_shotgun(camera:Camera3D):
 				hit_object.take_damage(revolver_damage)
 
 				print("Shotgun hit: ", hit_object.name)
-			else:
-				print("Miss")
+
+			if hit_object.get_parent().has_method("take_damage"):
+				hit_object.get_parent().take_damage()
+
+				print("Shotgun hit: ", hit_object.get_parent().name)
+
+		else:
+			print("Miss")
 
 func reload() -> void:
 	if is_reloading:
