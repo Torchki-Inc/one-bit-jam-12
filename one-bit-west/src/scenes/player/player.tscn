@@ -8,7 +8,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8qny"]
 size = Vector3(1, 1, 0.118896484)
 
-[node name="Player" type="CharacterBody3D" unique_id=986646973]
+[node name="Player" type="CharacterBody3D" unique_id=986646973 groups=["player"]]
 script = ExtResource("1_swhsd")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=613253213]
