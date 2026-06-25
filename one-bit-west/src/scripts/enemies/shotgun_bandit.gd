@@ -1,0 +1,176 @@
+class_name BanditShotgun
+extends BaseEnemy
+
+var sm: EnemySM
+@onready var shoot_point: Marker3D = $ShootPoint
+@export var shotgun_spread := 8.0
+@export var shotgun_pellets := 8
+
+
+func _ready():
+	super._ready()
+	sm = EnemySM.new()
+
+	var roam = BanditRoamState.new()
+	var prepare = BanditPrepareState.new()
+	var shoot = BanditShootState.new()
+	var wait = BanditWaitState.new()
+
+	roam.enemy = self
+	roam.next = prepare
+	prepare.enemy = self
+	prepare.next = shoot
+	shoot.enemy = self
+	shoot.next = wait
+	wait.enemy = self
+	wait.next = roam
+
+	sm.current = roam
+	sm.enter()
+
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	sm.update(delta)
+
+
+func make_shot():
+	for i in shotgun_pellets:
+		var space_state := get_world_3d().direct_space_state
+
+		var from := self.shoot_point.global_position
+		var direction := (player.global_position - from).normalized()
+
+		var spread_x := deg_to_rad(randf_range(-shotgun_spread, shotgun_spread))
+		var spread_y := deg_to_rad(randf_range(-shotgun_spread, shotgun_spread))
+
+		direction = direction.rotated(shoot_point.global_transform.basis.x, spread_y)
+		direction = direction.rotated(shoot_point.global_transform.basis.y, spread_x)
+		direction = direction.normalized()
+
+		var to := from + direction * shoot_radius
+		_draw_ray(from, to)
+		var query := PhysicsRayQueryParameters3D.create(from, to)
+		query.exclude = [self]
+
+		var result := space_state.intersect_ray(query)
+
+		if result:
+			var hit_object = result["collider"]
+
+			if hit_object.has_method("take_damage"):
+				hit_object.take_damage(damage)
+
+				print("Shotgun hit: ", hit_object.name)
+
+			if hit_object.get_parent().has_method("take_damage"):
+				hit_object.get_parent().take_damage()
+
+				print("Shotgun hit: ", hit_object.get_parent().name)
+
+		else:
+			print("Miss")
+
+func _draw_ray(from: Vector3, to: Vector3):
+	var mesh_instance := MeshInstance3D.new()
+	var mesh := ImmediateMesh.new()
+	var material := StandardMaterial3D.new()
+
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = Color.BLUE
+
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
+	mesh.surface_add_vertex(from)
+	mesh.surface_add_vertex(to)
+	mesh.surface_end()
+
+	mesh_instance.mesh = mesh
+	get_tree().root.add_child(mesh_instance)
+
+	await get_tree().create_timer(0.05).timeout
+	mesh_instance.queue_free()
+
+#region States
+
+class BanditRoamState extends EnemyState:
+	var next: EnemyState
+	var timer := 0.0
+	var roam_target := Vector3.ZERO
+
+
+	func enter():
+		print("Enter Roam state")
+
+		_pick_new_target()
+
+
+	func update(delta) -> EnemyState:
+		timer -= delta
+		if timer <= 0.0:
+			_pick_new_target()
+
+		enemy.move_toward_target(roam_target, delta)
+
+		if enemy.global_position.distance_to(enemy.player.global_position) < enemy.shoot_radius:
+			print("in shooting position")
+			return next # -> PrepareState
+		return self
+
+
+	func _pick_new_target():
+		var offset = Vector3(randf_range(-6, 6), 0, randf_range(-6, 6))
+		roam_target = enemy.player.global_position + offset
+		timer = randf_range(2.0, 4.0)
+
+
+class BanditPrepareState extends EnemyState:
+	var next: EnemyState
+	var timer := 0.0
+
+
+	func enter():
+		timer = 0.8
+		# enemy.anim_state.travel("prepare")
+
+
+	func update(delta) -> EnemyState:
+		timer -= delta
+		if timer <= 0.0:
+			return next # -> ShootState
+		return self
+
+
+class BanditShootState extends EnemyState:
+	var next: EnemyState
+
+
+	func enter():
+		print("Enter Soot state")
+		enemy.make_shot()
+
+		pass
+		# enemy.anim_state.travel("shoot")
+		# spawn bullet here
+
+
+	func update(_delta) -> EnemyState:
+		return next # instant for now, add anim wait later
+
+
+class BanditWaitState extends EnemyState:
+	var next: EnemyState
+	var timer := 0.0
+
+
+	func enter():
+		print("Enter Wait state")
+		timer = randf_range(0.8, 1.5)
+
+
+	func update(delta) -> EnemyState:
+		timer -= delta
+		if timer <= 0.0:
+			return next # -> RoamState
+		return self
+
+#endregion
