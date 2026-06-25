@@ -5,9 +5,27 @@ extends CharacterBody3D
 @export var move_speed := 3.0
 @export var shoot_radius := 10.0
 @export var damage := 5.0
+@export var touch_damage := 5.0
+@export var touch_cooldown := 1.0
+@export var touch_timer := 0.0
 
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
+
+func _physics_process(_delta: float) -> void:
+	if touch_timer > 0:
+		touch_timer -= _delta
+
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+
+		if collider.is_in_group("player") && collider.has_method("take_damage") && touch_timer <= 0:
+			print("collision: ", collision, " collider: ", collider, "TAKE TOUCH DAMAGE")
+			collider.take_damage(damage)
+			touch_timer = touch_cooldown
+
+
 
 
 func _ready() -> void:

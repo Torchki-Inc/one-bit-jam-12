@@ -29,6 +29,7 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	sm.update(delta)
 
 
