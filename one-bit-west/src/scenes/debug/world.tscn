@@ -50,14 +50,20 @@ use_collision = true
 size = Vector3(65.727615, 0.36572266, 62.065796)
 material = SubResource("StandardMaterial3D_1mrpx")
 
+<<<<<<< HEAD
 [node name="Player" parent="." unique_id=986646973 node_paths=PackedStringArray("hud") instance=ExtResource("1_5lxvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 hud = NodePath("../Hud")
+=======
+[node name="Player" parent="." unique_id=986646973 instance=ExtResource("1_5lxvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.302811, 0.7, 0)
+>>>>>>> 2b6da64 (add rider)
 
 [node name="EnemyRoot" type="Node" parent="." unique_id=494032929]
 
 [node name="Enemy" parent="EnemyRoot" unique_id=1612062943 instance=ExtResource("2_5e4sf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.963048, 0.9197631, -6.1683846)
 
-[node name="Dog" parent="EnemyRoot" unique_id=1169720815 instance=ExtResource("5_lyve2")]
-shoot_radius = 7.0
+[node name="Dog" parent="EnemyRoot" unique_id=295239158 instance=ExtResource("5_lyve2")]
+JUMP_HEIGHT = 4.0
+JUMP_SPEED = 6.0
