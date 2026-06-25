@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cm56wlxem7jst"]
-
-[ext_resource type="PackedScene" uid="uid://jb7cakgdqba4" path="res://src/scenes/enemies/enemy.tscn" id="1_yf37c"]
-[ext_resource type="Script" uid="uid://diyhan7aa6nga" path="res://src/scripts/enemies/dog.gd" id="2_v2c5d"]
-
-[node name="Dog" unique_id=1612062943 instance=ExtResource("1_yf37c")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-script = ExtResource("2_v2c5d")
