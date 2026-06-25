@@ -30,6 +30,8 @@ enum WeaponType {
 var can_shoot := true
 var is_reloading := false
 
+signal ammo_changed(current: int, type: int)
+
 func shoot(camera:Camera3D):
 	if is_reloading:
 		print("Reloading")
@@ -46,6 +48,9 @@ func shoot(camera:Camera3D):
 	can_shoot = false
 	use_ammo(1)
 
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n)
+
 	match type:
 		WeaponType.REVOLVER:
 			shoot_revolver(camera)
@@ -54,6 +59,9 @@ func shoot(camera:Camera3D):
 
 	await get_tree().create_timer(get_fire_rate()).timeout
 	can_shoot = true
+
+	if get_current_ammo() == 0:
+		reload()
 
 func shoot_revolver(camera:Camera3D):
 	var space_state := get_world_3d().direct_space_state
@@ -127,10 +135,6 @@ func reload() -> void:
 	if get_current_ammo() >= get_max_ammo():
 		return
 
-	if get_reserve_ammo() <= 0:
-		print("No reserve ammo")
-		return
-
 	is_reloading = true
 	can_shoot = false
 
@@ -142,7 +146,9 @@ func reload() -> void:
 	var ammo_to_load = min(needed_ammo, get_reserve_ammo())
 
 	add_current_ammo(ammo_to_load)
-	remove_reserve_ammo(ammo_to_load)
+
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n)
 
 	is_reloading = false
 	can_shoot = true
@@ -199,11 +205,9 @@ func remove_reserve_ammo(amount: int) -> void:
 	match type:
 		WeaponType.REVOLVER:
 			reserve_revolver_ammo -= amount
-			reserve_revolver_ammo = max(reserve_revolver_ammo, 0)
 
 		WeaponType.SHOTGUN:
 			reserve_shotgun_ammo -= amount
-			reserve_shotgun_ammo = max(reserve_shotgun_ammo, 0)
 
 func get_reload_time() -> float:
 	match type:
@@ -222,3 +226,6 @@ func get_fire_rate() -> float:
 			return shotgun_fire_rate
 
 	return 0.5
+
+func update_ammo_display() -> void:
+	ammo_changed.emit(get_current_ammo(), get_reserve_ammo())

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://blldwpcs2b7gb"]
+
+[ext_resource type="Texture2D" uid="uid://immhsi1ubmuh" path="res://src/assets/HUD/crosshair.svg" id="1_6of88"]
+[ext_resource type="Script" uid="uid://dbxusdm26dig6" path="res://src/scripts/ui/hud.gd" id="1_782su"]
+[ext_resource type="Texture2D" uid="uid://6ipk3mj5huy5" path="res://src/assets/HUD/healthbar.png" id="3_3urrb"]
+[ext_resource type="Texture2D" uid="uid://b5snsb76n5r3f" path="res://src/assets/HUD/healthbarfill.png" id="4_mo38n"]
+[ext_resource type="Texture2D" uid="uid://b86ru17en36fg" path="res://src/assets/HUD/ammo/revovlerammo6.png" id="5_vai3a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vai3a"]
+font_color = Color(0.70477426, 0.24904665, 0.5420277, 1)
+
+[node name="Hud" type="Control" unique_id=1821053354]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_782su")
+
+[node name="Crosshair" type="TextureRect" parent="." unique_id=1306785877]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_6of88")
+
+[node name="AmmoLabel" type="Label" parent="." unique_id=601093085]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 25.0
+offset_right = 483.0
+offset_bottom = 48.0
+
+[node name="HealthLabel" type="Label" parent="." unique_id=371745087]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 8.0
+offset_right = 194.0
+offset_bottom = 31.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1052968325]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_over = ExtResource("3_3urrb")
+texture_progress = ExtResource("4_mo38n")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=634483614]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+texture = ExtResource("5_vai3a")
+
+[node name="Label" type="Label" parent="." unique_id=1206907595]
+layout_mode = 0
+offset_left = 547.0
+offset_top = 91.0
+offset_right = 587.0
+offset_bottom = 114.0
+label_settings = SubResource("LabelSettings_vai3a")
