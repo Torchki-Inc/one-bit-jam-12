@@ -130,10 +130,6 @@ func reload() -> void:
 	if get_current_ammo() >= get_max_ammo():
 		return
 
-	if get_reserve_ammo() <= 0:
-		print("No reserve ammo")
-		return
-
 	is_reloading = true
 	can_shoot = false
 
@@ -145,7 +141,7 @@ func reload() -> void:
 	var ammo_to_load = min(needed_ammo, get_reserve_ammo())
 
 	add_current_ammo(ammo_to_load)
-	remove_reserve_ammo(ammo_to_load)
+
 	emit_signal("ammo_changed", get_current_ammo(), get_reserve_ammo())
 
 	is_reloading = false
@@ -203,11 +199,9 @@ func remove_reserve_ammo(amount: int) -> void:
 	match type:
 		WeaponType.REVOLVER:
 			reserve_revolver_ammo -= amount
-			reserve_revolver_ammo = max(reserve_revolver_ammo, 0)
 
 		WeaponType.SHOTGUN:
 			reserve_shotgun_ammo -= amount
-			reserve_shotgun_ammo = max(reserve_shotgun_ammo, 0)
 
 func get_reload_time() -> float:
 	match type:

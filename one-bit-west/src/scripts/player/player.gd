@@ -11,14 +11,15 @@ const SENSITIVITY: float = 0.004
 
 @onready var weapon := $Head/Weapon
 
-var health := 100
+var max_health := 100
+var health := max_health
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	hud.set_max_health(max_health)
 	hud.set_health(health)
 	weapon.ammo_changed.connect(hud.set_ammo)
 	weapon.update_ammo_display()
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
