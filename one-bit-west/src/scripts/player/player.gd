@@ -16,6 +16,8 @@ var health := max_health
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func setup_hud():
 	hud.set_max_health(max_health)
 	hud.set_health(health)
 	weapon.ammo_changed.connect(hud.set_ammo)

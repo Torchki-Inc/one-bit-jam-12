@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d3mab62qvt00o"]
+
+[ext_resource type="Texture2D" uid="uid://bykh67juvfv3q" path="res://src/assets/floor.png" id="1_b15er"]
+
+[resource]
+shading_mode = 0
+albedo_texture = ExtResource("1_b15er")
+uv1_scale = Vector3(160, 160, 160)
+texture_filter = 0
