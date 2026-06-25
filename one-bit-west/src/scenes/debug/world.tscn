@@ -4,14 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://blldwpcs2b7gb" path="res://src/scenes/ui/HUD.tscn" id="1_h8hjv"]
 [ext_resource type="Texture2D" uid="uid://d203h7fk8a4t4" path="res://src/assets/raw/kenney_prototype-textures/PNG/Dark/texture_09.png" id="1_n2e7f"]
 [ext_resource type="PackedScene" uid="uid://jb7cakgdqba4" path="res://src/scenes/enemies/enemy.tscn" id="2_5e4sf"]
-<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="2_n2e7f"]
 [ext_resource type="PackedScene" uid="uid://b3740d5fde3hb" path="res://src/scenes/enemies/revolver_bandit.tscn" id="3_h8hjv"]
 [ext_resource type="PackedScene" uid="uid://dowiijg6wl0cp" path="res://src/scenes/enemies/shotgun_bandit.tscn" id="5_8ixfw"]
-=======
-[ext_resource type="PackedScene" uid="uid://cm56wlxem7jst" path="res://src/scenes/enemies/dog.tscn" id="5_lyve2"]
->>>>>>> 6e882bb (add dog)
-
+[ext_resource type="PackedScene" uid="uid://cm56wlxem7jst" path="res://src/scenes/enemies/dog.tscn" id="6_lyve2"]
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lxvg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,20 +46,14 @@ use_collision = true
 size = Vector3(65.727615, 0.36572266, 62.065796)
 material = SubResource("StandardMaterial3D_1mrpx")
 
-<<<<<<< HEAD
 [node name="Player" parent="." unique_id=986646973 node_paths=PackedStringArray("hud") instance=ExtResource("1_5lxvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 hud = NodePath("../Hud")
-=======
-[node name="Player" parent="." unique_id=986646973 instance=ExtResource("1_5lxvg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.302811, 0.7, 0)
->>>>>>> 2b6da64 (add rider)
 
 [node name="EnemyRoot" type="Node" parent="." unique_id=494032929]
 
 [node name="Enemy" parent="EnemyRoot" unique_id=1612062943 instance=ExtResource("2_5e4sf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.963048, 0.9197631, -6.1683846)
 
-[node name="Dog" parent="EnemyRoot" unique_id=295239158 instance=ExtResource("5_lyve2")]
-JUMP_HEIGHT = 4.0
-JUMP_SPEED = 6.0
+[node name="Dog" parent="EnemyRoot" unique_id=1169720815 instance=ExtResource("5_lyve2")]
+shoot_radius = 7.0
