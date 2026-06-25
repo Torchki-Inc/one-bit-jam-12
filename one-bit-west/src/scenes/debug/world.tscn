@@ -24,6 +24,11 @@ albedo_texture = ExtResource("1_n2e7f")
 
 [node name="test_world" type="Node3D" unique_id=607904926]
 
+[node name="Hud" parent="." unique_id=1821053354 instance=ExtResource("1_h8hjv")]
+
+[node name="PauseMenu" parent="." unique_id=1433678151 instance=ExtResource("2_n2e7f")]
+visible = false
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=962417784]
 environment = SubResource("Environment_h8hjv")
 
@@ -38,8 +43,9 @@ use_collision = true
 size = Vector3(65.727615, 0.36572266, 62.065796)
 material = SubResource("StandardMaterial3D_1mrpx")
 
-[node name="Player" parent="." unique_id=986646973 instance=ExtResource("1_5lxvg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.302811, 0.7, 0)
+[node name="Player" parent="." unique_id=986646973 node_paths=PackedStringArray("hud") instance=ExtResource("1_5lxvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+hud = NodePath("../Hud")
 
 [node name="EnemyRoot" type="Node" parent="." unique_id=494032929]
 
