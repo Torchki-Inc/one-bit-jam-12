@@ -1,6 +1,8 @@
 class_name BaseEnemy
 extends CharacterBody3D
 
+const GRAVITY := 9.81
+
 @export var health := 100
 @export var move_speed := 3.0
 @export var shoot_radius := 10.0
@@ -13,8 +15,13 @@ var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
 
 func _physics_process(_delta: float) -> void:
+	if not is_on_floor():
+		velocity.y -= GRAVITY * _delta
+
 	if touch_timer > 0:
 		touch_timer -= _delta
+
+	move_and_slide()
 
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -31,7 +38,6 @@ func _physics_process(_delta: float) -> void:
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 
-
 func take_damage(amount: int):
 	health -= amount
 	print(name, " took ", amount, " damage. HP: ", health)
@@ -41,6 +47,9 @@ func take_damage(amount: int):
 
 
 func die():
+	# TODO:
+		# play death animation
+		# leave dead spprite
 	queue_free()
 
 

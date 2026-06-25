@@ -57,7 +57,6 @@ class DogJumpState extends EnemyState:
 	var next: EnemyState
 	var timer := 0.0
 	var jump_duration := 1.0
-	const GRAVITY := 20.0
 
 	func enter():
 		timer = jump_duration
@@ -68,12 +67,6 @@ class DogJumpState extends EnemyState:
 		enemy.velocity = Vector3(direction.x * enemy.JUMP_SPEED, enemy.JUMP_HEIGHT, direction.z * enemy.JUMP_SPEED)
 
 	func update(delta) -> EnemyState:
-		# Always apply gravity
-		if not enemy.is_on_floor():
-			enemy.velocity.y -= GRAVITY * delta
-
-		# Always call move_and_slide — this is what actually moves the body
-		enemy.move_and_slide()
 
 		timer -= delta
 		if timer <= 0.0 and enemy.is_on_floor():
