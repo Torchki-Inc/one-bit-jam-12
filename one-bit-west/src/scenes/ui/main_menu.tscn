@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://0o282103f8ms"]
+
+[ext_resource type="Script" uid="uid://dbsmd5n6mf7qp" path="res://src/scripts/ui/main_menu.gd" id="1_loxbe"]
+[ext_resource type="PackedScene" uid="uid://ilop6igxmrm4" path="res://src/scenes/debug/world.tscn" id="2_f5lm1"]
+[ext_resource type="Texture2D" uid="uid://ga1o1h0cpduk" path="res://src/assets/main_menu_bg.png" id="2_ttmq8"]
+[ext_resource type="Texture2D" uid="uid://c5dggkmjrsd61" path="res://src/assets/button.png" id="4_f5lm1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x2oeq"]
+load_path = "res://.godot/imported/button.png-ca66e78eb695096274b2e1084a4bd702.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_wcnl7"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_46hs8"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4bni2"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=1271916942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_loxbe")
+game_scene = ExtResource("2_f5lm1")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=735877560]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ttmq8")
+expand_mode = 3
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1071657139]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.5
+offset_right = 45.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "GAME TITLE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=629409905]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -50.5
+offset_right = 39.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="TextureButton" parent="VBoxContainer" unique_id=76838175]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("4_f5lm1")
+texture_pressed = SubResource("CompressedTexture2D_x2oeq")
+texture_hover = SubResource("CompressedTexture2D_x2oeq")
+texture_disabled = SubResource("CompressedTexture2D_x2oeq")
+texture_focused = SubResource("CompressedTexture2D_x2oeq")
+
+[node name="Label" type="Label" parent="VBoxContainer/StartButton" unique_id=728221874]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "START"
+label_settings = SubResource("LabelSettings_wcnl7")
+
+[node name="OptionsButton" type="TextureButton" parent="VBoxContainer" unique_id=1767222879]
+layout_mode = 2
+texture_normal = ExtResource("4_f5lm1")
+
+[node name="Label" type="Label" parent="VBoxContainer/OptionsButton" unique_id=787303854]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_46hs8")
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer" unique_id=210524740]
+layout_mode = 2
+texture_normal = ExtResource("4_f5lm1")
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitButton" unique_id=1925250462]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUIT"
+label_settings = SubResource("LabelSettings_4bni2")
+
+[connection signal="button_up" from="VBoxContainer/StartButton" to="." method="_on_start_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_button_up"]

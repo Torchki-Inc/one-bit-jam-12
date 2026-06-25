@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ilop6igxmrm4"]
 
 [ext_resource type="PackedScene" uid="uid://c8v7b2luia2lj" path="res://src/scenes/player/player.tscn" id="1_5lxvg"]
-[ext_resource type="Texture2D" uid="uid://d203h7fk8a4t4" path="res://src/assets/raw/kenney_prototype-textures/PNG/Dark/texture_09.png" id="1_n2e7f"]
+[ext_resource type="PackedScene" uid="uid://blldwpcs2b7gb" path="res://src/scenes/ui/HUD.tscn" id="1_h8hjv"]
 [ext_resource type="PackedScene" uid="uid://jb7cakgdqba4" path="res://src/scenes/enemies/enemy.tscn" id="2_5e4sf"]
-[ext_resource type="PackedScene" uid="uid://cm56wlxem7jst" path="res://src/scenes/enemies/dog.tscn" id="5_lyve2"]
+[ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="2_n2e7f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lxvg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,6 +24,11 @@ albedo_texture = ExtResource("1_n2e7f")
 
 [node name="test_world" type="Node3D" unique_id=607904926]
 
+[node name="Hud" parent="." unique_id=1821053354 instance=ExtResource("1_h8hjv")]
+
+[node name="PauseMenu" parent="." unique_id=1433678151 instance=ExtResource("2_n2e7f")]
+visible = false
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=962417784]
 environment = SubResource("Environment_h8hjv")
 
@@ -38,8 +43,9 @@ use_collision = true
 size = Vector3(65.727615, 0.36572266, 62.065796)
 material = SubResource("StandardMaterial3D_1mrpx")
 
-[node name="Player" parent="." unique_id=986646973 instance=ExtResource("1_5lxvg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.302811, 0.7, 0)
+[node name="Player" parent="." unique_id=986646973 node_paths=PackedStringArray("hud") instance=ExtResource("1_5lxvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+hud = NodePath("../Hud")
 
 [node name="EnemyRoot" type="Node" parent="." unique_id=494032929]
 
