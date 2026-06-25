@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6ipk3mj5huy5"
-path="res://.godot/imported/healthbar.png-a13abaf3d7e7a4a8da4ecfdd0b2c9e5b.ctex"
+uid="uid://dej2xfr6xj5hv"
+path="res://.godot/imported/revovlerammo1.png-84451ba4dba22124ad45fa7d0b3794ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/assets/healthbar.png"
-dest_files=["res://.godot/imported/healthbar.png-a13abaf3d7e7a4a8da4ecfdd0b2c9e5b.ctex"]
+source_file="res://src/assets/HUD/ammo/revovlerammo1.png"
+dest_files=["res://.godot/imported/revovlerammo1.png-84451ba4dba22124ad45fa7d0b3794ea.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5snsb76n5r3f"
-path="res://.godot/imported/healthbarfill.png-067108f6c4a2cdb4c8694845e2d2a020.ctex"
+uid="uid://dr5x758mlbbnv"
+path="res://.godot/imported/shotgunammo2.png-c8e83923946a1f613f8887a7ccd9bcab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/assets/healthbarfill.png"
-dest_files=["res://.godot/imported/healthbarfill.png-067108f6c4a2cdb4c8694845e2d2a020.ctex"]
+source_file="res://src/assets/HUD/ammo/shotgunammo2.png"
+dest_files=["res://.godot/imported/shotgunammo2.png-c8e83923946a1f613f8887a7ccd9bcab.ctex"]
 
 [params]
 

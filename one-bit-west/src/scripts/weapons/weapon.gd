@@ -30,7 +30,7 @@ enum WeaponType {
 var can_shoot := true
 var is_reloading := false
 
-signal ammo_changed(current: int, reserve: int)
+signal ammo_changed(current: int, type: int)
 
 func shoot(camera:Camera3D):
 	if is_reloading:
@@ -47,7 +47,9 @@ func shoot(camera:Camera3D):
 
 	can_shoot = false
 	use_ammo(1)
-	emit_signal("ammo_changed", get_current_ammo(), get_reserve_ammo())
+
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n)
 
 	match type:
 		WeaponType.REVOLVER:
@@ -57,6 +59,9 @@ func shoot(camera:Camera3D):
 
 	await get_tree().create_timer(get_fire_rate()).timeout
 	can_shoot = true
+
+	if get_current_ammo() == 0:
+		reload()
 
 func shoot_revolver(camera:Camera3D):
 	var space_state := get_world_3d().direct_space_state
@@ -142,7 +147,8 @@ func reload() -> void:
 
 	add_current_ammo(ammo_to_load)
 
-	emit_signal("ammo_changed", get_current_ammo(), get_reserve_ammo())
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n)
 
 	is_reloading = false
 	can_shoot = true
