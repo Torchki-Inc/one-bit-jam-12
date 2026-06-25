@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Wave" format=3 uid="uid://vgp4yu4pp1k"]
+
+[ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="1_c0o4g"]
+
+[resource]
+script = ExtResource("1_c0o4g")
+score_regen = 50.0
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: false,
+2: true,
+3: true,
+4: false,
+5: false
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"

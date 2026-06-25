@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://fwj3byy11j13"]
+
+[ext_resource type="Script" uid="uid://c0nbfgp6yqfgm" path="res://src/scripts/systems/wave_manager.gd" id="1_p5crq"]
+[ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_hkypc"]
+[ext_resource type="Resource" uid="uid://vgp4yu4pp1k" path="res://src/resources/waves/wave1.tres" id="3_syqa5"]
+
+[node name="test_spawner" type="Node" unique_id=430263971]
+script = ExtResource("1_p5crq")
+waves = Array[ExtResource("2_hkypc")]([ExtResource("3_syqa5")])

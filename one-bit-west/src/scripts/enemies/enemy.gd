@@ -1,8 +1,11 @@
 class_name BaseEnemy
 extends CharacterBody3D
 
+enum Type { DOG, RIDER, BANDIT, SHOTGUN, HAWK, GHOST }
+
 const GRAVITY := 9.81
 
+@export var spawn_cost := 10.0
 @export var health := 100
 @export var move_speed := 3.0
 @export var shoot_radius := 10.0

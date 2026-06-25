@@ -1,6 +1,8 @@
 class_name BanditShotgun
 extends BaseEnemy
 
+@export var type: BaseEnemy.Type = BaseEnemy.Type.SHOTGUN
+
 var sm: EnemySM
 @onready var shoot_point: Marker3D = $ShootPoint
 @export var shotgun_spread := 8.0
