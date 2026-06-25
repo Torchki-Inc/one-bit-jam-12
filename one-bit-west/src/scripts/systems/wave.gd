@@ -1,7 +1,8 @@
 class_name Wave
 extends Resource
 
-@export var time: float
+@export var spawn_rate: float
+@export var wave_duration: float
 @export var score_regen: float
 @export var allowed_enemies: Dictionary[BaseEnemy.Type, bool] = {
 	BaseEnemy.Type.DOG: false,

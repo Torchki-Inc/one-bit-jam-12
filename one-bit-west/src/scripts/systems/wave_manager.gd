@@ -1,24 +1,29 @@
 extends Node
 
-#temporary
-var timer := 5
-
+var current_wave_index := 0
 var credits := 0
+var timer: Timer
 var current_wave: Wave
 @export var waves: Array[Wave] = []
 
 
 func _ready() -> void:
-	current_wave = waves[0]
+	timer = Timer.new()
+	add_child(timer)
+
+	timer.timeout.connect(_on_timer_timeout)
+
+	if waves.is_empty():
+		push_error("WaveManager: no waves assigned!")
+		return
+	current_wave = waves[current_wave_index]
 
 
 func _process(delta: float) -> void:
 	credits += current_wave.score_regen * delta
-	timer -= delta
-	if timer <= 0:
-		print("curret credits: ", credits)
-		_on_spawn_tick()
-		timer = 5
+
+	if Input.is_action_pressed("move_up"):
+		timer.start(current_wave.wave_duration)
 
 
 # choose random enemies based on rarity
@@ -43,7 +48,8 @@ func pick_enemy_to_spawn() -> BaseEnemy.Type:
 func _on_spawn_tick():
 	var type = pick_enemy_to_spawn()
 	if credits > current_wave.enemy_cost[type]:
-		pass #spawn_enemy(current_wave.enemy_cost[type])
+		#spawn_enemy(type)
+		pass
 	else:
 		print("Not enough credits")
 
@@ -54,9 +60,18 @@ func spawn_enemy():
 	pass
 
 
-# do i need it?
-func set_wave(next: int):
-	if next != waves.size() - 1:
-		current_wave = waves[next]
+# Set up next wave
+func next_wave():
+	if current_wave_index + 1 != waves.size():
+		current_wave_index += 1
+		current_wave = waves[current_wave_index]
+
+		timer.start(current_wave.wave_duration)
+
 	else:
-		pass
+		print("No more waves")
+
+
+func _on_timer_timeout():
+	print("Wave ended")
+	next_wave()
