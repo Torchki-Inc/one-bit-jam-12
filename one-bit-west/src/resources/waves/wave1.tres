@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_c0o4g")
-wave_duration = 10.0
-score_regen = 50.0
+spawn_rate = 500.0
+wave_duration = 60.0
 allowed_enemies = Dictionary[int, bool]({
-0: true,
+0: false,
 1: false,
 2: true,
 3: true,

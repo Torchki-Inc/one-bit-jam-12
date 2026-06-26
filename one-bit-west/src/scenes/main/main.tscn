@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dkgnkfepnx5mi" path="res://src/scripts/ui/pause_layout.gd" id="2_vw57g"]
 [ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="3_fub2y"]
 [ext_resource type="PackedScene" uid="uid://c8v7b2luia2lj" path="res://src/scenes/player/player.tscn" id="3_fup5m"]
+[ext_resource type="PackedScene" uid="uid://bywyq0bikkwec" path="res://src/scenes/main/game_manager.tscn" id="4_cx4eu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cx4eu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,6 +24,7 @@ glow_enabled = true
 script = ExtResource("1_fub2y")
 level_scene = ExtResource("2_cx4eu")
 player_scene = ExtResource("3_fup5m")
+game_manager = ExtResource("4_cx4eu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=127042257]
 environment = SubResource("Environment_4harg")

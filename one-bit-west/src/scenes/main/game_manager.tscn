@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bywyq0bikkwec"]
+
+[ext_resource type="Script" uid="uid://c0nbfgp6yqfgm" path="res://src/scripts/systems/wave_manager.gd" id="1_dpreg"]
+[ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
+[ext_resource type="Resource" uid="uid://vgp4yu4pp1k" path="res://src/resources/waves/wave1.tres" id="3_kj45g"]
+
+[node name="GameManager" type="Node" unique_id=1478407804]
+script = ExtResource("1_dpreg")
+waves = Array[ExtResource("2_6owvl")]([ExtResource("3_kj45g")])
