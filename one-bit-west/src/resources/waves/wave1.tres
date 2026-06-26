@@ -9,9 +9,9 @@ wave_duration = 60.0
 allowed_enemies = Dictionary[int, bool]({
 0: false,
 1: false,
-2: true,
-3: true,
+2: false,
+3: false,
 4: false,
-5: false
+5: true
 })
 metadata/_custom_type_script = "uid://c5ejsphh6tqwb"

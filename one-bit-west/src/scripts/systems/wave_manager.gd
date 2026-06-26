@@ -86,11 +86,9 @@ func spawn_enemy(type: BaseEnemy.Type) -> void:
 		BaseEnemy.Type.SHOTGUN:
 			scene = preload("res://src/scenes/enemies/shotgun_bandit.tscn")
 		BaseEnemy.Type.HAWK:
-			pass
-		# scene = preload("res://src/scenes/enemies/hawk.tscn")
+			scene = preload("res://src/scenes/enemies/hawk.tscn")
 		BaseEnemy.Type.GHOST:
-			pass
-		# scene = preload("res://src/scenes/enemies/ghost.tscn")
+			scene = preload("res://src/scenes/enemies/ghost.tscn")
 	print("Enemy {} spawned: ")
 
 	var enemy = scene.instantiate()
