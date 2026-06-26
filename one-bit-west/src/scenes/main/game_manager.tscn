@@ -16,6 +16,7 @@ metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
 [sub_resource type="Resource" id="Resource_6owvl"]
 script = ExtResource("2_6owvl")
+wave_duration = 15.0
 max_alive = 6
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_kj45g"), SubResource("Resource_ld7rm")])
 allowed_enemies = Dictionary[int, bool]({
