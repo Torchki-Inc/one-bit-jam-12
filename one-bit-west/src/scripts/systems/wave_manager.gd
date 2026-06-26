@@ -1,3 +1,4 @@
+class_name WaveManager
 extends Node
 
 enum State {
@@ -111,6 +112,7 @@ func _process(delta: float) -> void:
 
 func spawn_burst(burst: Burst) -> void:
 	var budget := burst.budget
+	var delay := 0.0
 
 	while budget > 0:
 		if get_alive_enemy_count() >= current_wave.max_alive:
@@ -120,8 +122,11 @@ func spawn_burst(burst: Burst) -> void:
 		if enemy_type == BaseEnemy.Type.NONE:
 			return
 
-		spawn_enemy(enemy_type)
+		get_tree().create_timer(delay).timeout.connect(
+			func(): spawn_enemy(enemy_type)
+		)
 		budget -= get_enemy_cost(enemy_type)
+		delay += 0.3 # adjust this
 
 
 func spawn_enemy(type: BaseEnemy.Type) -> void:
@@ -179,11 +184,11 @@ func get_enemy_cost(type: BaseEnemy.Type) -> int:
 		BaseEnemy.Type.RIDER:
 			return 4
 		BaseEnemy.Type.SHOTGUN:
-			return 5
-		BaseEnemy.Type.HAWK:
 			return 3
+		BaseEnemy.Type.HAWK:
+			return 2
 		BaseEnemy.Type.GHOST:
-			return 8
+			return 6
 		_:
 			return 999
 

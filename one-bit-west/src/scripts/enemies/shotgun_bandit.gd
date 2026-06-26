@@ -66,12 +66,13 @@ func make_shot():
 				print("Shotgun hit: ", hit_object.name)
 
 			if hit_object.get_parent().has_method("take_damage"):
-				hit_object.get_parent().take_damage()
+				hit_object.get_parent().take_damage(damage)
 
 				print("Shotgun hit: ", hit_object.get_parent().name)
 
 		else:
 			print("Miss")
+
 
 func _draw_ray(from: Vector3, to: Vector3):
 	var mesh_instance := MeshInstance3D.new()

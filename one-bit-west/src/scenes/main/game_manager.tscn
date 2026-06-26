@@ -32,6 +32,6 @@ spawn_weight = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
-[node name="GameManager" type="Node" unique_id=1478407804]
+[node name="GameManager" type="Node" unique_id=1478407804 groups=["game_master"]]
 script = ExtResource("1_dpreg")
 waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_6owvl")])
