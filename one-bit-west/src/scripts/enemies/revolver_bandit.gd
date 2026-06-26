@@ -1,6 +1,9 @@
 class_name BanditRevolver
 extends BaseEnemy
 
+@export var type: BaseEnemy.Type = BaseEnemy.Type.BANDIT
+
+
 var sm: EnemySM
 @onready var shoot_point: Marker3D = $ShootPoint
 
