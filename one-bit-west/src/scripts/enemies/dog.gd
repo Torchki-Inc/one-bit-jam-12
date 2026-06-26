@@ -1,6 +1,8 @@
 class_name Dog
 extends BaseEnemy
 
+@export var type: BaseEnemy.Type = BaseEnemy.Type.DOG
+
 var sm: EnemySM
 @export var JUMP_HEIGHT := 4.0
 @export var JUMP_SPEED := 6.0
