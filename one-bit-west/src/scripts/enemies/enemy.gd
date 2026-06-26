@@ -1,7 +1,7 @@
 class_name BaseEnemy
 extends CharacterBody3D
 
-enum Type { DOG, RIDER, BANDIT, SHOTGUN, HAWK, GHOST }
+enum Type { DOG, RIDER, BANDIT, SHOTGUN, HAWK, GHOST, NONE }
 
 const GRAVITY := 9.81
 
@@ -40,6 +40,7 @@ func _physics_process(_delta: float) -> void:
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
+	add_to_group("enemy")
 
 func take_damage(amount: int):
 	health -= amount

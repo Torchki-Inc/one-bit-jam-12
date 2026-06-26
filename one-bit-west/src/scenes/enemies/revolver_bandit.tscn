@@ -5,6 +5,10 @@
 
 [node name="RevolverBandit" unique_id=1612062943 instance=ExtResource("1_yhqqd")]
 script = ExtResource("2_0lk27")
+type = 2
+health = 5
+move_speed = 2.0
+shoot_radius = 15.0
 
 [node name="Sprite3D" parent="." index="1" unique_id=1967239771]
 modulate = Color(1, 0.13725491, 0, 1)

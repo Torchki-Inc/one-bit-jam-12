@@ -1,9 +1,37 @@
 [gd_scene format=3 uid="uid://bywyq0bikkwec"]
 
-[ext_resource type="Script" uid="uid://c0nbfgp6yqfgm" path="res://src/scripts/systems/wave_manager.gd" id="1_dpreg"]
+[ext_resource type="Script" uid="uid://c0eknmdkfm5g5" path="res://src/scripts/systems/wave_manager.gd" id="1_dpreg"]
 [ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
-[ext_resource type="Resource" uid="uid://vgp4yu4pp1k" path="res://src/resources/waves/wave1.tres" id="3_kj45g"]
+[ext_resource type="Script" uid="uid://cd5yu6idcqav4" path="res://src/scripts/systems/burst.gd" id="3_dpreg"]
+
+[sub_resource type="Resource" id="Resource_kj45g"]
+script = ExtResource("3_dpreg")
+time = 5.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_ld7rm"]
+script = ExtResource("3_dpreg")
+time = 20.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_6owvl"]
+script = ExtResource("2_6owvl")
+max_alive = 6
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_kj45g"), SubResource("Resource_ld7rm")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: false,
+2: true,
+3: false,
+4: false,
+5: false
+})
+spawn_weight = Dictionary[int, int]({
+0: 5,
+2: 5
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
 [node name="GameManager" type="Node" unique_id=1478407804]
 script = ExtResource("1_dpreg")
-waves = Array[ExtResource("2_6owvl")]([ExtResource("3_kj45g")])
+waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_6owvl")])
