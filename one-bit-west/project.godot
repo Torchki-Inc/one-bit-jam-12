@@ -48,6 +48,9 @@ folder_colors={
 player="player"
 ghost="Ghost type enemy"
 game_master=""
+totem=""
+waypoint=""
+boss=""
 
 [input]
 

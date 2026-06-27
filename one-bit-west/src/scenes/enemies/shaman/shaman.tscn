@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://2jgyfpa1fuk"]
+
+[ext_resource type="Script" uid="uid://kxmwshkcrkbd" path="res://src/scripts/enemies/shaman/shaman.gd" id="1_1adsi"]
+[ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="1_2l27j"]
+[ext_resource type="PackedScene" uid="uid://cif44dqi42oq0" path="res://src/scenes/enemies/shaman/shaman_totem.tscn" id="2_0yj45"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c8qny"]
+radius = 1.0
+
+[node name="Shaman" type="CharacterBody3D" unique_id=1993316644 groups=["boss"]]
+script = ExtResource("1_1adsi")
+max_hp = 100.0
+totem_respawn_delay = 60.0
+max_enemies = 2
+totem_scene = ExtResource("2_0yj45")
+
+[node name="Sprite" type="Sprite3D" parent="." unique_id=825801415]
+transform = Transform3D(1, 0, 0, 0, 1.9414318, 0, 0, 0, 1, 0, 0, 0)
+modulate = Color(0, 0.023529412, 1, 1)
+billboard = 1
+texture = ExtResource("1_2l27j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1944707163]
+shape = SubResource("CapsuleShape3D_c8qny")
+
+[node name="SummonTimer" type="Timer" parent="." unique_id=1580253641]
+
+[node name="TeleportTimer" type="Timer" parent="." unique_id=1820349368]
+
+[node name="ShieldVFX" type="Node3D" parent="." unique_id=143582127]
