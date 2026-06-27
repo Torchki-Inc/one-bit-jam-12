@@ -2,8 +2,8 @@ class_name Wave
 extends Resource
 
 @export_group("General")
-@export var wave_duration := 60.0
 @export var max_alive := 12
+@export var cooldown_duration := 5.0
 
 @export_group("Spawning")
 @export var bursts: Array[Burst]

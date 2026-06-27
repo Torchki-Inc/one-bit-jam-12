@@ -23,7 +23,7 @@ shape = SubResource("BoxShape3D_c8qny")
 [node name="Weapon" parent="Head" unique_id=876486780 instance=ExtResource("3_n52bt")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.89941406, -0.34492636, -0.5073173)
 revolver_damage = 20
-shotgun_damage = 50
+shotgun_damage = 5
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1181811111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48002672, 0)

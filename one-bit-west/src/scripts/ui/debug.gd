@@ -12,6 +12,6 @@ func _process(_delta: float) -> void:
 		game_manager = get_node_or_null("../../Systems/GameManager")
 		return
 
-	fps_label.text = "FPS: %d" % Engine.get_frames_per_second()
+	fps_label.text = "Current Wave: %s" % game_manager.current_wave_index
 	enemies_alive_label.text = "Enemies: %d" % game_manager.get_alive_enemy_count()
 	wave_time_label.text = "Time: %.1f" % game_manager.timer.time_left # adjust to actual property

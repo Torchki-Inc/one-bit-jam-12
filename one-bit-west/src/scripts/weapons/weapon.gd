@@ -118,12 +118,12 @@ func shoot_shotgun(camera:Camera3D):
 			var hit_object = result["collider"]
 
 			if hit_object.has_method("take_damage"):
-				hit_object.take_damage(revolver_damage)
+				hit_object.take_damage(shotgun_damage)
 
 				print("Shotgun hit: ", hit_object.name)
 
 			if hit_object.get_parent().has_method("take_damage"):
-				hit_object.get_parent().take_damage()
+				hit_object.get_parent().take_damage(shotgun_damage)
 
 				print("Shotgun hit: ", hit_object.get_parent().name)
 

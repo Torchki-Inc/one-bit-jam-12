@@ -14,6 +14,7 @@ var current_wave: Wave
 
 var wave_time := 0.0
 var next_burst := 0
+var spawning_finished := false
 
 var spawn_points: Array[Marker3D] = []
 
@@ -39,7 +40,7 @@ const ENEMY_SCENES = {
 
 func _ready() -> void:
 	add_child(timer)
-	timer.timeout.connect(_on_wave_finished)
+	timer.timeout.connect(_on_cooldown_finished)
 
 	if waves.is_empty():
 		push_error("WaveManager: no waves assigned")
@@ -59,10 +60,9 @@ func start_wave(index: int) -> void:
 
 	wave_time = 0.0
 	next_burst = 0
+	spawning_finished = false
 
 	state = State.WAVE_ACTIVE
-
-	timer.start(current_wave.wave_duration)
 
 
 func start_cooldown() -> void:
@@ -73,21 +73,14 @@ func start_cooldown() -> void:
 # Wave flow
 # --------------------
 
-
-func _on_wave_finished() -> void:
+func _on_cooldown_finished() -> void:
 	if current_wave_index + 1 >= waves.size():
 		state = State.IDLE
 		print("All waves completed")
 		get_tree().change_scene_to_file("res://src/scenes/ui/main_menu.tscn")
+		return
 
-	if state == State.WAVE_ACTIVE:
-		start_cooldown()
-	elif state == State.WAVE_COOLDOWN:
-		start_wave(current_wave_index + 1)
-
-# --------------------
-# Burst system (deterministic tick)
-# --------------------
+	start_wave(current_wave_index + 1)
 
 
 func _process(delta: float) -> void:
@@ -105,9 +98,11 @@ func _process(delta: float) -> void:
 		spawn_burst(burst)
 		next_burst += 1
 
-# --------------------
-# Spawning
-# --------------------
+	if !spawning_finished and next_burst >= current_wave.bursts.size():
+		spawning_finished = true
+
+	if spawning_finished and get_alive_enemy_count() == 0:
+		start_cooldown()
 
 
 func spawn_burst(burst: Burst) -> void:
@@ -123,16 +118,19 @@ func spawn_burst(burst: Burst) -> void:
 			return
 
 		get_tree().create_timer(delay).timeout.connect(
-			func(): spawn_enemy(enemy_type)
+			func():
+				spawn_enemy(enemy_type)
 		)
+
 		budget -= get_enemy_cost(enemy_type)
-		delay += 0.3 # adjust this
+		delay += 0.3
 
 
 func spawn_enemy(type: BaseEnemy.Type) -> void:
-	var scene: PackedScene = ENEMY_SCENES.get(type, null)
+	var scene: PackedScene = ENEMY_SCENES.get(type)
+
 	if scene == null:
-		push_error("Missing scene for type: %s" % type)
+		push_error("Missing scene for type")
 		return
 
 	if spawn_points.is_empty():
@@ -154,13 +152,15 @@ func spawn_enemy(type: BaseEnemy.Type) -> void:
 func pick_enemy_to_spawn(remaining_budget: int) -> BaseEnemy.Type:
 	var allowed := current_wave.allowed_enemies.keys().filter(
 		func(type):
-			return current_wave.allowed_enemies.get(type, false) and get_enemy_cost(type) <= remaining_budget
+			return current_wave.allowed_enemies.get(type, false) \
+			and get_enemy_cost(type) <= remaining_budget
 	)
 
 	if allowed.is_empty():
 		return BaseEnemy.Type.NONE
 
 	var total_weight := 0
+
 	for t in allowed:
 		total_weight += current_wave.spawn_weight.get(t, 1)
 
@@ -169,6 +169,7 @@ func pick_enemy_to_spawn(remaining_budget: int) -> BaseEnemy.Type:
 
 	for t in allowed:
 		cumulative += current_wave.spawn_weight.get(t, 1)
+
 		if roll < cumulative:
 			return t
 
@@ -218,7 +219,12 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 	params.collision_mask = 1
 
 	for i in 5:
-		var offset = Vector3(randf_range(-3, 3), 0.5, randf_range(-3, 3))
+		var offset = Vector3(
+			randf_range(-3, 3),
+			0.5,
+			randf_range(-3, 3)
+		)
+
 		params.transform.origin = marker.global_position + offset
 
 		if space.intersect_shape(params, 1).is_empty():
