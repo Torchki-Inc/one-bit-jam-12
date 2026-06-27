@@ -1,8 +1,14 @@
 class_name Wave
 extends Resource
 
-@export var spawn_rate: float
-@export var wave_duration: float
+@export_group("General")
+@export var max_alive := 12
+@export var cooldown_duration := 5.0
+
+@export_group("Spawning")
+@export var bursts: Array[Burst]
+
+@export_group("Enemy Pool")
 @export var allowed_enemies: Dictionary[BaseEnemy.Type, bool] = {
 	BaseEnemy.Type.DOG: false,
 	BaseEnemy.Type.RIDER: false,
@@ -12,7 +18,7 @@ extends Resource
 	BaseEnemy.Type.GHOST: false,
 }
 
-@export var enemy_weight: Dictionary[BaseEnemy.Type, int] = {
+@export var spawn_weight: Dictionary[BaseEnemy.Type, int] = {
 	BaseEnemy.Type.DOG: 3,
 	BaseEnemy.Type.RIDER: 2,
 	BaseEnemy.Type.BANDIT: 5,

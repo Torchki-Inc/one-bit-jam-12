@@ -20,7 +20,6 @@ func _ready():
 	jump.enemy = self
 	jump.next = roam
 
-
 	sm.current = roam
 	sm.enter()
 
@@ -35,8 +34,10 @@ class DogRoamState extends EnemyState:
 	var timer := 0.0
 	var roam_target := Vector3.ZERO
 
+
 	func enter():
 		_pick_new_target()
+
 
 	func update(delta) -> EnemyState:
 		timer -= delta
@@ -49,6 +50,7 @@ class DogRoamState extends EnemyState:
 			return next
 		return self
 
+
 	func _pick_new_target():
 		# var offset = Vector3(randf_range(-6, 6), 0, randf_range(-6, 6))
 		roam_target = enemy.player.global_position # + offset
@@ -60,17 +62,21 @@ class DogJumpState extends EnemyState:
 	var timer := 0.0
 	var jump_duration := 1.0
 
+
 	func enter():
 		timer = jump_duration
 		_launch()
+
 
 	func _launch():
 		var direction = (enemy.player.global_position - enemy.global_position).normalized()
 		enemy.velocity = Vector3(direction.x * enemy.JUMP_SPEED, enemy.JUMP_HEIGHT, direction.z * enemy.JUMP_SPEED)
 
-	func update(delta) -> EnemyState:
 
-		timer -= delta
-		if timer <= 0.0 and enemy.is_on_floor():
+	func update(delta) -> EnemyState:
+		if enemy.is_on_floor() and timer < jump_duration - 0.1:
+			enemy.velocity.x = 0
+			enemy.velocity.z = 0
 			return next
+		timer -= delta
 		return self
