@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://clqbstrej2dla"]
+
+[ext_resource type="Texture2D" uid="uid://c2lk876qpfvw7" path="res://src/assets/buildings/front_sheriff.png" id="1_1tayg"]
+
+[resource]
+albedo_texture = ExtResource("1_1tayg")
+texture_filter = 0
+disable_receive_shadows = true

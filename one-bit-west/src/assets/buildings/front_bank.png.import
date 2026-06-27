@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chxm8myiu4bj0"
-path.s3tc="res://.godot/imported/shotgunammo0.png-68ce9c37a3e9f86a981e89c090f91363.s3tc.ctex"
+uid="uid://c2hsvrh6nrlje"
+path.s3tc="res://.godot/imported/front_bank.png-baca701bc39141c2f77a66bb9cae89ae.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://src/assets/HUD/ammo/shotgunammo0.png"
-dest_files=["res://.godot/imported/shotgunammo0.png-68ce9c37a3e9f86a981e89c090f91363.s3tc.ctex"]
+source_file="res://src/assets/buildings/front_bank.png"
+dest_files=["res://.godot/imported/front_bank.png-baca701bc39141c2f77a66bb9cae89ae.s3tc.ctex"]
 
 [params]
 

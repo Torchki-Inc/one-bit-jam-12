@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://chgdvuvb8jct6"]
+
+[ext_resource type="Texture2D" uid="uid://cbqleuuwq8mtr" path="res://src/assets/buildings/front_saloon.png" id="1_ddpjc"]
+
+[resource]
+albedo_texture = ExtResource("1_ddpjc")
+texture_filter = 0
+disable_receive_shadows = true
