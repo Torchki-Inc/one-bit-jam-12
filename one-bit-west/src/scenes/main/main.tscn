@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dkgnkfepnx5mi" path="res://src/scripts/ui/pause_layout.gd" id="2_vw57g"]
 [ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="3_fub2y"]
 [ext_resource type="PackedScene" uid="uid://c8v7b2luia2lj" path="res://src/scenes/player/player.tscn" id="3_fup5m"]
+[ext_resource type="PackedScene" uid="uid://c5p4u2t31clk6" path="res://src/scenes/ui/debug.tscn" id="8_fup5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3q0a4"]
 sky_top_color = Color(1, 1, 1, 1)
