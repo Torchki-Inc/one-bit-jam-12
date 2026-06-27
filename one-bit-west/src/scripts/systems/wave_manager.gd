@@ -179,7 +179,7 @@ func get_enemy_cost(type: BaseEnemy.Type) -> int:
 		BaseEnemy.Type.RIDER:   return 4
 		BaseEnemy.Type.SHOTGUN: return 3
 		BaseEnemy.Type.HAWK:    return 2
-		BaseEnemy.Type.GHOST:   return 6
+		BaseEnemy.Type.GHOST:   return 5
 		_:                      return 999
 
 # --------------------

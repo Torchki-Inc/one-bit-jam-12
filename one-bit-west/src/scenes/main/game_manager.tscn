@@ -4,27 +4,61 @@
 [ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
 [ext_resource type="Script" uid="uid://cd5yu6idcqav4" path="res://src/scripts/systems/burst.gd" id="3_dpreg"]
 
-[sub_resource type="Resource" id="Resource_xk08b"]
+[sub_resource type="Resource" id="Resource_1dumf"]
+script = ExtResource("3_dpreg")
+budget = 3
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_yqfra"]
+script = ExtResource("3_dpreg")
+time = 8.0
+budget = 3
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_yhni8"]
+script = ExtResource("3_dpreg")
+time = 18.0
+budget = 2
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_3gwi3"]
+script = ExtResource("2_6owvl")
+max_alive = 6
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_1dumf"), SubResource("Resource_yqfra"), SubResource("Resource_yhni8")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: false,
+2: false,
+3: false,
+4: false,
+5: false
+})
+spawn_weight = Dictionary[int, int]({
+0: 10
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_afeke"]
 script = ExtResource("3_dpreg")
 budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_wmu78"]
+[sub_resource type="Resource" id="Resource_42gyf"]
 script = ExtResource("3_dpreg")
-time = 10.0
-budget = 2
+time = 7.0
+budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_u6mpw"]
+[sub_resource type="Resource" id="Resource_smo20"]
 script = ExtResource("3_dpreg")
 time = 15.0
-budget = 2
+budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_1qsip"]
+[sub_resource type="Resource" id="Resource_tn1v3"]
 script = ExtResource("2_6owvl")
-cooldown_duration = 10.0
-bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_xk08b"), SubResource("Resource_wmu78"), SubResource("Resource_u6mpw")])
+max_alive = 7
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_afeke"), SubResource("Resource_42gyf"), SubResource("Resource_smo20")])
 allowed_enemies = Dictionary[int, bool]({
 0: true,
 1: false,
@@ -34,48 +68,265 @@ allowed_enemies = Dictionary[int, bool]({
 5: false
 })
 spawn_weight = Dictionary[int, int]({
-0: 6,
-1: 2,
-2: 4,
-3: 4,
-4: 3,
-5: 1
+0: 7,
+2: 3
 })
 metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
-[sub_resource type="Resource" id="Resource_arm2g"]
+[sub_resource type="Resource" id="Resource_luuom"]
 script = ExtResource("3_dpreg")
-budget = 2
+budget = 5
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_fr4ef"]
+[sub_resource type="Resource" id="Resource_2rcfe"]
 script = ExtResource("3_dpreg")
-time = 10.0
-budget = 2
+time = 6.0
+budget = 5
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_6imkx"]
+[sub_resource type="Resource" id="Resource_qg761"]
+script = ExtResource("3_dpreg")
+time = 12.0
+budget = 4
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_7olfi"]
+script = ExtResource("3_dpreg")
+time = 18.0
+budget = 4
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_0yj45"]
 script = ExtResource("2_6owvl")
-cooldown_duration = 10.0
-bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_arm2g"), SubResource("Resource_fr4ef")])
+max_alive = 8
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_luuom"), SubResource("Resource_2rcfe"), SubResource("Resource_qg761"), SubResource("Resource_7olfi")])
 allowed_enemies = Dictionary[int, bool]({
-0: false,
-1: false,
+0: true,
 2: true,
-3: false,
-4: true,
-5: false
+4: true
 })
 spawn_weight = Dictionary[int, int]({
-0: 3,
-1: 2,
-2: 5,
-3: 4,
-4: 5,
-5: 1
+0: 4,
+2: 4,
+4: 2
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_6owvl"]
+script = ExtResource("3_dpreg")
+budget = 6
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_kj45g"]
+script = ExtResource("3_dpreg")
+time = 6.0
+budget = 6
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_ld7rm"]
+script = ExtResource("3_dpreg")
+time = 12.0
+budget = 6
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_hhm28"]
+script = ExtResource("3_dpreg")
+time = 18.0
+budget = 6
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_dpreg"]
+script = ExtResource("2_6owvl")
+max_alive = 10
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_6owvl"), SubResource("Resource_kj45g"), SubResource("Resource_ld7rm"), SubResource("Resource_hhm28")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+2: true,
+3: true,
+4: true
+})
+spawn_weight = Dictionary[int, int]({
+0: 30,
+2: 30,
+3: 20,
+4: 20
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_e0gqj"]
+script = ExtResource("3_dpreg")
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_344li"]
+script = ExtResource("3_dpreg")
+time = 5.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_skgtm"]
+script = ExtResource("3_dpreg")
+time = 10.0
+budget = 7
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_lyyeg"]
+script = ExtResource("3_dpreg")
+time = 16.0
+budget = 7
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_43l3e"]
+script = ExtResource("2_6owvl")
+max_alive = 10
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_e0gqj"), SubResource("Resource_344li"), SubResource("Resource_skgtm"), SubResource("Resource_lyyeg")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: true,
+2: true,
+3: true,
+4: true
+})
+spawn_weight = Dictionary[int, int]({
+0: 10,
+1: 20,
+2: 30,
+3: 20,
+4: 20
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_mncka"]
+script = ExtResource("3_dpreg")
+budget = 10
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_6h202"]
+script = ExtResource("3_dpreg")
+time = 5.0
+budget = 9
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_27a1l"]
+script = ExtResource("3_dpreg")
+time = 10.0
+budget = 10
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_uq0br"]
+script = ExtResource("3_dpreg")
+time = 15.0
+budget = 9
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_projx"]
+script = ExtResource("2_6owvl")
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_mncka"), SubResource("Resource_6h202"), SubResource("Resource_27a1l"), SubResource("Resource_uq0br")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: true,
+2: true,
+3: true,
+4: true,
+5: true
+})
+spawn_weight = Dictionary[int, int]({
+0: 15,
+1: 15,
+2: 25,
+3: 20,
+4: 15,
+5: 10
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_km3or"]
+script = ExtResource("3_dpreg")
+budget = 12
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_v11pg"]
+script = ExtResource("3_dpreg")
+time = 5.0
+budget = 11
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_5q2tv"]
+script = ExtResource("3_dpreg")
+time = 10.0
+budget = 11
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_tj0ht"]
+script = ExtResource("3_dpreg")
+time = 15.0
+budget = 12
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_d0awv"]
+script = ExtResource("2_6owvl")
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_km3or"), SubResource("Resource_v11pg"), SubResource("Resource_5q2tv"), SubResource("Resource_tj0ht")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: true,
+2: true,
+3: true,
+4: true,
+5: true
+})
+spawn_weight = Dictionary[int, int]({
+0: 15,
+1: 15,
+2: 20,
+3: 20,
+4: 15,
+5: 15
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_pcg63"]
+script = ExtResource("3_dpreg")
+budget = 14
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_7xf3f"]
+script = ExtResource("3_dpreg")
+time = 5.0
+budget = 14
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_n6c78"]
+script = ExtResource("3_dpreg")
+time = 10.0
+budget = 13
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_yt4o3"]
+script = ExtResource("3_dpreg")
+time = 15.0
+budget = 14
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_qcf3j"]
+script = ExtResource("2_6owvl")
+max_alive = 14
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_pcg63"), SubResource("Resource_7xf3f"), SubResource("Resource_n6c78"), SubResource("Resource_yt4o3")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: true,
+2: true,
+3: true,
+4: true,
+5: true
+})
+spawn_weight = Dictionary[int, int]({
+0: 10,
+1: 15,
+2: 20,
+3: 20,
+4: 15,
+5: 20
 })
 metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
 [node name="GameManager" type="Node" unique_id=1478407804 groups=["game_master"]]
 script = ExtResource("1_dpreg")
-waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_1qsip"), SubResource("Resource_6imkx")])
+waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_3gwi3"), SubResource("Resource_tn1v3"), SubResource("Resource_0yj45"), SubResource("Resource_dpreg"), SubResource("Resource_43l3e"), SubResource("Resource_projx"), SubResource("Resource_d0awv"), SubResource("Resource_qcf3j")])
