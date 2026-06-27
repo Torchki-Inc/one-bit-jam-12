@@ -13,12 +13,15 @@ const GRAVITY := 9.81
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
 var touch_timer := 0.0
+const KILL_DEPTH = -20
 
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
 
 
 func _physics_process(_delta: float) -> void:
+	if global_position.y < KILL_DEPTH:
+		die()
 	if not is_on_floor():
 		velocity.y -= GRAVITY * _delta
 

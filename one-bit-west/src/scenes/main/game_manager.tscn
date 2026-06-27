@@ -4,24 +4,78 @@
 [ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
 [ext_resource type="Script" uid="uid://cd5yu6idcqav4" path="res://src/scripts/systems/burst.gd" id="3_dpreg"]
 
-[sub_resource type="Resource" id="Resource_f4xxn"]
+[sub_resource type="Resource" id="Resource_xk08b"]
 script = ExtResource("3_dpreg")
-time = 150.0
+budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_45wc1"]
+[sub_resource type="Resource" id="Resource_wmu78"]
+script = ExtResource("3_dpreg")
+time = 10.0
+budget = 2
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_u6mpw"]
+script = ExtResource("3_dpreg")
+time = 15.0
+budget = 2
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_1qsip"]
 script = ExtResource("2_6owvl")
-bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_f4xxn")])
+cooldown_duration = 10.0
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_xk08b"), SubResource("Resource_wmu78"), SubResource("Resource_u6mpw")])
+allowed_enemies = Dictionary[int, bool]({
+0: true,
+1: false,
+2: true,
+3: false,
+4: false,
+5: false
+})
+spawn_weight = Dictionary[int, int]({
+0: 6,
+1: 2,
+2: 4,
+3: 4,
+4: 3,
+5: 1
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_arm2g"]
+script = ExtResource("3_dpreg")
+budget = 2
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_fr4ef"]
+script = ExtResource("3_dpreg")
+time = 10.0
+budget = 2
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_6imkx"]
+script = ExtResource("2_6owvl")
+cooldown_duration = 10.0
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_arm2g"), SubResource("Resource_fr4ef")])
 allowed_enemies = Dictionary[int, bool]({
 0: false,
 1: false,
-2: false,
+2: true,
 3: false,
 4: true,
 5: false
+})
+spawn_weight = Dictionary[int, int]({
+0: 3,
+1: 2,
+2: 5,
+3: 4,
+4: 5,
+5: 1
 })
 metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
 [node name="GameManager" type="Node" unique_id=1478407804 groups=["game_master"]]
 script = ExtResource("1_dpreg")
-waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_45wc1")])
+waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_1qsip"), SubResource("Resource_6imkx")])

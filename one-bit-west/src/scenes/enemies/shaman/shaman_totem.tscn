@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cif44dqi42oq0"]
+
+[ext_resource type="Script" uid="uid://blnltfm151go1" path="res://src/scripts/enemies/shaman/shaman_totem.gd" id="1_8k2sr"]
+[ext_resource type="Texture2D" uid="uid://6ipk3mj5huy5" path="res://src/assets/HUD/healthbar.png" id="2_46od4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ak4f6"]
+size = Vector3(0.5, 2.032, 0.5)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1833274443]
+script = ExtResource("1_8k2sr")
+hp = 5.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=374753115]
+transform = Transform3D(-2.6226834e-08, 0.6, 0, -0.6, -2.6226834e-08, 0, 0, 0, 0.6, 0, 0.5351222, 0)
+billboard = 2
+texture = ExtResource("2_46od4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1964304399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5161743, 0)
+shape = SubResource("BoxShape3D_ak4f6")
+debug_color = Color(0.8623431, 0.35901967, 1.92523e-07, 0.7176471)

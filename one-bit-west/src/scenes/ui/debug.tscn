@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://q5s33bxdvspc" path="res://src/scripts/ui/debug.gd" id="1_iy5nv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fup5m"]
-font_color = Color(0.101960786, 1, 1, 1)
+font_color = Color(0.040372677, 0.5860358, 0, 1)
 
 [node name="Debug" type="Control" unique_id=1954137714]
 layout_mode = 3

@@ -18,6 +18,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_782su")
 
+[node name="BossBar" type="TextureProgressBar" parent="." unique_id=464131743]
+layout_mode = 0
+offset_left = 300.0
+offset_right = 600.0
+offset_bottom = 110.0
+value = 50.0
+texture_over = ExtResource("3_3urrb")
+texture_progress = ExtResource("4_mo38n")
+
 [node name="Crosshair" type="TextureRect" parent="." unique_id=1306785877]
 layout_mode = 1
 anchors_preset = 8
