@@ -4,6 +4,25 @@
 [ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
 [ext_resource type="Script" uid="uid://cd5yu6idcqav4" path="res://src/scripts/systems/burst.gd" id="3_dpreg"]
 
+[sub_resource type="Resource" id="Resource_yjox6"]
+script = ExtResource("3_dpreg")
+time = 5.0
+budget = 10
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_jiekx"]
+script = ExtResource("2_6owvl")
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_yjox6")])
+allowed_enemies = Dictionary[int, bool]({
+0: false,
+1: false,
+2: false,
+3: false,
+4: false,
+5: true
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
 [sub_resource type="Resource" id="Resource_1dumf"]
 script = ExtResource("3_dpreg")
 budget = 3
@@ -329,4 +348,4 @@ metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
 [node name="GameManager" type="Node" unique_id=1478407804 groups=["game_master"]]
 script = ExtResource("1_dpreg")
-waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_3gwi3"), SubResource("Resource_tn1v3"), SubResource("Resource_0yj45"), SubResource("Resource_dpreg"), SubResource("Resource_43l3e"), SubResource("Resource_projx"), SubResource("Resource_d0awv"), SubResource("Resource_qcf3j")])
+waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_jiekx"), SubResource("Resource_3gwi3"), SubResource("Resource_tn1v3"), SubResource("Resource_0yj45"), SubResource("Resource_dpreg"), SubResource("Resource_43l3e"), SubResource("Resource_projx"), SubResource("Resource_d0awv"), SubResource("Resource_qcf3j")])

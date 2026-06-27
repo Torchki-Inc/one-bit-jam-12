@@ -18,7 +18,7 @@ func _ready():
 	sm.current = roam
 	sm.enter()
 
-func take_damage(_amount: int):
+func take_damage(_amount: int) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:

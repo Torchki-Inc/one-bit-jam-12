@@ -28,7 +28,7 @@ const ENEMY_SCENES = {
 	BaseEnemy.Type.GHOST:  preload("res://src/scenes/enemies/ghost.tscn"),
 }
 const SHAMAN = preload("res://src/scenes/enemies/shaman/shaman.tscn")
-
+const TALISMAN = preload("res://src/scenes/weapons/talisman.tscn")
 # --------------------
 # Lifecycle
 # --------------------
@@ -80,7 +80,12 @@ func _process(delta: float) -> void:
 	if not spawning_finished and next_burst >= current_wave.bursts.size():
 		spawning_finished = true
 
-	if spawning_finished and get_alive_enemy_count() == 0 and not boss_fight:
+	var all_spawned := next_burst >= current_wave.bursts.size()
+	var last_burst_delay := 0.0
+	if current_wave.bursts.size() > 0:
+		last_burst_delay = current_wave.bursts.back().time
+
+	if spawning_finished and wave_time > last_burst_delay + 1.0 and get_alive_enemy_count() == 0 and not boss_fight:
 		if current_wave_index + 1 >= waves.size():
 			boss_fight = true
 			state = State.IDLE
@@ -104,14 +109,18 @@ func _start_boss_sequence() -> void:
 func spawn_burst(burst: Burst) -> void:
 	var budget := burst.budget
 	var delay := 0.0
+	var ghost_spawned := false
 
 	while budget > 0:
 		if get_alive_enemy_count() >= current_wave.max_alive:
-			return
+			break  # was return — changed so ghost_spawned still triggers below
 
 		var enemy_type := pick_enemy_to_spawn(budget)
 		if enemy_type == BaseEnemy.Type.NONE:
-			return
+			break
+
+		if enemy_type == BaseEnemy.Type.GHOST:
+			ghost_spawned = true
 
 		get_tree().create_timer(delay).timeout.connect(
 			func(): spawn_enemy(enemy_type)
@@ -119,6 +128,9 @@ func spawn_burst(burst: Burst) -> void:
 
 		budget -= get_enemy_cost(enemy_type)
 		delay += 0.3
+
+	if ghost_spawned:
+		get_tree().create_timer(delay).timeout.connect(spawn_talisman)
 
 func spawn_boss(boss_scene: PackedScene) -> void:
 	if boss_scene == null or spawn_points.is_empty():
@@ -145,6 +157,11 @@ func spawn_enemy(type: BaseEnemy.Type) -> void:
 	entity_root.add_child(enemy)
 	enemy.global_position = find_valid_spawn(marker)
 
+func spawn_talisman() -> void:
+	var marker := spawn_points[randi() % spawn_points.size()]
+	var talisman := TALISMAN.instantiate()
+	entity_root.add_child(talisman)
+	talisman.global_position = find_valid_spawn(marker)
 # --------------------
 # Enemy selection
 # --------------------
@@ -209,3 +226,7 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 			return marker.global_position + offset
 
 	return marker.global_position
+
+func kill_all_ghosts() -> void:
+	for enemy in get_tree().get_nodes_in_group("ghost"):
+		enemy.die()
