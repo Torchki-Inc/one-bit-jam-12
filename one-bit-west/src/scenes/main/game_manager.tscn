@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bywyq0bikkwec"]
+
+[ext_resource type="Script" uid="uid://c0eknmdkfm5g5" path="res://src/scripts/systems/wave_manager.gd" id="1_dpreg"]
+[ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
+[ext_resource type="Script" uid="uid://cd5yu6idcqav4" path="res://src/scripts/systems/burst.gd" id="3_dpreg"]
+
+[sub_resource type="Resource" id="Resource_kj45g"]
+script = ExtResource("3_dpreg")
+time = 5.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_ld7rm"]
+script = ExtResource("3_dpreg")
+time = 20.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_6owvl"]
+script = ExtResource("2_6owvl")
+wave_duration = 15.0
+max_alive = 6
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_kj45g"), SubResource("Resource_ld7rm")])
+allowed_enemies = Dictionary[int, bool]({
+0: false,
+1: true,
+2: false,
+3: false,
+4: false,
+5: false
+})
+spawn_weight = Dictionary[int, int]({
+0: 5,
+2: 5
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[sub_resource type="Resource" id="Resource_n2sin"]
+script = ExtResource("3_dpreg")
+time = 0.1
+budget = 15
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_garty"]
+script = ExtResource("3_dpreg")
+time = 4.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_wsj3u"]
+script = ExtResource("3_dpreg")
+time = 6.0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
+[sub_resource type="Resource" id="Resource_emwhe"]
+script = ExtResource("2_6owvl")
+wave_duration = 20.0
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_n2sin"), SubResource("Resource_garty"), SubResource("Resource_wsj3u")])
+allowed_enemies = Dictionary[int, bool]({
+0: false,
+1: false,
+2: false,
+3: true,
+4: true,
+5: false
+})
+metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
+
+[node name="GameManager" type="Node" unique_id=1478407804 groups=["game_master"]]
+script = ExtResource("1_dpreg")
+waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_6owvl"), SubResource("Resource_emwhe")])

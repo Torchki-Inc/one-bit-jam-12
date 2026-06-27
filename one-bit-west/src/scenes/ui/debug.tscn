@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c5p4u2t31clk6"]
+
+[ext_resource type="Script" uid="uid://q5s33bxdvspc" path="res://src/scripts/ui/debug.gd" id="1_iy5nv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fup5m"]
+font_color = Color(0.101960786, 1, 1, 1)
+
+[node name="Debug" type="Control" unique_id=1954137714]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iy5nv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1225682806]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemiesAlive" type="Label" parent="VBoxContainer" unique_id=2068033627]
+layout_mode = 2
+text = "Enemies Alive:"
+label_settings = SubResource("LabelSettings_fup5m")
+
+[node name="Fps" type="Label" parent="VBoxContainer" unique_id=1444224165]
+layout_mode = 2
+text = "Fps:"
+label_settings = SubResource("LabelSettings_fup5m")
+
+[node name="WaveTimeLeft" type="Label" parent="VBoxContainer" unique_id=1176718313]
+layout_mode = 2
+text = "WaveTimeLeft:"
+label_settings = SubResource("LabelSettings_fup5m")

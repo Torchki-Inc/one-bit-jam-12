@@ -1,6 +1,8 @@
 class_name BanditShotgun
 extends BaseEnemy
 
+@export var type: BaseEnemy.Type = BaseEnemy.Type.SHOTGUN
+
 var sm: EnemySM
 @onready var shoot_point: Marker3D = $ShootPoint
 @export var shotgun_spread := 8.0
@@ -64,12 +66,13 @@ func make_shot():
 				print("Shotgun hit: ", hit_object.name)
 
 			if hit_object.get_parent().has_method("take_damage"):
-				hit_object.get_parent().take_damage()
+				hit_object.get_parent().take_damage(damage)
 
 				print("Shotgun hit: ", hit_object.get_parent().name)
 
 		else:
 			print("Miss")
+
 
 func _draw_ray(from: Vector3, to: Vector3):
 	var mesh_instance := MeshInstance3D.new()

@@ -1,6 +1,8 @@
 class_name Rider
 extends BaseEnemy
 
+@export var type: BaseEnemy.Type = BaseEnemy.Type.RIDER
+
 var sm: EnemySM
 @export var CHARGE_SPEED := 14.0
 

@@ -8,6 +8,7 @@ enum WeaponType {
 @export var type := WeaponType.REVOLVER
 
 # Revolver stats
+@export_group("Revolver")
 @export var revolver_damage := 2
 @export var revolver_range := 30.0
 @export var revolver_fire_rate := 0.35
@@ -17,6 +18,7 @@ enum WeaponType {
 @export var revolver_reload_time := 1.2
 
 # Shotgun stats
+@export_group("Shotgun")
 @export var shotgun_damage := 1
 @export var shotgun_range := 15.0
 @export var shotgun_fire_rate := 0.9
@@ -116,12 +118,12 @@ func shoot_shotgun(camera:Camera3D):
 			var hit_object = result["collider"]
 
 			if hit_object.has_method("take_damage"):
-				hit_object.take_damage(revolver_damage)
+				hit_object.take_damage(shotgun_damage)
 
 				print("Shotgun hit: ", hit_object.name)
 
 			if hit_object.get_parent().has_method("take_damage"):
-				hit_object.get_parent().take_damage()
+				hit_object.get_parent().take_damage(shotgun_damage)
 
 				print("Shotgun hit: ", hit_object.get_parent().name)
 

@@ -51,3 +51,12 @@ script = ExtResource("2_vw57g")
 
 [node name="PauseMenu" parent="PauseLayout" unique_id=1433678151 instance=ExtResource("3_fub2y")]
 visible = false
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1593638519]
+layer = 250
+
+[node name="Debug" parent="DebugLayer" unique_id=1954137714 instance=ExtResource("8_fup5m")]
+z_index = 250
+offset_top = 265.0
+offset_right = -516.0
+offset_bottom = -12.0

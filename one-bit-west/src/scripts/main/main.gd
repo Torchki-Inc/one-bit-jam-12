@@ -2,10 +2,12 @@ extends Node
 
 @export var level_scene: PackedScene
 @export var player_scene: PackedScene
+@export var game_manager: PackedScene
 
 @onready var level_root: Node3D = $World/LevelRoot
 @onready var entity_root: Node3D = $World/EntityRoot
 @onready var hud: Control = $HudLayout/Hud
+@onready var systems: Node = $Systems
 
 var current_level: Node3D
 var player: CharacterBody3D
@@ -14,6 +16,7 @@ var player: CharacterBody3D
 func _ready() -> void:
 	load_level()
 	spawn_player()
+	initialise_manager()
 
 func load_level() -> void:
 	if level_scene == null:
@@ -49,3 +52,11 @@ func get_player_spawn() -> Marker3D:
 		return spawn
 
 	return null
+
+func initialise_manager() -> void:
+	if game_manager == null:
+		push_error("No game_manager assigned in Main.gd")
+		return
+
+	var manager := game_manager.instantiate()
+	systems.add_child(manager)
