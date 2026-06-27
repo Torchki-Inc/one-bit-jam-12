@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://brlq3juh01bgr"]
+
+[ext_resource type="Texture2D" uid="uid://c7rf21isexf1l" path="res://src/assets/buildings/front_house1.png" id="1_kvt2n"]
+
+[resource]
+albedo_texture = ExtResource("1_kvt2n")
+texture_filter = 0
+disable_receive_shadows = true

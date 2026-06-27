@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bp85ibxgysc38"]
 
-[ext_resource type="Material" uid="uid://d3mab62qvt00o" path="res://src/assets/metrials/floor.tres" id="1_1qsip"]
-[ext_resource type="Material" uid="uid://cjswkc1s62r6a" path="res://src/assets/metrials/edge.tres" id="2_6imkx"]
+
+[ext_resource type="Material" uid="uid://d3mab62qvt00o" path="res://src/materials/floor.tres" id="1_1qsip"]
+[ext_resource type="Material" uid="uid://cjswkc1s62r6a" path="res://src/materials/edge.tres" id="2_6imkx"]
+[ext_resource type="Script" uid="uid://chxve1svcrhrc" path="res://src/scripts/buildings/building.gd" id="3_xk08b"]
 
 [node name="Level0" type="Node3D" unique_id=1777991085]
 
@@ -12,6 +14,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 size = Vector3(100, 0.5, 100)
 material = ExtResource("1_1qsip")
+
+
+[node name="Ceiling" type="CSGBox3D" parent="Geometry" unique_id=49092399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+visible = false
+use_collision = true
+size = Vector3(100, 0.5, 100)
+material = ExtResource("2_6imkx")
 
 [node name="NorthWall" type="CSGBox3D" parent="Geometry" unique_id=1879985601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, -50)
@@ -42,120 +52,146 @@ transform = Transform3D(-0.7265747, 0, 0.6870875, 0, 1, 0, -0.6870875, 0, -0.726
 use_collision = true
 size = Vector3(9, 5, 7)
 
+script = ExtResource("3_xk08b")
+
 [node name="building1" type="CSGBox3D" parent="Geometry" unique_id=268609619]
 transform = Transform3D(0.2689198, 0, 0.96316254, 0, 1, 0, -0.96316254, 0, 0.2689198, -10.052358, 2.5, 26.318333)
 use_collision = true
 size = Vector3(9, 5, 7)
 
+script = ExtResource("3_xk08b")
+
 [node name="building2" type="CSGBox3D" parent="Geometry" unique_id=1886742012]
 transform = Transform3D(0.055821627, 0, -0.9984408, 0, 1, 0, 0.9984408, 0, 0.055821627, 15.594728, 2.5, -3.9487677)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building3" type="CSGBox3D" parent="Geometry" unique_id=823816847]
 transform = Transform3D(0.64545757, 0, 0.7637962, 0, 1, 0, -0.7637962, 0, 0.64545757, -20.499775, 2.5, 6.3027515)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building4" type="CSGBox3D" parent="Geometry" unique_id=1545077753]
 transform = Transform3D(-0.993768, 0, -0.11146921, 0, 1, 0, 0.11146921, 0, -0.993768, 30.225456, 2.5, 5.698109)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building5" type="CSGBox3D" parent="Geometry" unique_id=1417457634]
 transform = Transform3D(0.7986358, 0, -0.6018148, 0, 1, 0, 0.6018148, 0, 0.7986358, -21.398125, 2.5, -28.688267)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building6" type="CSGBox3D" parent="Geometry" unique_id=892477571]
 transform = Transform3D(-0.16676918, 0, 0.98599607, 0, 1, 0, -0.98599607, 0, -0.16676918, 33.777042, 2.5, -38.736004)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building7" type="CSGBox3D" parent="Geometry" unique_id=182056773]
 transform = Transform3D(-0.86074245, 0, 0.50904095, 0, 1, 0, -0.50904095, 0, -0.86074245, -27.497187, 2.5, 26.922493)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building8" type="CSGBox3D" parent="Geometry" unique_id=326599407]
 transform = Transform3D(-0.94437623, 0, -0.32886752, 0, 1, 0, 0.32886752, 0, -0.94437623, 16.41325, 2.5, 36.04066)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building9" type="CSGBox3D" parent="Geometry" unique_id=1526259784]
 transform = Transform3D(-0.35836703, 0, -0.933581, 0, 1, 0, 0.933581, 0, -0.35836703, 32.309547, 2.5, 23.948769)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building10" type="CSGBox3D" parent="Geometry" unique_id=421818771]
 transform = Transform3D(0.48175496, 0, -0.87630635, 0, 1, 0, 0.87630635, 0, 0.48175496, 11.303955, 2.5, -24.1674)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building11" type="CSGBox3D" parent="Geometry" unique_id=1739311459]
 transform = Transform3D(-0.53582495, 0, -0.84432983, 0, 1, 0, 0.84432983, 0, -0.53582495, -19.662895, 2.5, -9.840382)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building12" type="CSGBox3D" parent="Geometry" unique_id=1598424452]
 transform = Transform3D(-0.9980279, 0, 0.06278673, 0, 1, 0, -0.06278673, 0, -0.9980279, -5.6425467, 2.5, -18.642796)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building13" type="CSGBox3D" parent="Geometry" unique_id=1595784682]
 transform = Transform3D(0.99211746, 0, -0.12532581, 0, 1, 0, 0.12532581, 0, 0.99211746, 29.736809, 2.5, -12.467323)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building14" type="CSGBox3D" parent="Geometry" unique_id=594701163]
 transform = Transform3D(-0.5976257, 0, 0.80177647, 0, 1, 0, -0.80177647, 0, -0.5976257, -5.31458, 2.5, 12.653381)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building15" type="CSGBox3D" parent="Geometry" unique_id=565019336]
 transform = Transform3D(0.9921175, 0, -0.12532581, 0, 1, 0, 0.12532581, 0, 0.9921175, 9.410677, 2.5, 10.928468)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building16" type="CSGBox3D" parent="Geometry" unique_id=845594854]
 transform = Transform3D(-0.9822922, 0, 0.18737048, 0, 1, 0, -0.18737048, 0, -0.9822922, 3.78905, 2.5, -36.170517)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building17" type="CSGBox3D" parent="Geometry" unique_id=716125370]
 transform = Transform3D(-0.9822922, 0, 0.18737048, 0, 1, 0, -0.18737048, 0, -0.9822922, -38.168224, 2.5, -39.33591)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building18" type="CSGBox3D" parent="Geometry" unique_id=2036198024]
 transform = Transform3D(-0.9822922, 0, 0.18737048, 0, 1, 0, -0.18737048, 0, -0.9822922, -36.705772, 2.5, -9.899197)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building19" type="CSGBox3D" parent="Geometry" unique_id=1667555385]
 transform = Transform3D(0.6414497, 0, 0.7671653, 0, 1, 0, -0.7671653, 0, 0.6414497, -39.247078, 2.5, 39.763397)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building20" type="CSGBox3D" parent="Geometry" unique_id=1424464692]
 transform = Transform3D(0.2689198, 0, 0.96316254, 0, 1, 0, -0.96316254, 0, 0.2689198, -12.249047, 2.5, -39.962437)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building21" type="CSGBox3D" parent="Geometry" unique_id=1769344213]
 transform = Transform3D(-0.993768, 0, -0.11146921, 0, 1, 0, 0.11146921, 0, -0.993768, 27.587626, 2.5, -26.895573)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building22" type="CSGBox3D" parent="Geometry" unique_id=1910743569]
 transform = Transform3D(-0.9822922, 0, 0.18737048, 0, 1, 0, -0.18737048, 0, -0.9822922, -2.4894905, 2.5, 39.475964)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="building23" type="CSGBox3D" parent="Geometry" unique_id=931675757]
 transform = Transform3D(-0.7265747, 0, 0.6870875, 0, 1, 0, -0.6870875, 0, -0.7265747, -37.70271, 2.5, 11.807373)
 use_collision = true
 size = Vector3(9, 5, 7)
+script = ExtResource("3_xk08b")
 
 [node name="Cover" type="Node3D" parent="." unique_id=126294588]
 

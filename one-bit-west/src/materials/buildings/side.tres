@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cogtcd5xguph6"]
+
+[ext_resource type="Texture2D" uid="uid://ynifks2pggvk" path="res://src/assets/buildings/side.png" id="1_l3ksy"]
+
+[resource]
+albedo_texture = ExtResource("1_l3ksy")
+uv1_scale = Vector3(-1, 1, 1)
+texture_filter = 0
+disable_receive_shadows = true
