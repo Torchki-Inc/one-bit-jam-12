@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://2jgyfpa1fuk"]
+
+[ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="1_2l27j"]
+
+[node name="Shaman" type="CharacterBody3D" unique_id=1993316644]
+
+[node name="AnimatedSprite3D" type="Sprite3D" parent="." unique_id=1737123014]
+modulate = Color(0, 0.023529412, 1, 1)
+billboard = 1
+texture = ExtResource("1_2l27j")
