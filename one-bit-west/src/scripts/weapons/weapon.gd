@@ -7,6 +7,23 @@ enum WeaponType {
 
 @export var type := WeaponType.REVOLVER
 
+const SPRITE_DIR := "res://src/assets/weapons"
+
+const REVOLVER_TEXTURES = [
+	preload("res://src/assets/weapons/revolver/revovler.png"),
+	preload("res://src/assets/weapons/revolver/revovler1.png"),
+	preload("res://src/assets/weapons/revolver/revovler2.png"),
+	preload("res://src/assets/weapons/revolver/revovler3.png"),
+]
+
+const SHOTGUN_TEXTURES = [
+	preload("res://src/assets/weapons/shotgun/shotgun.png"),
+	preload("res://src/assets/weapons/shotgun/shotgun1.png"),
+	preload("res://src/assets/weapons/shotgun/shotgun2.png"),
+	preload("res://src/assets/weapons/shotgun/shotgun3.png"),
+	preload("res://src/assets/weapons/shotgun/shotgun4.png"),
+]
+
 # Revolver stats
 @export_group("Revolver")
 @export var revolver_damage := 2
@@ -31,8 +48,12 @@ enum WeaponType {
 
 var can_shoot := true
 var is_reloading := false
+var reload_animation_id := 0
 
 signal ammo_changed(current: int, type: int)
+
+func _ready() -> void:
+	set_idle_texture()
 
 func shoot(camera:Camera3D):
 	if is_reloading:
@@ -139,6 +160,8 @@ func reload() -> void:
 
 	is_reloading = true
 	can_shoot = false
+	reload_animation_id += 1
+	play_reload_animation(reload_animation_id)
 
 	print("Reloading...")
 
@@ -154,6 +177,7 @@ func reload() -> void:
 
 	is_reloading = false
 	can_shoot = true
+	set_idle_texture()
 
 	print("Reloaded")
 
@@ -231,3 +255,50 @@ func get_fire_rate() -> float:
 
 func update_ammo_display() -> void:
 	ammo_changed.emit(get_current_ammo(), get_reserve_ammo())
+
+func play_reload_animation(animation_id: int) -> void:
+	var frames := get_reload_frames()
+	if frames.is_empty():
+		return
+
+	var frame_time := get_reload_time() / float(frames.size())
+
+	for frame in frames:
+		if animation_id != reload_animation_id or !is_reloading:
+			return
+
+		texture = frame
+		await get_tree().create_timer(frame_time).timeout
+
+	if animation_id == reload_animation_id:
+		set_idle_texture()
+
+
+func get_reload_frames() -> Array:
+	match type:
+		WeaponType.REVOLVER:
+			return REVOLVER_TEXTURES.slice(1)
+		WeaponType.SHOTGUN:
+			return SHOTGUN_TEXTURES.slice(1)
+
+	return []
+
+
+func set_idle_texture() -> void:
+	match type:
+		WeaponType.REVOLVER:
+			texture = REVOLVER_TEXTURES[0]
+		WeaponType.SHOTGUN:
+			texture = SHOTGUN_TEXTURES[0]
+
+func set_weapon_type(new_type: int) -> void:
+	if type == new_type:
+		return
+
+	type = new_type
+	reload_animation_id += 1
+	is_reloading = false
+	can_shoot = true
+	set_idle_texture()
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n)

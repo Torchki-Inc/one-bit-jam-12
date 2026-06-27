@@ -37,12 +37,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		weapon.shoot(camera);
 
+	if event.is_action_pressed("reload"):
+		weapon.reload()
+
 	if event.is_action_pressed("change_weapon"):
 		match weapon.type:
 			weapon.WeaponType.REVOLVER:
-				weapon.type = weapon.WeaponType.SHOTGUN
+				weapon.set_weapon_type(weapon.WeaponType.SHOTGUN)
 			weapon.WeaponType.SHOTGUN:
-				weapon.type = weapon.WeaponType.REVOLVER
+				weapon.set_weapon_type(weapon.WeaponType.REVOLVER)
 
 		var type_n := 0 if weapon.type == weapon.WeaponType.REVOLVER else 1
 		hud.set_ammo(weapon.get_current_ammo(), type_n)
