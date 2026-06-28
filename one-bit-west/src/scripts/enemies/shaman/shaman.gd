@@ -48,6 +48,7 @@ func start() -> void:
 func take_damage(amount: float) -> void:
 	if active_totems > 0:
 		return  # тотемы живы — неуязвим
+	VfxManager.hitstop(0.04, 0.05)
 	hp -= amount
 	emit_signal("health_changed", hp)
 	if hp <= 0.0:
@@ -132,6 +133,7 @@ func _on_teleport() -> void:
 # ── смерть ─────────────────────────────────────────────────────────────────
 
 func _die() -> void:
+	VfxManager.hitstop(0.08, 0.02)
 	summon_timer.stop()
 	teleport_timer.stop()
 	emit_signal("shaman_defeated")

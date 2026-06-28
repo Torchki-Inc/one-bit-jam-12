@@ -12,15 +12,29 @@ const GRAVITY := 9.81
 @export var damage := 5.0
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
+
 var touch_timer := 0.0
 const KILL_DEPTH = -20
 var dead := false
+var stun_timer := 0.0
+
 
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
 
+@onready var sprite: Sprite3D = $Sprite3D
+var hit_tween: Tween
+
 
 func _physics_process(_delta: float) -> void:
+	if dead:
+		return
+	if stun_timer > 0:
+		stun_timer -= _delta
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+
 	if global_position.y < KILL_DEPTH:
 		die()
 	if not is_on_floor():
@@ -50,6 +64,8 @@ func take_damage(amount: int):
 	if dead or not is_inside_tree():
 		return
 	health -= amount
+	stun_timer = 0.15
+	flash_hit()
 	if health <= 0:
 		die()
 
@@ -58,6 +74,8 @@ func die():
 	if dead:
 		return
 	dead = true
+	var pos := global_position  # кешируем до queue_free
+	VfxManager.spawn_death_burst(pos)
 	# TODO:
 	# play death animation
 	# leave dead spprite
@@ -77,3 +95,10 @@ func move_toward_target(target_pos: Vector3, _delta: float):
 func face_direction(move_dir: Vector3):
 	if move_dir.x != 0:
 		$Sprite3D.flip_h = move_dir.x < 0
+
+func flash_hit() -> void:
+	if hit_tween:
+		hit_tween.kill()
+	sprite.modulate = Color(1, 1, 1, 1)  # белый флэш
+	hit_tween = create_tween()
+	hit_tween.tween_property(sprite, "modulate", Color(0, 0, 0, 1), 0.12)

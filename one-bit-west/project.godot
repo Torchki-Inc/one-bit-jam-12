@@ -16,6 +16,10 @@ run/main_scene="uid://0o282103f8ms"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+VfxManager="*uid://bs6g8tcl1ajc2"
+
 [display]
 
 window/size/viewport_width=640
@@ -52,6 +56,7 @@ totem=""
 waypoint=""
 boss=""
 enemy=""
+effect_root=""
 
 [input]
 

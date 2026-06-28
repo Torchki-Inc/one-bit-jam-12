@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://cxeewwumw75h6"]
 
-[ext_resource type="Texture2D" uid="uid://o0q5hhivmvq8" path="res://src/assets/weapons/revolver/revovler.png" id="1_hcdoj"]
+[ext_resource type="Texture2D" uid="uid://j7hx384631fp" path="res://src/assets/weapons/shotgun/shotgun.png" id="1_atqnv"]
 [ext_resource type="Script" uid="uid://csvvv2333k0xm" path="res://src/scripts/weapons/weapon.gd" id="2_atqnv"]
+[ext_resource type="Texture2D" uid="uid://blq7gpe7v334f" path="res://src/assets/raw/MuzzleFlash.png" id="3_atqnv"]
 
 [node name="Weapon" type="Sprite3D" unique_id=876486780]
-texture = ExtResource("1_hcdoj")
+texture = ExtResource("1_atqnv")
 script = ExtResource("2_atqnv")
+
+[node name="MuzzleFlash" type="Sprite3D" parent="." unique_id=1343035353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41873148, 0.35057497, 0)
+sorting_offset = -10.0
+texture = ExtResource("3_atqnv")
