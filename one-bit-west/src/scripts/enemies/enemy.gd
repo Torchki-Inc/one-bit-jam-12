@@ -22,6 +22,9 @@ var stun_timer := 0.0
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
 
+@onready var sprite: Sprite3D = $Sprite3D
+var hit_tween: Tween
+
 
 func _physics_process(_delta: float) -> void:
 	if dead:
@@ -62,6 +65,7 @@ func take_damage(amount: int):
 		return
 	health -= amount
 	stun_timer = 0.15
+	flash_hit()
 	if health <= 0:
 		die()
 
@@ -91,3 +95,10 @@ func move_toward_target(target_pos: Vector3, _delta: float):
 func face_direction(move_dir: Vector3):
 	if move_dir.x != 0:
 		$Sprite3D.flip_h = move_dir.x < 0
+
+func flash_hit() -> void:
+	if hit_tween:
+		hit_tween.kill()
+	sprite.modulate = Color(1, 1, 1, 1)  # белый флэш
+	hit_tween = create_tween()
+	hit_tween.tween_property(sprite, "modulate", Color(0, 0, 0, 1), 0.12)
