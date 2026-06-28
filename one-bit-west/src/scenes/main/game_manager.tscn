@@ -6,8 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_yjox6"]
 script = ExtResource("3_dpreg")
-time = 5.0
-budget = 10
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
 [sub_resource type="Resource" id="Resource_jiekx"]
@@ -15,11 +13,11 @@ script = ExtResource("2_6owvl")
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_yjox6")])
 allowed_enemies = Dictionary[int, bool]({
 0: false,
-1: false,
+1: true,
 2: false,
 3: false,
 4: false,
-5: true
+5: false
 })
 metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 

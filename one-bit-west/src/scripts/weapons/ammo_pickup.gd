@@ -10,5 +10,6 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		body.add_shotgun_ammo(amount)
+		var weapon = body.get_node("Head/Weapon")
+		weapon.add_reserve_ammo(amount)
 		queue_free()

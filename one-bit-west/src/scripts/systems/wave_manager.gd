@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 	if not spawning_finished and next_burst >= current_wave.bursts.size():
 		spawning_finished = true
 
-	var all_spawned := next_burst >= current_wave.bursts.size()
+	# var all_spawned := next_burst >= current_wave.bursts.size()
 	var last_burst_delay := 0.0
 	if current_wave.bursts.size() > 0:
 		last_burst_delay = current_wave.bursts.back().time

@@ -72,12 +72,10 @@ func make_shot():
 			if hit_object.has_method("take_damage"):
 				hit_object.take_damage(damage)
 
-				print("Shotgun hit: ", hit_object.name)
 
 			if hit_object.get_parent().has_method("take_damage"):
 				hit_object.get_parent().take_damage(damage)
 
-				print("Shotgun hit: ", hit_object.get_parent().name)
 
 		else:
 			print("Miss")
@@ -111,7 +109,6 @@ class BanditRoamState extends EnemyState:
 
 
 	func enter():
-		print("Enter Roam state")
 
 		_pick_new_target()
 

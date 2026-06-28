@@ -29,6 +29,8 @@ func _physics_process(delta: float) -> void:
 	sm.update(delta)
 
 func die():
+	if dead or not is_inside_tree():
+		return
 	var scene = preload("res://src/scenes/enemies/revolver_bandit.tscn")
 	var new_enemy = scene.instantiate()
 	new_enemy.global_position = global_position + Vector3(0, 0.5, 0)
