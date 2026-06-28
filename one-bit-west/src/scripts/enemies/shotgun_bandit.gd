@@ -30,11 +30,20 @@ func _ready():
 	sm.current = roam
 	sm.enter()
 
+func die() -> void:
+	if randf() < 0.5:
+		_drop_ammo(1)
+	super.die()
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	sm.update(delta)
 
+func _drop_ammo(amount: int) -> void:
+	var pickup = preload("res://src/scenes/weapons/ammo_pickup.tscn").instantiate()
+	pickup.amount = amount
+	get_tree().current_scene.add_child(pickup)
+	pickup.global_position = global_position
 
 func make_shot():
 	for i in shotgun_pellets:
@@ -63,12 +72,10 @@ func make_shot():
 			if hit_object.has_method("take_damage"):
 				hit_object.take_damage(damage)
 
-				print("Shotgun hit: ", hit_object.name)
 
 			if hit_object.get_parent().has_method("take_damage"):
 				hit_object.get_parent().take_damage(damage)
 
-				print("Shotgun hit: ", hit_object.get_parent().name)
 
 		else:
 			print("Miss")
@@ -102,7 +109,6 @@ class BanditRoamState extends EnemyState:
 
 
 	func enter():
-		print("Enter Roam state")
 
 		_pick_new_target()
 

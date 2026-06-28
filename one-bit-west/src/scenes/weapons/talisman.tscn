@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://daup3t7n8nwif"]
+
+[ext_resource type="Script" uid="uid://b3v8b6wov32v5" path="res://src/scripts/weapons/talisman.gd" id="1_mnoms"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e7h4a"]
+load_path = "res://.godot/imported/crosshair.svg-d5548b6f4cbecec9d26483cce8736121.s3tc.ctex"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c8qny"]
+
+[node name="Talisman" type="Area3D" unique_id=1797242529]
+script = ExtResource("1_mnoms")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=952599722]
+transform = Transform3D(3.645, 0, 0, 0, 3.645, 0, 0, 0, 3.645, 0, 0.3094012, 0)
+billboard = 2
+texture = SubResource("CompressedTexture2D_e7h4a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2082144181]
+shape = SubResource("SphereShape3D_c8qny")

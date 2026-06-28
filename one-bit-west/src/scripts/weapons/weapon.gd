@@ -143,7 +143,7 @@ func shoot_shotgun(camera:Camera3D):
 
 				print("Shotgun hit: ", hit_object.name)
 
-			if hit_object.get_parent().has_method("take_damage"):
+			elif hit_object.get_parent().has_method("take_damage"):
 				hit_object.get_parent().take_damage(shotgun_damage)
 
 				print("Shotgun hit: ", hit_object.get_parent().name)
@@ -302,3 +302,8 @@ func set_weapon_type(new_type: int) -> void:
 	set_idle_texture()
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
 	emit_signal("ammo_changed", get_current_ammo(), type_n)
+
+func add_reserve_ammo(amount: int) -> void:
+	print("Adding reserve ammo: ", amount)
+	reserve_shotgun_ammo += amount
+	emit_signal("ammo_changed", get_current_ammo(), 1)

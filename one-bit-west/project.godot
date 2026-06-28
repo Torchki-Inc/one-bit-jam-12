@@ -51,6 +51,7 @@ game_master=""
 totem=""
 waypoint=""
 boss=""
+enemy=""
 
 [input]
 
