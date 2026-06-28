@@ -15,7 +15,7 @@ script = ExtResource("1_swhsd")
 texture = ExtResource("2_qopur")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1777880548]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10094643, 0.25213027, 0.09841286)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10094643, 0.25213027, -0.039826468)
 shape = SubResource("BoxShape3D_c8qny")
 
 [node name="Head" type="Node3D" parent="." unique_id=1664977333]

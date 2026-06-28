@@ -27,6 +27,8 @@ const SHOTGUN_TEXTURES = [
 	preload("res://src/assets/weapons/shotgun/shotgun4.png"),
 ]
 
+
+
 # Revolver stats
 @export_group("Revolver")
 @export var revolver_damage := 2
@@ -46,7 +48,7 @@ const SHOTGUN_TEXTURES = [
 @export var shotgun_spread := 8.0
 @export var max_shotgun_ammo := 2
 @export var current_shotgun_ammo := 2
-@export var reserve_shotgun_ammo := 12
+@export var reserve_shotgun_ammo := 2
 @export var shotgun_reload_time := 2.0
 
 @onready var muzzle_flash: Sprite3D = $MuzzleFlash
@@ -56,7 +58,18 @@ var can_shoot := true
 var is_reloading := false
 var reload_animation_id := 0
 
-signal ammo_changed(current: int, type: int)
+signal ammo_changed(current: int, type: int, reserve: int)
+
+@export var camera_path: NodePath = "../Camera3D"
+@export var viewmodel_offset := Vector3(0.35, -0.25, -1)
+
+@onready var camera: Camera3D = get_node(camera_path)
+
+func _process(_delta: float) -> void:
+	var cam_transform := camera.global_transform
+
+	global_transform.basis = cam_transform.basis
+	global_position = cam_transform.origin + cam_transform.basis * viewmodel_offset
 
 func _ready() -> void:
 	set_idle_texture()
@@ -79,7 +92,7 @@ func shoot(camera:Camera3D):
 	use_ammo(1)
 
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	emit_signal("ammo_changed", get_current_ammo(), type_n)
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 	match type:
 		WeaponType.REVOLVER:
@@ -179,6 +192,11 @@ func reload() -> void:
 	if get_current_ammo() >= get_max_ammo():
 		return
 
+	# Only shotgun cares about reserve ammo.
+	if type == WeaponType.SHOTGUN and reserve_shotgun_ammo <= 0:
+		print("No shotgun reserve ammo")
+		return
+
 	is_reloading = true
 	can_shoot = false
 	reload_animation_id += 1
@@ -189,12 +207,18 @@ func reload() -> void:
 	await get_tree().create_timer(get_reload_time()).timeout
 
 	var needed_ammo := get_max_ammo() - get_current_ammo()
-	var ammo_to_load = min(needed_ammo, get_reserve_ammo())
 
-	add_current_ammo(ammo_to_load)
+	match type:
+		WeaponType.REVOLVER:
+			current_revolver_ammo += needed_ammo
+
+		WeaponType.SHOTGUN:
+			var ammo_to_load:int = min(needed_ammo, reserve_shotgun_ammo)
+			current_shotgun_ammo += ammo_to_load
+			reserve_shotgun_ammo -= ammo_to_load
 
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	emit_signal("ammo_changed", get_current_ammo(), type_n)
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 	is_reloading = false
 	can_shoot = true
@@ -240,21 +264,7 @@ func get_max_ammo() -> int:
 
 
 func get_reserve_ammo() -> int:
-	match type:
-		WeaponType.REVOLVER:
-			return reserve_revolver_ammo
-		WeaponType.SHOTGUN:
-			return reserve_shotgun_ammo
-
-	return 0
-
-func remove_reserve_ammo(amount: int) -> void:
-	match type:
-		WeaponType.REVOLVER:
-			reserve_revolver_ammo -= amount
-
-		WeaponType.SHOTGUN:
-			reserve_shotgun_ammo -= amount
+	return reserve_shotgun_ammo
 
 func get_reload_time() -> float:
 	match type:
@@ -275,7 +285,8 @@ func get_fire_rate() -> float:
 	return 0.5
 
 func update_ammo_display() -> void:
-	ammo_changed.emit(get_current_ammo(), get_reserve_ammo())
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	ammo_changed.emit(get_current_ammo(), type_n, get_reserve_ammo())
 
 func play_reload_animation(animation_id: int) -> void:
 	var frames := get_reload_frames()
@@ -322,17 +333,18 @@ func set_weapon_type(new_type: int) -> void:
 	can_shoot = true
 	set_idle_texture()
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	emit_signal("ammo_changed", get_current_ammo(), type_n)
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 func add_reserve_ammo(amount: int) -> void:
 	print("Adding reserve ammo: ", amount)
 	reserve_shotgun_ammo += amount
-	emit_signal("ammo_changed", get_current_ammo(), 1)
+  
+  var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 func show_muzzle_flash() -> void:
 	if flash_tween:
 		flash_tween.kill()
-	# позиция зависит от текущего оружия
 	muzzle_flash.position = MUZZLE_POS_REVOLVER if type == WeaponType.REVOLVER else MUZZLE_POS_SHOTGUN
 	muzzle_flash.visible = true
 	muzzle_flash.scale = Vector3.ONE * randf_range(0.8, 1.3)
