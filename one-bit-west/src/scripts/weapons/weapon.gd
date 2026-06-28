@@ -338,8 +338,8 @@ func set_weapon_type(new_type: int) -> void:
 func add_reserve_ammo(amount: int) -> void:
 	print("Adding reserve ammo: ", amount)
 	reserve_shotgun_ammo += amount
-  
-  var type_n := 0 if type == WeaponType.REVOLVER else 1
+
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
 	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 func show_muzzle_flash() -> void:
