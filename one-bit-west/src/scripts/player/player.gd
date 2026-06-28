@@ -81,3 +81,4 @@ func take_damage(amount: int):
 	print(name, " took ", amount, " damage. HP: ", health)
 
 	hud.set_health(health)
+	hud.flash_damage()

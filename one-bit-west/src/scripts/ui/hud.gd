@@ -4,7 +4,9 @@ extends Control
 @onready var ammo_label: Label = $AmmoLabel
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 @onready var ammo_counter: TextureRect = $TextureRect
-@onready var boss_bar: TextureProgressBar = $BossBar # добавь нод в сцену
+@onready var boss_bar: TextureProgressBar = $BossBar
+@onready var damage_flash: ColorRect = $DamageFlash
+var flash_tween: Tween
 var shaman: ShamanBoss
 
 const REVOLVER_AMMO_TEXTURES = [
@@ -67,3 +69,11 @@ func set_ammo(current: int, type: int) -> void:
 			ammo_counter.texture = REVOLVER_AMMO_TEXTURES[current]
 		1:
 			ammo_counter.texture = SHOTGUN_AMMO_TEXTURES[current]
+
+func flash_damage() -> void:
+	if flash_tween:
+		flash_tween.kill()
+	damage_flash.color.a = 0.6  # было modulate.a
+	flash_tween = create_tween()
+	flash_tween.tween_property(damage_flash, "color:a", 0.0, 0.4)\
+        .set_ease(Tween.EASE_OUT)

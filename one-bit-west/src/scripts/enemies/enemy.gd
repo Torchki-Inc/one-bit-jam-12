@@ -12,15 +12,26 @@ const GRAVITY := 9.81
 @export var damage := 5.0
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
+
 var touch_timer := 0.0
 const KILL_DEPTH = -20
 var dead := false
+var stun_timer := 0.0
+
 
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
 
 
 func _physics_process(_delta: float) -> void:
+	if dead:
+		return
+	if stun_timer > 0:
+		stun_timer -= _delta
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+
 	if global_position.y < KILL_DEPTH:
 		die()
 	if not is_on_floor():
@@ -50,6 +61,7 @@ func take_damage(amount: int):
 	if dead or not is_inside_tree():
 		return
 	health -= amount
+	stun_timer = 0.15
 	if health <= 0:
 		die()
 
@@ -58,6 +70,8 @@ func die():
 	if dead:
 		return
 	dead = true
+	var pos := global_position  # кешируем до queue_free
+	VfxManager.spawn_death_burst(pos)
 	# TODO:
 	# play death animation
 	# leave dead spprite

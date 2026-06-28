@@ -9,6 +9,9 @@ enum WeaponType {
 
 const SPRITE_DIR := "res://src/assets/weapons"
 
+const MUZZLE_POS_REVOLVER := Vector3(-0.054, 0.257, 0.0)
+const MUZZLE_POS_SHOTGUN  := Vector3(-0.419, 0.35, 0.0)
+
 const REVOLVER_TEXTURES = [
 	preload("res://src/assets/weapons/revolver/revovler.png"),
 	preload("res://src/assets/weapons/revolver/revovler1.png"),
@@ -46,6 +49,9 @@ const SHOTGUN_TEXTURES = [
 @export var reserve_shotgun_ammo := 12
 @export var shotgun_reload_time := 2.0
 
+@onready var muzzle_flash: Sprite3D = $MuzzleFlash
+var flash_tween: Tween
+
 var can_shoot := true
 var is_reloading := false
 var reload_animation_id := 0
@@ -54,6 +60,7 @@ signal ammo_changed(current: int, type: int)
 
 func _ready() -> void:
 	set_idle_texture()
+	muzzle_flash.visible = false
 
 func shoot(camera:Camera3D):
 	if is_reloading:
@@ -87,6 +94,10 @@ func shoot(camera:Camera3D):
 		reload()
 
 func shoot_revolver(camera:Camera3D):
+	show_muzzle_flash()
+	camera.kick(2.0, 0.02)
+	camera.shake(0.01, 0.05)
+
 	var space_state := get_world_3d().direct_space_state
 
 	var from := camera.global_position
@@ -99,6 +110,7 @@ func shoot_revolver(camera:Camera3D):
 	var result := space_state.intersect_ray(query)
 
 	if result:
+		VfxManager.spawn_hit_puff(result["position"])
 		var hit_object = result["collider"]
 
 		if hit_object.has_method("take_damage"):
@@ -115,6 +127,11 @@ func shoot_revolver(camera:Camera3D):
 		print("Miss")
 
 func shoot_shotgun(camera:Camera3D):
+	show_muzzle_flash()
+	camera.kick(5.0, 0.06)
+	camera.shake(0.03, 0.08)
+
+	var hit_any := false
 	for i in shotgun_pellets:
 		var space_state := get_world_3d().direct_space_state
 
@@ -134,8 +151,12 @@ func shoot_shotgun(camera:Camera3D):
 		query.exclude = [self]
 
 		var result := space_state.intersect_ray(query)
-
 		if result:
+			VfxManager.spawn_hit_puff(result["position"])
+			if not hit_any:
+				VfxManager.hitstop()  # один раз на залп
+				hit_any = true
+
 			var hit_object = result["collider"]
 
 			if hit_object.has_method("take_damage"):
@@ -307,3 +328,15 @@ func add_reserve_ammo(amount: int) -> void:
 	print("Adding reserve ammo: ", amount)
 	reserve_shotgun_ammo += amount
 	emit_signal("ammo_changed", get_current_ammo(), 1)
+
+func show_muzzle_flash() -> void:
+	if flash_tween:
+		flash_tween.kill()
+	# позиция зависит от текущего оружия
+	muzzle_flash.position = MUZZLE_POS_REVOLVER if type == WeaponType.REVOLVER else MUZZLE_POS_SHOTGUN
+	muzzle_flash.visible = true
+	muzzle_flash.scale = Vector3.ONE * randf_range(0.8, 1.3)
+	muzzle_flash.rotation.z = randf_range(0, TAU)
+	flash_tween = create_tween()
+	flash_tween.tween_interval(0.05)
+	flash_tween.tween_callback(func(): muzzle_flash.visible = false)

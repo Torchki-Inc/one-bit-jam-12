@@ -213,17 +213,35 @@ func take_available_spawnpoints() -> void:
 
 func find_valid_spawn(marker: Marker3D) -> Vector3:
 	var space := get_viewport().get_world_3d().direct_space_state
+
 	var shape := SphereShape3D.new()
 	shape.radius = 0.5
+
 	var params := PhysicsShapeQueryParameters3D.new()
 	params.shape = shape
 	params.collision_mask = 1
 
 	for i in 5:
-		var offset := Vector3(randf_range(-3, 3), 0.5, randf_range(-3, 3))
-		params.transform.origin = marker.global_position + offset
-		if space.intersect_shape(params, 1).is_empty():
-			return marker.global_position + offset
+		var offset := Vector3(randf_range(-3, 0), 0.5, randf_range(-3, 3))
+		var pos := marker.global_position + offset
+
+		# Check for collisions with other objects
+		params.transform.origin = pos
+		if !space.intersect_shape(params, 1).is_empty():
+			continue
+
+		# Find the floor
+		var ray := PhysicsRayQueryParameters3D.create(
+			pos + Vector3.UP * 5.0,
+			pos + Vector3.DOWN * 10.0
+		)
+		ray.collision_mask = 1
+
+		var hit := space.intersect_ray(ray)
+		if hit.is_empty():
+			continue
+
+		return hit.position + Vector3.UP * 0.1
 
 	return marker.global_position
 
