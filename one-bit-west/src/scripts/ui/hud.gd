@@ -52,6 +52,8 @@ func _ready() -> void:
 	$TextureProgressBar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	boss_bar.visible = false
 
+	#reserve_ammo_container.grow_horizontal = Control.GROW_DIRECTION_END
+
 
 func set_max_health(value: int):
 	health_bar.max_value = value
