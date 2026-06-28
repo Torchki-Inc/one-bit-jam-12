@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://immhsi1ubmuh" path="res://src/assets/HUD/crosshair.svg" id="1_6of88"]
 [ext_resource type="Script" uid="uid://dbxusdm26dig6" path="res://src/scripts/ui/hud.gd" id="1_782su"]
+[ext_resource type="Texture2D" uid="uid://dvnf4xej01n1h" path="res://src/assets/HUD/healthbar_boss.png" id="2_5x04n"]
 [ext_resource type="Texture2D" uid="uid://6ipk3mj5huy5" path="res://src/assets/HUD/healthbar.png" id="3_3urrb"]
+[ext_resource type="Texture2D" uid="uid://b2rk4a50p60oi" path="res://src/assets/HUD/healthbarfill_boss.png" id="3_eo1lo"]
 [ext_resource type="Texture2D" uid="uid://b5snsb76n5r3f" path="res://src/assets/HUD/healthbarfill.png" id="4_mo38n"]
 [ext_resource type="Texture2D" uid="uid://b86ru17en36fg" path="res://src/assets/HUD/ammo/revovlerammo6.png" id="5_vai3a"]
 
@@ -25,13 +27,17 @@ grow_vertical = 2
 script = ExtResource("1_782su")
 
 [node name="BossBar" type="TextureProgressBar" parent="." unique_id=464131743]
-layout_mode = 0
-offset_left = 300.0
-offset_right = 600.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
 offset_bottom = 110.0
+grow_horizontal = 0
 value = 50.0
-texture_over = ExtResource("3_3urrb")
-texture_progress = ExtResource("4_mo38n")
+fill_mode = 1
+texture_over = ExtResource("2_5x04n")
+texture_progress = ExtResource("3_eo1lo")
 
 [node name="Crosshair" type="TextureRect" parent="." unique_id=1306785877]
 layout_mode = 1
@@ -90,3 +96,11 @@ offset_top = 91.0
 offset_right = 587.0
 offset_bottom = 114.0
 label_settings = SubResource("LabelSettings_vai3a")
+
+[node name="ReserveAmmoContainer" type="HBoxContainer" parent="." unique_id=1019742023]
+layout_mode = 1
+offset_left = 112.0
+offset_top = 285.0
+offset_right = 152.0
+offset_bottom = 325.0
+theme_override_constants/separation = -25

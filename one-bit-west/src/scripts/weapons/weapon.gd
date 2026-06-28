@@ -24,6 +24,8 @@ const SHOTGUN_TEXTURES = [
 	preload("res://src/assets/weapons/shotgun/shotgun4.png"),
 ]
 
+
+
 # Revolver stats
 @export_group("Revolver")
 @export var revolver_damage := 2
@@ -43,14 +45,25 @@ const SHOTGUN_TEXTURES = [
 @export var shotgun_spread := 8.0
 @export var max_shotgun_ammo := 2
 @export var current_shotgun_ammo := 2
-@export var reserve_shotgun_ammo := 0
+@export var reserve_shotgun_ammo := 2
 @export var shotgun_reload_time := 2.0
 
 var can_shoot := true
 var is_reloading := false
 var reload_animation_id := 0
 
-signal ammo_changed(current: int, type: int)
+signal ammo_changed(current: int, type: int, reserve: int)
+
+@export var camera_path: NodePath = "../Camera3D"
+@export var viewmodel_offset := Vector3(0.35, -0.25, -1)
+
+@onready var camera: Camera3D = get_node(camera_path)
+
+func _process(_delta: float) -> void:
+	var cam_transform := camera.global_transform
+
+	global_transform.basis = cam_transform.basis
+	global_position = cam_transform.origin + cam_transform.basis * viewmodel_offset
 
 func _ready() -> void:
 	set_idle_texture()
@@ -72,7 +85,7 @@ func shoot(camera:Camera3D):
 	use_ammo(1)
 
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	emit_signal("ammo_changed", get_current_ammo(), type_n)
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 	match type:
 		WeaponType.REVOLVER:
@@ -179,12 +192,12 @@ func reload() -> void:
 			current_revolver_ammo += needed_ammo
 
 		WeaponType.SHOTGUN:
-			var ammo_to_load := min(needed_ammo, reserve_shotgun_ammo)
+			var ammo_to_load:int = min(needed_ammo, reserve_shotgun_ammo)
 			current_shotgun_ammo += ammo_to_load
 			reserve_shotgun_ammo -= ammo_to_load
 
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	emit_signal("ammo_changed", get_current_ammo(), type_n)
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 	is_reloading = false
 	can_shoot = true
@@ -230,13 +243,7 @@ func get_max_ammo() -> int:
 
 
 func get_reserve_ammo() -> int:
-	match type:
-		WeaponType.REVOLVER:
-			return reserve_revolver_ammo
-		WeaponType.SHOTGUN:
-			return reserve_shotgun_ammo
-
-	return 0
+	return reserve_shotgun_ammo
 
 func get_reload_time() -> float:
 	match type:
@@ -258,7 +265,7 @@ func get_fire_rate() -> float:
 
 func update_ammo_display() -> void:
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	ammo_changed.emit(get_current_ammo(), type_n)
+	ammo_changed.emit(get_current_ammo(), type_n, get_reserve_ammo())
 
 func play_reload_animation(animation_id: int) -> void:
 	var frames := get_reload_frames()
@@ -305,9 +312,10 @@ func set_weapon_type(new_type: int) -> void:
 	can_shoot = true
 	set_idle_texture()
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
-	emit_signal("ammo_changed", get_current_ammo(), type_n)
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())
 
 func add_reserve_ammo(amount: int) -> void:
 	print("Adding reserve ammo: ", amount)
 	reserve_shotgun_ammo += amount
-	emit_signal("ammo_changed", get_current_ammo(), 1)
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	emit_signal("ammo_changed", get_current_ammo(), type_n, get_reserve_ammo())

@@ -48,7 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				weapon.set_weapon_type(weapon.WeaponType.REVOLVER)
 
 		var type_n := 0 if weapon.type == weapon.WeaponType.REVOLVER else 1
-		hud.set_ammo(weapon.get_current_ammo(), type_n)
+		hud.set_ammo(weapon.get_current_ammo(), type_n, weapon.get_reserve_ammo())
 
 
 func _physics_process(delta: float) -> void:

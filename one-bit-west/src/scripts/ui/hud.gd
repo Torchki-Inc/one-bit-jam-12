@@ -5,6 +5,8 @@ extends Control
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 @onready var ammo_counter: TextureRect = $TextureRect
 @onready var boss_bar: TextureProgressBar = $BossBar # добавь нод в сцену
+@onready var reserve_ammo_container: HBoxContainer = $ReserveAmmoContainer
+
 var shaman: ShamanBoss
 
 const REVOLVER_AMMO_TEXTURES = [
@@ -23,6 +25,7 @@ const SHOTGUN_AMMO_TEXTURES = [
 	preload("res://src/assets/HUD/ammo/shotgunammo2.png"),
 ]
 
+const SHOTGUN_RESERVE_BULLET_TEXTURE = preload("res://src/assets/weapons/shotgun/shotgunammo.png")
 
 func _process(delta: float) -> void:
 	$Label.text = str(Engine.get_frames_per_second())
@@ -59,8 +62,19 @@ func set_health(value: int) -> void:
 	health_bar.value = value
 
 
-func set_ammo(current: int, type: int) -> void:
+func set_ammo(current: int, type: int, reserve: int) -> void:
 	ammo_label.text = "Ammo: " + str(current)
+
+	for child in reserve_ammo_container.get_children():
+			child.queue_free()
+
+	for i in reserve:
+		var shell := TextureRect.new()
+		shell.texture = SHOTGUN_RESERVE_BULLET_TEXTURE
+		shell.custom_minimum_size = Vector2(70, 70)
+		shell.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		shell.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		reserve_ammo_container.add_child(shell)
 
 	match type:
 		0:
