@@ -43,7 +43,7 @@ const SHOTGUN_TEXTURES = [
 @export var shotgun_spread := 8.0
 @export var max_shotgun_ammo := 2
 @export var current_shotgun_ammo := 2
-@export var reserve_shotgun_ammo := 12
+@export var reserve_shotgun_ammo := 0
 @export var shotgun_reload_time := 2.0
 
 var can_shoot := true
@@ -158,6 +158,11 @@ func reload() -> void:
 	if get_current_ammo() >= get_max_ammo():
 		return
 
+	# Only shotgun cares about reserve ammo.
+	if type == WeaponType.SHOTGUN and reserve_shotgun_ammo <= 0:
+		print("No shotgun reserve ammo")
+		return
+
 	is_reloading = true
 	can_shoot = false
 	reload_animation_id += 1
@@ -168,9 +173,15 @@ func reload() -> void:
 	await get_tree().create_timer(get_reload_time()).timeout
 
 	var needed_ammo := get_max_ammo() - get_current_ammo()
-	var ammo_to_load = min(needed_ammo, get_reserve_ammo())
 
-	add_current_ammo(ammo_to_load)
+	match type:
+		WeaponType.REVOLVER:
+			current_revolver_ammo += needed_ammo
+
+		WeaponType.SHOTGUN:
+			var ammo_to_load := min(needed_ammo, reserve_shotgun_ammo)
+			current_shotgun_ammo += ammo_to_load
+			reserve_shotgun_ammo -= ammo_to_load
 
 	var type_n := 0 if type == WeaponType.REVOLVER else 1
 	emit_signal("ammo_changed", get_current_ammo(), type_n)
@@ -227,14 +238,6 @@ func get_reserve_ammo() -> int:
 
 	return 0
 
-func remove_reserve_ammo(amount: int) -> void:
-	match type:
-		WeaponType.REVOLVER:
-			reserve_revolver_ammo -= amount
-
-		WeaponType.SHOTGUN:
-			reserve_shotgun_ammo -= amount
-
 func get_reload_time() -> float:
 	match type:
 		WeaponType.REVOLVER:
@@ -254,7 +257,8 @@ func get_fire_rate() -> float:
 	return 0.5
 
 func update_ammo_display() -> void:
-	ammo_changed.emit(get_current_ammo(), get_reserve_ammo())
+	var type_n := 0 if type == WeaponType.REVOLVER else 1
+	ammo_changed.emit(get_current_ammo(), type_n)
 
 func play_reload_animation(animation_id: int) -> void:
 	var frames := get_reload_frames()

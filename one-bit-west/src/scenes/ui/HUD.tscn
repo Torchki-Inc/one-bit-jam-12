@@ -6,6 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://b5snsb76n5r3f" path="res://src/assets/HUD/healthbarfill.png" id="4_mo38n"]
 [ext_resource type="Texture2D" uid="uid://b86ru17en36fg" path="res://src/assets/HUD/ammo/revovlerammo6.png" id="5_vai3a"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_a81b2"]
+font_color = Color(1, 0.21568628, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_re8f7"]
+font_color = Color(1, 0.25490198, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_vai3a"]
 font_color = Color(0.70477426, 0.24904665, 0.5420277, 1)
 
@@ -49,6 +55,7 @@ offset_left = 443.0
 offset_top = 25.0
 offset_right = 483.0
 offset_bottom = 48.0
+label_settings = SubResource("LabelSettings_a81b2")
 
 [node name="HealthLabel" type="Label" parent="." unique_id=371745087]
 layout_mode = 0
@@ -56,6 +63,7 @@ offset_left = 154.0
 offset_top = 8.0
 offset_right = 194.0
 offset_bottom = 31.0
+label_settings = SubResource("LabelSettings_re8f7")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1052968325]
 layout_mode = 0
