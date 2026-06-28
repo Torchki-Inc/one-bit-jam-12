@@ -21,7 +21,7 @@ time = 18.0
 budget = 2
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_3gwi3"]
+[sub_resource type="Resource" id="Resource_dqyix"]
 script = ExtResource("2_6owvl")
 max_alive = 6
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_1dumf"), SubResource("Resource_yqfra"), SubResource("Resource_yhni8")])
@@ -55,7 +55,7 @@ time = 15.0
 budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_tn1v3"]
+[sub_resource type="Resource" id="Resource_f81ek"]
 script = ExtResource("2_6owvl")
 max_alive = 7
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_afeke"), SubResource("Resource_42gyf"), SubResource("Resource_smo20")])
@@ -96,7 +96,7 @@ time = 18.0
 budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_0yj45"]
+[sub_resource type="Resource" id="Resource_e3e1h"]
 script = ExtResource("2_6owvl")
 max_alive = 8
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_luuom"), SubResource("Resource_2rcfe"), SubResource("Resource_qg761"), SubResource("Resource_7olfi")])
@@ -135,7 +135,7 @@ time = 18.0
 budget = 6
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_dpreg"]
+[sub_resource type="Resource" id="Resource_bmsf4"]
 script = ExtResource("2_6owvl")
 max_alive = 10
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_6owvl"), SubResource("Resource_kj45g"), SubResource("Resource_ld7rm"), SubResource("Resource_hhm28")])
@@ -174,7 +174,7 @@ time = 16.0
 budget = 7
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_43l3e"]
+[sub_resource type="Resource" id="Resource_l6ynq"]
 script = ExtResource("2_6owvl")
 max_alive = 10
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_e0gqj"), SubResource("Resource_344li"), SubResource("Resource_skgtm"), SubResource("Resource_lyyeg")])
@@ -217,7 +217,7 @@ time = 15.0
 budget = 9
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_projx"]
+[sub_resource type="Resource" id="Resource_s60gc"]
 script = ExtResource("2_6owvl")
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_mncka"), SubResource("Resource_6h202"), SubResource("Resource_27a1l"), SubResource("Resource_uq0br")])
 allowed_enemies = Dictionary[int, bool]({
@@ -261,7 +261,7 @@ time = 15.0
 budget = 12
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_d0awv"]
+[sub_resource type="Resource" id="Resource_urf58"]
 script = ExtResource("2_6owvl")
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_km3or"), SubResource("Resource_v11pg"), SubResource("Resource_5q2tv"), SubResource("Resource_tj0ht")])
 allowed_enemies = Dictionary[int, bool]({
@@ -305,7 +305,7 @@ time = 15.0
 budget = 14
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
-[sub_resource type="Resource" id="Resource_qcf3j"]
+[sub_resource type="Resource" id="Resource_7o1d8"]
 script = ExtResource("2_6owvl")
 max_alive = 14
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_pcg63"), SubResource("Resource_7xf3f"), SubResource("Resource_n6c78"), SubResource("Resource_yt4o3")])
@@ -329,4 +329,4 @@ metadata/_custom_type_script = "uid://c5ejsphh6tqwb"
 
 [node name="GameManager" type="Node" unique_id=1478407804 groups=["game_master"]]
 script = ExtResource("1_dpreg")
-waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_3gwi3"), SubResource("Resource_tn1v3"), SubResource("Resource_0yj45"), SubResource("Resource_dpreg"), SubResource("Resource_43l3e"), SubResource("Resource_projx"), SubResource("Resource_d0awv"), SubResource("Resource_qcf3j")])
+waves = Array[ExtResource("2_6owvl")]([SubResource("Resource_dqyix"), SubResource("Resource_f81ek"), SubResource("Resource_e3e1h"), SubResource("Resource_bmsf4"), SubResource("Resource_l6ynq"), SubResource("Resource_s60gc"), SubResource("Resource_urf58"), SubResource("Resource_7o1d8")])
