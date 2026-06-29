@@ -1,26 +1,39 @@
 [gd_scene format=3 uid="uid://2jgyfpa1fuk"]
 
 [ext_resource type="Script" uid="uid://kxmwshkcrkbd" path="res://src/scripts/enemies/shaman/shaman.gd" id="1_1adsi"]
-[ext_resource type="Texture2D" uid="uid://b33tp883dchjw" path="res://icon.svg" id="1_2l27j"]
 [ext_resource type="PackedScene" uid="uid://cif44dqi42oq0" path="res://src/scenes/enemies/shaman/shaman_totem.tscn" id="2_0yj45"]
+[ext_resource type="Resource" uid="uid://hv6eyia6qr8t" path="res://src/resources/enemy/ShamanSprites.tres" id="2_luuom"]
+[ext_resource type="Texture2D" uid="uid://dw2ltg5en24fd" path="res://src/assets/sprites/enemies/shaman/shamanidle.png" id="4_2rcfe"]
+[ext_resource type="Script" uid="uid://cqlfelrckwny6" path="res://src/scripts/enemies/shaman/shield_vfx.gd" id="5_2rcfe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c8qny"]
-radius = 1.0
+radius = 0.65966797
+height = 3.421753
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luuom"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wewn7"]
+material = SubResource("StandardMaterial3D_luuom")
+radius = 1.162
+height = 4.311
 
 [node name="Shaman" type="CharacterBody3D" unique_id=1993316644 groups=["boss"]]
 script = ExtResource("1_1adsi")
+sprites = ExtResource("2_luuom")
 max_hp = 100.0
 totem_respawn_delay = 60.0
-max_enemies = 2
+max_enemies = 15
 totem_scene = ExtResource("2_0yj45")
 
 [node name="Sprite" type="Sprite3D" parent="." unique_id=825801415]
-transform = Transform3D(1, 0, 0, 0, 1.9414318, 0, 0, 0, 1, 0, 0, 0)
-modulate = Color(0, 0.023529412, 1, 1)
-billboard = 1
-texture = ExtResource("1_2l27j")
+billboard = 2
+texture = ExtResource("4_2rcfe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1944707163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.108947754, -0.07351291)
 shape = SubResource("CapsuleShape3D_c8qny")
 
 [node name="SummonTimer" type="Timer" parent="." unique_id=1580253641]
@@ -28,3 +41,7 @@ shape = SubResource("CapsuleShape3D_c8qny")
 [node name="TeleportTimer" type="Timer" parent="." unique_id=1820349368]
 
 [node name="ShieldVFX" type="Node3D" parent="." unique_id=143582127]
+script = ExtResource("5_2rcfe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShieldVFX" unique_id=1022381824]
+mesh = SubResource("SphereMesh_wewn7")

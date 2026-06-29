@@ -225,7 +225,7 @@ func get_alive_enemy_count() -> int:
 
 func take_available_spawnpoints() -> void:
 	for child in spawn_point_root.get_children():
-		if child is Marker3D and child.name != "PlayerSpawn":
+		if child is Marker3D and child.name != "PlayerSpawn" and !is_in_group("waypoint") and !is_in_group("totem"):
 			spawn_points.append(child)
 
 func find_valid_spawn(marker: Marker3D) -> Vector3:

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://hv6eyia6qr8t"]
+
+[ext_resource type="Texture2D" uid="uid://ihta7xbgss0a" path="res://src/assets/sprites/enemies/shaman/shamanengaged.png" id="1_h3aet"]
+[ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_ne0gm"]
+[ext_resource type="Texture2D" uid="uid://blq4ru7ybm7w2" path="res://src/assets/sprites/enemies/shaman/shamandead.png" id="2_u0h2b"]
+[ext_resource type="Texture2D" uid="uid://dw2ltg5en24fd" path="res://src/assets/sprites/enemies/shaman/shamanidle.png" id="4_dkj2b"]
+
+[resource]
+script = ExtResource("1_ne0gm")
+walk = ExtResource("4_dkj2b")
+attack = ExtResource("1_h3aet")
+dead = ExtResource("2_u0h2b")
+metadata/_custom_type_script = "uid://cmin7i1si6of8"
