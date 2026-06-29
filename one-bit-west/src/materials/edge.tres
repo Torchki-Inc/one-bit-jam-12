@@ -1,4 +1,8 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://cjswkc1s62r6a"]
 
+[ext_resource type="Texture2D" uid="uid://cd74wt8g4mu07" path="res://src/assets/landscape.png" id="1_xjwrq"]
+
 [resource]
 shading_mode = 0
+albedo_texture = ExtResource("1_xjwrq")
+texture_filter = 0
