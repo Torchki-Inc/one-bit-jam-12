@@ -2,17 +2,23 @@ extends CSGBox3D
 
 @export var box_size := Vector3(9.0, 5.0, 7.0)
 
-const MATERIAL_DIR := "res://src/materials/buildings/"
-
-const BACK_MAT_PATH := MATERIAL_DIR + "back.tres"
-const SIDE_MAT_PATH := MATERIAL_DIR + "side.tres"
-
 const FACE_OFFSET := 0.01
 
+const BACK_MAT := preload("res://src/materials/buildings/back.tres")
+const SIDE_MAT := preload("res://src/materials/buildings/side.tres")
+
+const FRONT_MATS: Array[Material] = [
+	preload("res://src/materials/buildings/front_bank.tres"),
+	preload("res://src/materials/buildings/front_house1.tres"),
+	preload("res://src/materials/buildings/front_house2.tres"),
+	preload("res://src/materials/buildings/front_saloon.tres"),
+	preload("res://src/materials/buildings/front_sheriff.tres"),
+]
+
 func _ready() -> void:
-	var random_front_mat := get_random_front_material()
-	var back_mat := load(BACK_MAT_PATH)
-	var side_mat := load(SIDE_MAT_PATH)
+	var random_front_mat: Material = FRONT_MATS.pick_random()
+	var back_mat: Material = BACK_MAT
+	var side_mat: Material = SIDE_MAT
 
 	var swap_front_back := randf() < 0.5
 
@@ -54,22 +60,6 @@ func _ready() -> void:
 		Vector3(0, 0, 0),
 		side_mat
 	)
-
-
-func get_random_front_material() -> Material:
-	var files := DirAccess.get_files_at(MATERIAL_DIR)
-	var front_files: Array[String] = []
-
-	for file in files:
-		if file.begins_with("front_") and file.ends_with(".tres"):
-			front_files.append(file)
-
-	if front_files.is_empty():
-		push_error("No front_*.tres materials found in " + MATERIAL_DIR)
-		return null
-
-	var chosen_file: String = front_files.pick_random()
-	return load(MATERIAL_DIR + chosen_file)
 
 
 func make_quad(
