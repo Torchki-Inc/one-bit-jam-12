@@ -29,6 +29,11 @@ const ENEMY_SCENES = {
 }
 const SHAMAN = preload("res://src/scenes/enemies/shaman/shaman.tscn")
 const TALISMAN = preload("res://src/scenes/weapons/talisman.tscn")
+
+const WIN_SCREEN := preload("res://src/scenes/ui/WinScreen.tscn")
+
+var game_finished := false
+
 # --------------------
 # Lifecycle
 # --------------------
@@ -141,6 +146,10 @@ func spawn_boss(boss_scene: PackedScene) -> void:
 	var boss := boss_scene.instantiate()
 	entity_root.add_child(boss)
 	boss.global_position = pos
+
+	if boss.has_signal("shaman_defeated"):
+			boss.shaman_defeated.connect(_on_boss_defeated)
+
 	boss.start()
 
 func spawn_enemy(type: BaseEnemy.Type) -> void:
@@ -248,3 +257,14 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 func kill_all_ghosts() -> void:
 	for enemy in get_tree().get_nodes_in_group("ghost"):
 		enemy.die()
+
+func _on_boss_defeated() -> void:
+	if game_finished:
+		return
+
+	game_finished = true
+
+	await get_tree().create_timer(2.0).timeout
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_packed(WIN_SCREEN)
