@@ -8,6 +8,7 @@ extends Node
 @onready var entity_root: Node3D = $World/EntityRoot
 @onready var hud: Control = $HudLayout/Hud
 @onready var systems: Node = $Systems
+@onready var nav_region: Node3D = $World/LevelRoot
 
 var current_level: Node3D
 var player: CharacterBody3D
@@ -25,6 +26,11 @@ func load_level() -> void:
 
 	current_level = level_scene.instantiate()
 	level_root.add_child(current_level)
+
+	# print_debug("Baking navigation mesh...")
+	# nav_region.bake_navigation_mesh()
+	# await nav_region.bake_finished
+	# print_debug("Navigation mesh baked.")
 
 func spawn_player() -> void:
 	if player_scene == null:

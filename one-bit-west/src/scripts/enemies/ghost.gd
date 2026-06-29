@@ -22,6 +22,7 @@ func take_damage(_amount: int) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	sm.update(delta)
 	_hover(delta)
 	move_and_slide()
 
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 			print("collision: ", collision, " collider: ", collider, "TAKE TOUCH DAMAGE")
 			collider.take_damage(damage)
 			self.die()
-	sm.update(delta)
+
 
 
 func _hover(delta: float) -> void:

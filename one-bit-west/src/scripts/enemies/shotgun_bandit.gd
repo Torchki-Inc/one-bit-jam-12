@@ -36,8 +36,8 @@ func die() -> void:
 	super.die()
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
 	sm.update(delta)
+	super._physics_process(delta)
 
 func _drop_ammo(amount: int) -> void:
 	var pickup = preload("res://src/scenes/weapons/ammo_pickup.tscn").instantiate()

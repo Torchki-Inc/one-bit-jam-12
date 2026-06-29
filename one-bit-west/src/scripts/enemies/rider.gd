@@ -25,8 +25,8 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
 	sm.update(delta)
+	super._physics_process(delta)
 
 func die():
 	if dead or not is_inside_tree():

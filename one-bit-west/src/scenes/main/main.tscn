@@ -40,7 +40,7 @@ environment = SubResource("Environment_fup5m")
 
 [node name="EffectRoot" type="Node3D" parent="World" unique_id=981164991 groups=["effect_root"]]
 
-[node name="LevelRoot" type="Node3D" parent="World" unique_id=924270617]
+[node name="LevelRoot" type="Node3D" parent="World" unique_id=351227779]
 
 [node name="HudLayout" type="CanvasLayer" parent="." unique_id=992616815]
 layer = 10

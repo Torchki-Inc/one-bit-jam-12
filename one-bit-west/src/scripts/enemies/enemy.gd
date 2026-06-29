@@ -59,6 +59,14 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	add_to_group("enemy")
 
+	await get_tree().physics_frame
+	if nav_agent.get_navigation_map() == RID():
+		print("WARNING: nav map не назначен!")
+	else:
+		print("nav map OK: ", nav_agent.get_navigation_map())
+
+	await get_tree().physics_frame
+	nav_agent.max_speed = move_speed
 
 func take_damage(amount: int):
 	if dead or not is_inside_tree():
@@ -84,11 +92,21 @@ func die():
 
 # calculate and move sprite toward player
 func move_toward_target(target_pos: Vector3, _delta: float):
-	var dir = (target_pos - global_position)
+	nav_agent.target_position = target_pos
+
+	print("nav finished: ", nav_agent.is_navigation_finished(),
+          " dist: ", global_position.distance_to(target_pos))
+
+	var next: Vector3= nav_agent.get_next_path_position()
+	var dir := (next - global_position)
 	dir.y = 0
 	dir = dir.normalized()
-	velocity = dir * move_speed
-	move_and_slide()
+
+
+	velocity.x = dir.x * move_speed
+	velocity.z = dir.z * move_speed
+	print("next_pos: ", next, " dir: ", dir, " vel: ", Vector2(velocity.x, velocity.z))
+	face_direction(dir)
 
 
 # prevent sprites from moving backwards
