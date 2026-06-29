@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="one-bit-west"
+config/version="1.0"
 config/tags=PackedStringArray("3d", "jam")
 run/main_scene="uid://0o282103f8ms"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.101960786, 0.039215688, 0.039215688, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://dv3v37o1ouevc"
+config/icon="uid://dylrbu7ji5012"
 
 [autoload]
 
