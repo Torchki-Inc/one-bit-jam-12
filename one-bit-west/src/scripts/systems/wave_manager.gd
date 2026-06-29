@@ -155,6 +155,8 @@ func spawn_boss(boss_scene: PackedScene) -> void:
 	if boss.has_signal("shaman_defeated"):
 			boss.shaman_defeated.connect(_on_boss_defeated)
 
+	AudioManager.play_music(AudioManager.BOSS_LOOP)
+
 	boss.start()
 
 func spawn_enemy(type: BaseEnemy.Type) -> void:

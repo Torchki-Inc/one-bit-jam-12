@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://cat7mnksbyxr" path="res://src/scripts/main/main.gd" id="1_fub2y"]
 [ext_resource type="PackedScene" uid="uid://bp85ibxgysc38" path="res://src/scenes/levels/level0.tscn" id="2_cx4eu"]
 [ext_resource type="Script" uid="uid://dkgnkfepnx5mi" path="res://src/scripts/ui/pause_layout.gd" id="2_vw57g"]
-[ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="3_fub2y"]
 [ext_resource type="PackedScene" uid="uid://c8v7b2luia2lj" path="res://src/scenes/player/player.tscn" id="3_fup5m"]
 [ext_resource type="PackedScene" uid="uid://bywyq0bikkwec" path="res://src/scenes/main/game_manager.tscn" id="4_fup5m"]
+[ext_resource type="PackedScene" uid="uid://bmmsauwh5btgf" path="res://src/scenes/ui/pause_menu.tscn" id="7_fup5m"]
 [ext_resource type="PackedScene" uid="uid://c5p4u2t31clk6" path="res://src/scenes/ui/debug.tscn" id="8_fup5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3q0a4"]
@@ -52,7 +52,7 @@ process_mode = 3
 layer = 20
 script = ExtResource("2_vw57g")
 
-[node name="PauseMenu" parent="PauseLayout" unique_id=1433678151 instance=ExtResource("3_fub2y")]
+[node name="PauseMenu" parent="PauseLayout" unique_id=1433678151 instance=ExtResource("7_fup5m")]
 visible = false
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1593638519]
