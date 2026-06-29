@@ -47,6 +47,8 @@ class RiderRoamState extends EnemyState:
 	var charge_delay := 3.0         # how long to wait before charging
 
 	func enter() -> void:
+		enemy.sprite.texture = enemy.sprites.walk
+
 		# Start
 		enemy.velocity = Vector3.ZERO
 		var offset = enemy.global_position - enemy.player.global_position
@@ -80,6 +82,7 @@ class RiderChargeState extends EnemyState:
 	const GRAVITY := 20.0
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.attack
 		timer = jump_duration
 		_charge()
 

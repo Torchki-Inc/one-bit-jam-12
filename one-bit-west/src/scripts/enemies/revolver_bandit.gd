@@ -130,6 +130,7 @@ class BanditPrepareState extends EnemyState:
 
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.attack
 		timer = 0.8
 		# enemy.anim_state.travel("prepare")
 
@@ -148,7 +149,6 @@ class BanditShootState extends EnemyState:
 	func enter():
 		enemy.make_shot()
 
-		pass
 		# enemy.anim_state.travel("shoot")
 		# spawn bullet here
 
@@ -163,6 +163,7 @@ class BanditWaitState extends EnemyState:
 
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.walk
 		timer = randf_range(1.5, 2.0)
 
 

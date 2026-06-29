@@ -20,7 +20,6 @@ const KILL_DEPTH = -20
 var dead := false
 var stun_timer := 0.0
 
-
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
 
@@ -60,6 +59,7 @@ func _physics_process(_delta: float) -> void:
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	add_to_group("enemy")
+	original_modulate = sprite.modulate
 
 	await get_tree().physics_frame
 	if nav_agent.get_navigation_map() == RID():
@@ -72,6 +72,7 @@ func _ready() -> void:
 
 	if sprites.walk != null:
 		sprite.texture = sprites.walk
+
 
 func take_damage(amount: int):
 	if dead or not is_inside_tree():
@@ -87,31 +88,25 @@ func die():
 	if dead:
 		return
 	dead = true
-	var pos := global_position  # кешируем до queue_free
+	var pos := global_position # кешируем до queue_free
 	VfxManager.spawn_death_burst(pos)
 	# TODO:
 	# play death animation
 	# leave dead spprite
 	leave_body()
-	queue_free()
 
 
 # calculate and move sprite toward player
 func move_toward_target(target_pos: Vector3, _delta: float):
 	nav_agent.target_position = target_pos
 
-	print("nav finished: ", nav_agent.is_navigation_finished(),
-          " dist: ", global_position.distance_to(target_pos))
-
-	var next: Vector3= nav_agent.get_next_path_position()
+	var next: Vector3 = nav_agent.get_next_path_position()
 	var dir := (next - global_position)
 	dir.y = 0
 	dir = dir.normalized()
 
-
 	velocity.x = dir.x * move_speed
 	velocity.z = dir.z * move_speed
-	print("next_pos: ", next, " dir: ", dir, " vel: ", Vector2(velocity.x, velocity.z))
 	face_direction(dir)
 
 
@@ -120,13 +115,19 @@ func face_direction(move_dir: Vector3):
 	if move_dir.x != 0:
 		$Sprite3D.flip_h = move_dir.x < 0
 
+
 func flash_hit() -> void:
-	original_modulate = sprite.modulate
 	if hit_tween:
 		hit_tween.kill()
-	sprite.modulate = Color(0, 0, 0, 1)  # белый флэш
+	sprite.modulate = Color(0, 0, 0, 1) # белый флэш
 	hit_tween = create_tween()
 	hit_tween.tween_property(sprite, "modulate", original_modulate, 0.12)
 
+
 func leave_body():
-	var po
+
+	sprite.texture = sprites.dead
+	sprite.offset.y -= 40
+	set_process(false)
+	set_physics_process(false)
+	$CollisionShape3D.disabled = true
