@@ -10,6 +10,7 @@ var wave_time := 0.0
 var next_burst := 0
 var spawning_finished := false
 var boss_fight := false
+var pending_spawns := 0
 
 var spawn_points: Array[Marker3D] = []
 
@@ -35,6 +36,7 @@ const TALISMAN = preload("res://src/scenes/weapons/talisman.tscn")
 
 func _ready() -> void:
 	add_child(timer)
+	timer.one_shot = true
 	timer.timeout.connect(_on_cooldown_finished)
 
 	if waves.is_empty():
@@ -85,7 +87,7 @@ func _process(delta: float) -> void:
 	if current_wave.bursts.size() > 0:
 		last_burst_delay = current_wave.bursts.back().time
 
-	if spawning_finished and wave_time > last_burst_delay + 1.0 and get_alive_enemy_count() == 0 and not boss_fight:
+	if spawning_finished and pending_spawns == 0 and wave_time > last_burst_delay + 1.0 and get_alive_enemy_count() == 0 and not boss_fight:
 		if current_wave_index + 1 >= waves.size():
 			boss_fight = true
 			state = State.IDLE
@@ -122,8 +124,11 @@ func spawn_burst(burst: Burst) -> void:
 		if enemy_type == BaseEnemy.Type.GHOST:
 			ghost_spawned = true
 
+		pending_spawns += 1
 		get_tree().create_timer(delay).timeout.connect(
-			func(): spawn_enemy(enemy_type)
+			func():
+				spawn_enemy(enemy_type)
+				pending_spawns -= 1
 		)
 
 		budget -= get_enemy_cost(enemy_type)
