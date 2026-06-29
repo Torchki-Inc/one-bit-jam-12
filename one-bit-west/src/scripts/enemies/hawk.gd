@@ -103,7 +103,7 @@ class HawkDiveState extends EnemyState:
 		var dir = to_target.normalized()
 		enemy.velocity = dir * enemy.CHARGE_SPEED
 
-		if enemy.global_position.distance_to(dive_target) < 1.5:
+		if enemy.global_position.distance_to(dive_target) < 0.2:
 			return next
 
 		if elapsed >= MAX_DIVE_TIME:

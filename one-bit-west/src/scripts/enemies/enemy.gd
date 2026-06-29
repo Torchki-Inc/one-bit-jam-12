@@ -45,6 +45,7 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if global_position.y < KILL_DEPTH:
+		print("enemy killed by depth: ", global_position.y)
 		queue_free()
 		return
 
@@ -109,7 +110,6 @@ func die():
 
 
 func _update_waddle(_delta: float) -> void:
-	print("waddle spd: ", Vector2(velocity.x, velocity.z).length())
 	if not waddle_enabled:
 		return
 
@@ -154,6 +154,9 @@ func leave_body():
 	print("called leave body")
 	sprite.texture = sprites.dead
 	sprite.offset.y -= dead_sprite_offset
+
+	sprite.position.y = 0.0 - global_position.y
+
 	set_process(false)
 	set_physics_process(false)
 	add_to_group("dead")

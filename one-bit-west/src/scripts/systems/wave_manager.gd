@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 			start_cooldown()
 
 func _start_boss_sequence() -> void:
-	# ждём пока враги из последнего burst реально заспавнятся
+	# ждём пок  враги из последнего burst реально заспавнятся
 	await get_tree().process_frame
 	await get_tree().process_frame
 	while get_alive_enemy_count() > 0:
@@ -238,29 +238,30 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 	params.shape = shape
 	params.collision_mask = 1
 
-	for i in 5:
-		var offset := Vector3(randf_range(-3, 0), 0.5, randf_range(-3, 3))
+	for i in 20:
+		var offset := Vector3(randf_range(-2, 2), 0.5, randf_range(-2, 2))
 		var pos := marker.global_position + offset
+		pos.x = clamp(pos.x, -30.0, 30.0)
+		pos.z = clamp(pos.z, -30.0, 30.0)
+		pos.y = 0.5  # фиксируем Y для shape check — не берём Y маркера
 
-		# Check for collisions with other objects
 		params.transform.origin = pos
 		if !space.intersect_shape(params, 1).is_empty():
 			continue
 
-		# Find the floor
 		var ray := PhysicsRayQueryParameters3D.create(
-			pos + Vector3.UP * 5.0,
-			pos + Vector3.DOWN * 10.0
+			pos + Vector3.UP * 10.0,  # было 5 — поднимаем выше крыш
+			pos + Vector3.DOWN * 20.0
 		)
 		ray.collision_mask = 1
-
 		var hit := space.intersect_ray(ray)
 		if hit.is_empty():
 			continue
 
-		return hit.position + Vector3.UP * 0.1
+		return hit.position + Vector3.UP * 1.0  # было 0.1 — враг появляется над полом
 
-	return marker.global_position
+	push_warning("find_valid_spawn: все попытки провалились, маркер: %s" % marker.name)
+	return Vector3(0, 1.0, 0)
 
 func kill_all_ghosts() -> void:
 	for enemy in get_tree().get_nodes_in_group("ghost"):

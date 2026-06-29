@@ -1,7 +1,13 @@
 [gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://bo0rd4gtn6dhc"]
 
+[ext_resource type="Texture2D" uid="uid://wmgrvydxw15r" path="res://src/assets/sprites/enemies/hawk/hawkengaged.png" id="1_e67bh"]
 [ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_qbbis"]
+[ext_resource type="Texture2D" uid="uid://cuwcjadrcpcpd" path="res://src/assets/sprites/enemies/hawk/hawkdead.png" id="2_mefss"]
+[ext_resource type="Texture2D" uid="uid://dhnytpho7vua" path="res://src/assets/sprites/enemies/hawk/hawkidle.png" id="4_jabbu"]
 
 [resource]
 script = ExtResource("1_qbbis")
+walk = ExtResource("4_jabbu")
+attack = ExtResource("1_e67bh")
+dead = ExtResource("2_mefss")
 metadata/_custom_type_script = "uid://cmin7i1si6of8"

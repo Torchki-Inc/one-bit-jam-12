@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cm56wlxem7jst" path="res://src/scenes/enemies/dog.tscn" id="1_f6k4x"]
 [ext_resource type="Script" uid="uid://bq034s1asjr0i" path="res://src/scripts/enemies/hawk.gd" id="2_rmqmi"]
 [ext_resource type="Resource" uid="uid://bo0rd4gtn6dhc" path="res://src/resources/enemy/HawkSprites.tres" id="3_rmqmi"]
+[ext_resource type="Texture2D" uid="uid://dhnytpho7vua" path="res://src/assets/sprites/enemies/hawk/hawkidle.png" id="4_gpf0c"]
 
 [node name="Hawk" unique_id=1612062943 instance=ExtResource("1_f6k4x")]
 script = ExtResource("2_rmqmi")
@@ -16,3 +17,6 @@ health = 30
 move_speed = 4.0
 touch_damage = 15.0
 sprites = ExtResource("3_rmqmi")
+
+[node name="Sprite3D" parent="." index="1" unique_id=1967239771]
+texture = ExtResource("4_gpf0c")
