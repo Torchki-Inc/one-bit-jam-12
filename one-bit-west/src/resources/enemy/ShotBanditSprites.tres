@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://bbgfx78ugy033"]
+
+[ext_resource type="Texture2D" uid="uid://dp2lh20kuawse" path="res://src/assets/sprites/enemies/shotgun/shotgunbanditengaged.png" id="1_c2fmd"]
+[ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_naxf5"]
+[ext_resource type="Texture2D" uid="uid://d0ckbs7elomk2" path="res://src/assets/sprites/enemies/revolver/deadbandit.png" id="2_qjn01"]
+[ext_resource type="Texture2D" uid="uid://m7n3y6vafdr4" path="res://src/assets/sprites/enemies/shotgun/shotgunbanditidle.png" id="4_svkh8"]
+
+[resource]
+script = ExtResource("1_naxf5")
+walk = ExtResource("4_svkh8")
+attack = ExtResource("1_c2fmd")
+dead = ExtResource("2_qjn01")
+metadata/_custom_type_script = "uid://cmin7i1si6of8"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://dtn1wc7ji22j7"]
+
+[ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_oudjp"]
+[ext_resource type="Texture2D" uid="uid://jq0p1l1jnl2u" path="res://src/assets/sprites/enemies/revolver/revolverbanditengaged.png" id="1_yrix1"]
+[ext_resource type="Texture2D" uid="uid://d0ckbs7elomk2" path="res://src/assets/sprites/enemies/revolver/deadbandit.png" id="2_msnyl"]
+[ext_resource type="Texture2D" uid="uid://bm0dcsdlseylk" path="res://src/assets/sprites/enemies/revolver/revolverbanditidle.png" id="4_7qa0d"]
+
+[resource]
+script = ExtResource("1_oudjp")
+walk = ExtResource("4_7qa0d")
+attack = ExtResource("1_yrix1")
+dead = ExtResource("2_msnyl")
+metadata/_custom_type_script = "uid://cmin7i1si6of8"

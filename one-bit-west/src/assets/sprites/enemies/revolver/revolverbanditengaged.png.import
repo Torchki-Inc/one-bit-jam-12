@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb8jp7tx1ocln"
-path="res://.godot/imported/building_wall_1.png-abfa601897d71dd8f7e24fb2ef86cdd1.ctex"
+uid="uid://jq0p1l1jnl2u"
+path="res://.godot/imported/revolverbanditengaged.png-5bfac800bb3a29fe3b94027cc46b21c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/assets/building_wall_1.png"
-dest_files=["res://.godot/imported/building_wall_1.png-abfa601897d71dd8f7e24fb2ef86cdd1.ctex"]
+source_file="res://src/assets/sprites/enemies/revolver/revolverbanditengaged.png"
+dest_files=["res://.godot/imported/revolverbanditengaged.png-5bfac800bb3a29fe3b94027cc46b21c7.ctex"]
 
 [params]
 

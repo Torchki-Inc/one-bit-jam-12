@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://jb7cakgdqba4" path="res://src/scenes/enemies/enemy.tscn" id="1_5wjrc"]
 [ext_resource type="Script" uid="uid://ces1aaap10ec2" path="res://src/scripts/enemies/rider.gd" id="2_3tc4d"]
+[ext_resource type="Resource" uid="uid://bjackxsspl3w5" path="res://src/resources/enemy/RiderSprites.tres" id="3_cpe3t"]
+[ext_resource type="Texture2D" uid="uid://cicd513ldkya0" path="res://src/assets/sprites/enemies/rider/bastardonahorseidle.png" id="4_bbc6g"]
 
 [node name="Rider" unique_id=1612062943 instance=ExtResource("1_5wjrc")]
 script = ExtResource("2_3tc4d")
@@ -9,10 +11,9 @@ type = 1
 CHARGE_SPEED = 14.0
 health = 1
 move_speed = 5.0
-shoot_radius = null
 damage = 0.0
 touch_damage = 20.0
+sprites = ExtResource("3_cpe3t")
 
 [node name="Sprite3D" parent="." index="1" unique_id=1967239771]
-transform = Transform3D(2.6757574, 0, 0, 0, 0.7522683, 0, 0, 0, 1, 0, 0, 0)
-modulate = Color(0, 0.23952305, 0.23952308, 1)
+texture = ExtResource("4_bbc6g")

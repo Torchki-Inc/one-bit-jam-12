@@ -12,7 +12,9 @@ const GRAVITY := 9.81
 @export var damage := 5.0
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
+@export var sprites: EnemySprites
 
+var original_modulate: Color
 var touch_timer := 0.0
 const KILL_DEPTH = -20
 var dead := false
@@ -68,6 +70,9 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	nav_agent.max_speed = move_speed
 
+	if sprites.walk != null:
+		sprite.texture = sprites.walk
+
 func take_damage(amount: int):
 	if dead or not is_inside_tree():
 		return
@@ -87,6 +92,7 @@ func die():
 	# TODO:
 	# play death animation
 	# leave dead spprite
+	leave_body()
 	queue_free()
 
 
@@ -115,8 +121,12 @@ func face_direction(move_dir: Vector3):
 		$Sprite3D.flip_h = move_dir.x < 0
 
 func flash_hit() -> void:
+	original_modulate = sprite.modulate
 	if hit_tween:
 		hit_tween.kill()
-	sprite.modulate = Color(1, 1, 1, 1)  # белый флэш
+	sprite.modulate = Color(0, 0, 0, 1)  # белый флэш
 	hit_tween = create_tween()
-	hit_tween.tween_property(sprite, "modulate", Color(0, 0, 0, 1), 0.12)
+	hit_tween.tween_property(sprite, "modulate", original_modulate, 0.12)
+
+func leave_body():
+	var po
