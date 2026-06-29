@@ -51,7 +51,6 @@ func _physics_process(_delta: float) -> void:
 		var collider = collision.get_collider()
 
 		if collider.is_in_group("player") && collider.has_method("take_damage") && touch_timer <= 0:
-			print("collision: ", collision, " collider: ", collider, "TAKE TOUCH DAMAGE")
 			collider.take_damage(damage)
 			touch_timer = touch_cooldown
 

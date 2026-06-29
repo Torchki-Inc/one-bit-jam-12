@@ -33,9 +33,12 @@ class DogRoamState extends EnemyState:
 	var next: EnemyState
 	var timer := 0.0
 	var roam_target := Vector3.ZERO
+	var jump_cooldown := 0.0
+	const JUMP_COOLDOWN_TIME := 1.0
 
 
 	func enter():
+		jump_cooldown = JUMP_COOLDOWN_TIME
 		_pick_new_target()
 
 
@@ -44,9 +47,11 @@ class DogRoamState extends EnemyState:
 		if timer <= 0.0:
 			_pick_new_target()
 
+		jump_cooldown -= delta
+
 		enemy.move_toward_target(roam_target, delta)
 
-		if enemy.global_position.distance_to(enemy.player.global_position) < enemy.shoot_radius:
+		if jump_cooldown <= 0.0 and enemy.global_position.distance_to(enemy.player.global_position) < enemy.shoot_radius:
 			return next
 		return self
 
@@ -61,7 +66,6 @@ class DogJumpState extends EnemyState:
 	var next: EnemyState
 	var timer := 0.0
 	var jump_duration := 1.0
-
 
 	func enter():
 		timer = jump_duration

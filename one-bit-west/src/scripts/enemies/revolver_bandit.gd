@@ -66,12 +66,10 @@ func make_shot():
 		if hit_object.has_method("take_damage"):
 			hit_object.take_damage(self.damage)
 
-			print("Revolver hit: ", hit_object.name)
 
 		elif hit_object.get_parent().has_method("take_damage"):
 			hit_object.get_parent().take_damage(self.damage)
 
-			print("Revolver hit: ", hit_object.name)
 	else:
 		print(self.get_instance_id(), " misses")
 

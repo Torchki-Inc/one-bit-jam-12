@@ -121,7 +121,6 @@ class BanditRoamState extends EnemyState:
 		enemy.move_toward_target(roam_target, delta)
 
 		if enemy.global_position.distance_to(enemy.player.global_position) < enemy.shoot_radius:
-			print("in shooting position")
 			return next # -> PrepareState
 		return self
 
@@ -156,7 +155,6 @@ class BanditShootState extends EnemyState:
 
 
 	func enter():
-		print("Enter Soot state")
 		enemy.make_shot()
 
 		pass
