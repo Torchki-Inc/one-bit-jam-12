@@ -19,4 +19,5 @@ touch_damage = 15.0
 sprites = ExtResource("3_rmqmi")
 
 [node name="Sprite3D" parent="." index="1" unique_id=1967239771]
+billboard = 1
 texture = ExtResource("4_gpf0c")

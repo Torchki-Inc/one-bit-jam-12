@@ -5,6 +5,9 @@
 [ext_resource type="Resource" uid="uid://bjackxsspl3w5" path="res://src/resources/enemy/RiderSprites.tres" id="3_cpe3t"]
 [ext_resource type="Texture2D" uid="uid://cicd513ldkya0" path="res://src/assets/sprites/enemies/rider/bastardonahorseidle.png" id="4_bbc6g"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_adrgu"]
+radius = 0.8496094
+
 [node name="Rider" unique_id=1612062943 instance=ExtResource("1_5wjrc")]
 script = ExtResource("2_3tc4d")
 type = 1
@@ -14,7 +17,10 @@ move_speed = 5.0
 damage = 0.0
 touch_damage = 20.0
 sprites = ExtResource("3_cpe3t")
-dead_sprite_offset = 40.0
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=1581835243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06502101, -0.03173828, 0.033081055)
+shape = SubResource("CapsuleShape3D_adrgu")
 
 [node name="Sprite3D" parent="." index="1" unique_id=1967239771]
 texture = ExtResource("4_bbc6g")

@@ -28,6 +28,8 @@ func _ready():
 
 	sm.current = roam
 	sm.enter()
+	self.sprite.texture = sprites.attack
+
 
 
 func _physics_process(delta: float) -> void:
@@ -53,6 +55,7 @@ class HawkRoamState extends EnemyState:
 	var charge_timer := 0.0         # countdown before charging
 
 	func enter() -> void:
+		enemy.sprite.texture = enemy.sprites.attack
 		# Start
 		enemy.velocity = Vector3.ZERO
 		var offset = enemy.global_position - enemy.player.global_position
@@ -89,6 +92,7 @@ class HawkDiveState extends EnemyState:
 	const MAX_DIVE_TIME := 2.5
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.attack
 		done = false
 		elapsed = 0.0
 		dive_target = enemy.player.global_position

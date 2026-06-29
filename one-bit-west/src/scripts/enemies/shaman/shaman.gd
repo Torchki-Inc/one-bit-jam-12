@@ -4,6 +4,7 @@ extends CharacterBody3D
 signal shaman_defeated
 signal health_changed(new_hp: float)
 
+@export var sprites: EnemySprites
 @export var max_hp: float = 300.0
 @export var summon_interval: float = 8.0
 @export var teleport_interval: float = 12.0

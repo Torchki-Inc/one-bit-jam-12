@@ -1,19 +1,20 @@
 [gd_scene format=3 uid="uid://daup3t7n8nwif"]
 
 [ext_resource type="Script" uid="uid://b3v8b6wov32v5" path="res://src/scripts/weapons/talisman.gd" id="1_mnoms"]
+[ext_resource type="Texture2D" uid="uid://dylrbu7ji5012" path="res://src/assets/sprites/enemies/shaman/talisman.png" id="2_ec8r6"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e7h4a"]
-load_path = "res://.godot/imported/crosshair.svg-d5548b6f4cbecec9d26483cce8736121.s3tc.ctex"
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_c8qny"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c8qny"]
+radius = 0.49194336
+height = 0.9838867
 
 [node name="Talisman" type="Area3D" unique_id=1797242529]
 script = ExtResource("1_mnoms")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=952599722]
-transform = Transform3D(3.645, 0, 0, 0, 3.645, 0, 0, 0, 3.645, 0, 0.3094012, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.3094012, 0)
 billboard = 2
-texture = SubResource("CompressedTexture2D_e7h4a")
+texture = ExtResource("2_ec8r6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2082144181]
-shape = SubResource("SphereShape3D_c8qny")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26245117, 0)
+shape = SubResource("CapsuleShape3D_c8qny")

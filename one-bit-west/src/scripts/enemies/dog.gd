@@ -38,6 +38,7 @@ class DogRoamState extends EnemyState:
 
 
 	func enter():
+		enemy	.sprite.texture = enemy.sprites.walk
 		jump_cooldown = JUMP_COOLDOWN_TIME
 		_pick_new_target()
 
@@ -68,6 +69,7 @@ class DogJumpState extends EnemyState:
 	var jump_duration := 1.0
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.attack
 		timer = jump_duration
 		_launch()
 

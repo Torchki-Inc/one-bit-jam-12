@@ -58,10 +58,16 @@ func spawn_player() -> void:
 	player.setup_hud()
 
 func get_player_spawn() -> Marker3D:
-	var spawn := $World/LevelRoot.get_node_or_null("SpawnPoints/PlayerSpawn")
+	if current_level == null:
+		return null
+
+	var spawn := current_level.get_node_or_null("SpawnPoints/PlayerSpawn")
 
 	if spawn and spawn is Marker3D:
+
+		print(spawn.global_position)
 		return spawn
+
 
 	return null
 

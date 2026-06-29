@@ -9,7 +9,7 @@
 height = 1.1809082
 
 [node name="Dog" unique_id=1612062943 instance=ExtResource("1_yf37c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5047, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_v2c5d")
 type = 0
 JUMP_HEIGHT = 4.0
@@ -19,11 +19,12 @@ move_speed = 5.5
 touch_damage = 10.0
 touch_cooldown = 0.8
 sprites = ExtResource("3_v2c5d")
-dead_sprite_offset = 15.0
+dead_sprite_offset = 0.0
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=1581835243]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107299805, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.107299805, 0)
 shape = SubResource("CapsuleShape3D_6u6pa")
 
 [node name="Sprite3D" parent="." index="1" unique_id=1967239771]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 texture = ExtResource("4_w8owr")

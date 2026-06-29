@@ -245,9 +245,11 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 		pos.z = clamp(pos.z, -30.0, 30.0)
 		pos.y = 0.5  # фиксируем Y для shape check — не берём Y маркера
 
-		params.transform.origin = pos
-		if !space.intersect_shape(params, 1).is_empty():
-			continue
+		# params.transform.origin = pos
+		# var shape_hits := space.intersect_shape(params, 1)
+		# if !shape_hits.is_empty():
+		# 	print("shape blocked at ", pos, " by ", shape_hits[0].get("collider"))
+		# 	continue
 
 		var ray := PhysicsRayQueryParameters3D.create(
 			pos + Vector3.UP * 10.0,  # было 5 — поднимаем выше крыш
@@ -258,8 +260,12 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 		if hit.is_empty():
 			continue
 
+		if hit.position.y > 1.0:
+			continue
+
 		return hit.position + Vector3.UP * 1.0  # было 0.1 — враг появляется над полом
 
+	print("FALLBACK triggered for marker: ", marker.name)
 	push_warning("find_valid_spawn: все попытки провалились, маркер: %s" % marker.name)
 	return Vector3(0, 1.0, 0)
 

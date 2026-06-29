@@ -14,7 +14,6 @@ const GRAVITY := 9.81
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
 @export var sprites: EnemySprites
-@export var dead_sprite_offset := 80.0
 
 @export_group("animation")
 @export var waddle_enabled := true
@@ -56,7 +55,6 @@ func _physics_process(_delta: float) -> void:
 		touch_timer -= _delta
 
 	move_and_slide()
-	_update_waddle(_delta)
 
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -107,21 +105,6 @@ func die():
 	# leave dead spprite
 	leave_body()
 
-
-
-func _update_waddle(_delta: float) -> void:
-	if not waddle_enabled:
-		return
-
-	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
-
-	if horizontal_speed > 0.1:
-		waddle_time += _delta * waddle_speed * (horizontal_speed / move_speed)
-		sprite.rotation_degrees.z = sin(waddle_time) * waddle_amount_deg
-	else:
-		sprite.rotation_degrees.z = lerp(sprite.rotation_degrees.z, 0.0, _delta * 5.0)
-
-
 # calculate and move sprite toward player
 func move_toward_target(target_pos: Vector3, _delta: float):
 	nav_agent.target_position = target_pos
@@ -138,7 +121,7 @@ func move_toward_target(target_pos: Vector3, _delta: float):
 
 # prevent sprites from moving backwards
 func face_direction(move_dir: Vector3):
-	if move_dir.x != 0:
+	if move_dir.x != 0 and !dead:
 		$Sprite3D.flip_h = move_dir.x < 0
 
 
@@ -151,13 +134,33 @@ func flash_hit() -> void:
 
 
 func leave_body():
-	print("called leave body")
+	if sprites.dead == null:
+		queue_free()
+		return
+
+	var floor_y := global_position.y
+
+	var ray := PhysicsRayQueryParameters3D.create(
+		global_position + Vector3.UP,
+		global_position + Vector3.DOWN * 100.0
+	)
+	ray.exclude = [self]
+
+	var hit := get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit:
+		floor_y = hit.position.y
+
+	sprite.reparent(get_tree().current_scene, true)
 	sprite.texture = sprites.dead
-	sprite.offset.y -= dead_sprite_offset
 
-	sprite.position.y = 0.0 - global_position.y
+	sprite.global_position = Vector3(
+		global_position.x,
+		floor_y + 0.7, # <-- adjust this number
+		global_position.z
+	)
 
-	set_process(false)
-	set_physics_process(false)
-	add_to_group("dead")
-	$CollisionShape3D.disabled = true
+	sprite.modulate = original_modulate
+
+
+	sprite.add_to_group("dead")
+	queue_free()

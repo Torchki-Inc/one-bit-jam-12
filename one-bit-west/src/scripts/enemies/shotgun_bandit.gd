@@ -31,7 +31,7 @@ func _ready():
 	sm.enter()
 
 func die() -> void:
-	if randf() < 0.5:
+	if randf() < 0.75:
 		_drop_ammo(1)
 	super.die()
 
@@ -52,7 +52,7 @@ func _drop_ammo(amount: int) -> void:
 	var pickup = preload("res://src/scenes/weapons/ammo_pickup.tscn").instantiate()
 	pickup.amount = amount
 	get_tree().current_scene.add_child(pickup)
-	pickup.global_position = global_position
+	pickup.global_position = global_position - Vector3(0, 1, 0)
 
 func make_shot():
 	if dead or not is_inside_tree():
