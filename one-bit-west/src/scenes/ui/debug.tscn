@@ -6,6 +6,7 @@
 font_color = Color(0.040372677, 0.5860358, 0, 1)
 
 [node name="Debug" type="Control" unique_id=1954137714]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

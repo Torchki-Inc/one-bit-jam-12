@@ -71,6 +71,7 @@ text = "RESUME"
 label_settings = SubResource("LabelSettings_wcnl7")
 
 [node name="OptionsButton" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=1258093816]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("3_3lwag")
 texture_pressed = ExtResource("3_3lwag")

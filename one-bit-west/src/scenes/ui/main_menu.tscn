@@ -88,6 +88,7 @@ text = "START"
 label_settings = SubResource("LabelSettings_wcnl7")
 
 [node name="OptionsButton" type="TextureButton" parent="VBoxContainer" unique_id=1767222879]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("4_f5lm1")
 
