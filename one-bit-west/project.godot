@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 VfxManager="*uid://bs6g8tcl1ajc2"
+AudioManager="*uid://b2pnqf513hmhj"
 
 [display]
 

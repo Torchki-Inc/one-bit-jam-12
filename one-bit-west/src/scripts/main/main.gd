@@ -17,6 +17,8 @@ var player: CharacterBody3D
 
 
 func _ready() -> void:
+	AudioManager.play_music(AudioManager.BASE_LOOP)
+
 	load_level()
 	spawn_player()
 	initialise_manager()

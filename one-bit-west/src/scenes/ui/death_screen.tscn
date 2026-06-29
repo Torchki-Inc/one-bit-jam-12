@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dudgocuegangb"]
 
 [ext_resource type="Script" uid="uid://br8m8eb246hsw" path="res://src/scripts/ui/death_screen.gd" id="1_slhqm"]
-[ext_resource type="PackedScene" uid="uid://cgrib7lxydwj2" path="res://src/scenes/main/main.tscn" id="2_lcuhm"]
-[ext_resource type="PackedScene" uid="uid://0o282103f8ms" path="res://src/scenes/ui/main_menu.tscn" id="3_fh5u1"]
 [ext_resource type="Texture2D" uid="uid://ga1o1h0cpduk" path="res://src/assets/main_menu_bg.png" id="4_5r5hf"]
 [ext_resource type="Texture2D" uid="uid://c5dggkmjrsd61" path="res://src/assets/button.png" id="5_mhmpl"]
 
@@ -20,8 +18,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_slhqm")
-game_scene = ExtResource("2_lcuhm")
-main_menu_scene = ExtResource("3_fh5u1")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2034784177]
 layout_mode = 1

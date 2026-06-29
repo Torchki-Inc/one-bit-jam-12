@@ -108,6 +108,8 @@ func shoot(camera:Camera3D):
 
 func shoot_revolver(camera:Camera3D):
 	show_muzzle_flash()
+	AudioManager.play(AudioManager.REVOLVER, -3.0, 0.05)
+
 	camera.kick(2.0, 0.02)
 	camera.shake(0.01, 0.05)
 
@@ -127,24 +129,31 @@ func shoot_revolver(camera:Camera3D):
 		var hit_object = result["collider"]
 
 		if hit_object.has_method("take_damage"):
+			AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -4.0, 0.08)
 			hit_object.take_damage(revolver_damage)
-
 			print("Revolver hit: ", hit_object.name)
 
 		elif hit_object.get_parent().has_method("take_damage"):
+			AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -4.0, 0.08)
 			hit_object.get_parent().take_damage(revolver_damage)
-
 			print("Revolver hit: ", hit_object.name)
+
+		else:
+			AudioManager.play_3d(AudioManager.HIT_WALL, result["position"], -6.0, 0.08)
 
 	else:
 		print("Miss")
 
 func shoot_shotgun(camera:Camera3D):
 	show_muzzle_flash()
+	AudioManager.play(AudioManager.SHOTGUN, -2.0, 0.04)
+
 	camera.kick(5.0, 0.06)
 	camera.shake(0.03, 0.08)
 
 	var hit_any := false
+	var sound_played := false
+
 	for i in shotgun_pellets:
 		var space_state := get_world_3d().direct_space_state
 
@@ -173,14 +182,23 @@ func shoot_shotgun(camera:Camera3D):
 			var hit_object = result["collider"]
 
 			if hit_object.has_method("take_damage"):
+				if not sound_played:
+					AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -6.0, 0.08)
+					sound_played = true
 				hit_object.take_damage(shotgun_damage)
-
 				print("Shotgun hit: ", hit_object.name)
 
 			elif hit_object.get_parent().has_method("take_damage"):
-				hit_object.get_parent().take_damage(shotgun_damage)
+				if not sound_played:
+					AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -6.0, 0.08)
+					sound_played = true
+				hit_object.take_damage(shotgun_damage)
+				print("Shotgun hit: ", hit_object.name)
 
-				print("Shotgun hit: ", hit_object.get_parent().name)
+			else:
+				if not sound_played:
+					AudioManager.play_3d(AudioManager.HIT_WALL, result["position"], -8.0, 0.08)
+					sound_played = false
 
 		else:
 			print("Miss")
@@ -201,6 +219,7 @@ func reload() -> void:
 	can_shoot = false
 	reload_animation_id += 1
 	play_reload_animation(reload_animation_id)
+	AudioManager.play(AudioManager.RELOAD, -4.0, 0.03)
 
 	print("Reloading...")
 
