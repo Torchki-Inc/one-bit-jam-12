@@ -14,6 +14,12 @@ const GRAVITY := 9.81
 @export var touch_cooldown := 1.0
 @export var sprites: EnemySprites
 
+@export_group("animation")
+@export var waddle_enabled := true
+@export var waddle_amount_deg := 6.0
+@export var waddle_speed := 10.0
+
+var waddle_time := 0.0
 var original_modulate: Color
 var touch_timer := 0.0
 const KILL_DEPTH = -20
@@ -45,6 +51,7 @@ func _physics_process(_delta: float) -> void:
 		touch_timer -= _delta
 
 	move_and_slide()
+	_update_waddle(_delta)
 
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -95,6 +102,19 @@ func die():
 	leave_body()
 
 
+func _update_waddle(_delta: float) -> void:
+	if not waddle_enabled:
+		return
+
+	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
+
+	if horizontal_speed > 0.1:
+		waddle_time += _delta * waddle_speed * (horizontal_speed / move_speed)
+		sprite.rotation_degrees.z = sin(waddle_time) * waddle_amount_deg
+	else:
+		sprite.rotation_degrees.z = lerp(sprite.rotation_degrees.z, 0.0, _delta * 5.0)
+
+
 # calculate and move sprite toward player
 func move_toward_target(target_pos: Vector3, _delta: float):
 	nav_agent.target_position = target_pos
@@ -126,7 +146,7 @@ func flash_hit() -> void:
 func leave_body():
 
 	sprite.texture = sprites.dead
-	sprite.offset.y -= 40
+	sprite.offset.y -= 80
 	set_process(false)
 	set_physics_process(false)
 	$CollisionShape3D.disabled = true
