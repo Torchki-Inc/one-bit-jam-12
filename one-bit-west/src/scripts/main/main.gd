@@ -1,5 +1,7 @@
 extends Node
 
+const DEATH_SCREEN := preload("res://src/scenes/ui/death_screen.tscn")
+
 @export var level_scene: PackedScene
 @export var player_scene: PackedScene
 @export var game_manager: PackedScene
@@ -15,6 +17,8 @@ var player: CharacterBody3D
 
 
 func _ready() -> void:
+	AudioManager.play_music(AudioManager.BASE_LOOP)
+
 	load_level()
 	spawn_player()
 	initialise_manager()
@@ -39,6 +43,8 @@ func spawn_player() -> void:
 
 	player = player_scene.instantiate()
 	entity_root.add_child(player)
+
+	player.died.connect(_on_player_died)
 
 	var spawn := get_player_spawn()
 
@@ -66,3 +72,7 @@ func initialise_manager() -> void:
 
 	var manager := game_manager.instantiate()
 	systems.add_child(manager)
+
+func _on_player_died() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_packed(DEATH_SCREEN)

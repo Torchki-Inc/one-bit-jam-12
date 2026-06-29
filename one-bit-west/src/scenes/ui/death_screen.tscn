@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dudgocuegangb"]
+
+[ext_resource type="Script" uid="uid://br8m8eb246hsw" path="res://src/scripts/ui/death_screen.gd" id="1_slhqm"]
+[ext_resource type="Texture2D" uid="uid://ga1o1h0cpduk" path="res://src/assets/main_menu_bg.png" id="4_5r5hf"]
+[ext_resource type="Texture2D" uid="uid://c5dggkmjrsd61" path="res://src/assets/button.png" id="5_mhmpl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_01ck2"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_42ll6"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="DeathScreen" type="Control" unique_id=1819962739]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_slhqm")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2034784177]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_5r5hf")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=294547501]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -50.5
+offset_right = 39.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartButton" type="TextureButton" parent="VBoxContainer" unique_id=1643573044]
+layout_mode = 2
+texture_normal = ExtResource("5_mhmpl")
+
+[node name="Label" type="Label" parent="VBoxContainer/RestartButton" unique_id=1099058088]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESTART"
+label_settings = SubResource("LabelSettings_01ck2")
+
+[node name="MainButton" type="TextureButton" parent="VBoxContainer" unique_id=1514637234]
+layout_mode = 2
+texture_normal = ExtResource("5_mhmpl")
+
+[node name="Label" type="Label" parent="VBoxContainer/MainButton" unique_id=1087489621]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "MAIN MENU"
+label_settings = SubResource("LabelSettings_01ck2")
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer" unique_id=1221989831]
+layout_mode = 2
+texture_normal = ExtResource("5_mhmpl")
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitButton" unique_id=1753139691]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUIT"
+label_settings = SubResource("LabelSettings_42ll6")
+
+[node name="Label" type="Label" parent="." unique_id=1348515170]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.5
+offset_right = 39.5
+offset_bottom = 23.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 20)
+text = "YOU LOST"
+label_settings = SubResource("LabelSettings_01ck2")
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainButton" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

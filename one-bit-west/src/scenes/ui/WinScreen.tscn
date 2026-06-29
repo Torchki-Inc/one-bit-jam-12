@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://cvj2fcikbn7kr"]
+
+[ext_resource type="Script" uid="uid://dk0tu0vywq2ij" path="res://src/scripts/ui/win_screen.gd" id="1_f04a3"]
+[ext_resource type="Texture2D" uid="uid://ga1o1h0cpduk" path="res://src/assets/main_menu_bg.png" id="2_q6ulb"]
+[ext_resource type="Texture2D" uid="uid://c5dggkmjrsd61" path="res://src/assets/button.png" id="3_8v2f4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s7pb6"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_imglj"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="WinScreen" type="Control" unique_id=412054432]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f04a3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1259645587]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_q6ulb")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1685942963]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -50.5
+offset_right = 39.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainButton" type="TextureButton" parent="VBoxContainer" unique_id=475365351]
+layout_mode = 2
+texture_normal = ExtResource("3_8v2f4")
+
+[node name="Label" type="Label" parent="VBoxContainer/MainButton" unique_id=1339545565]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "MAIN MENU"
+label_settings = SubResource("LabelSettings_s7pb6")
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer" unique_id=331014591]
+layout_mode = 2
+texture_normal = ExtResource("3_8v2f4")
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitButton" unique_id=17314360]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUIT"
+label_settings = SubResource("LabelSettings_imglj")
+
+[node name="Label" type="Label" parent="." unique_id=1153774573]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.5
+offset_right = 39.5
+offset_bottom = 23.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 20)
+text = "YOU WON"
+label_settings = SubResource("LabelSettings_s7pb6")
+
+[connection signal="pressed" from="VBoxContainer/MainButton" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
