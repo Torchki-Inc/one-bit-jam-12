@@ -24,7 +24,6 @@ height = 4.311
 script = ExtResource("1_1adsi")
 sprites = ExtResource("2_luuom")
 max_hp = 500.0
-totem_respawn_delay = 45.0
 max_enemies = 15
 totem_scene = ExtResource("2_0yj45")
 
