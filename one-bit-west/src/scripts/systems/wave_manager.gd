@@ -99,6 +99,7 @@ func _process(delta: float) -> void:
 			_start_boss_sequence()
 		else:
 			clear_dead_bodies()
+			heal_player_between_waves()
 			start_cooldown()
 
 func _start_boss_sequence() -> void:
@@ -289,3 +290,12 @@ func clear_dead_bodies() -> void:
 	for obj in get_tree().get_nodes_in_group("dead"):
 		if is_instance_valid(obj):
 			obj.queue_free()
+
+func heal_player_between_waves() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+
+	if player == null:
+		return
+
+	if player.has_method("heal"):
+		player.heal(20)

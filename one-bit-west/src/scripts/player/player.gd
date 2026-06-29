@@ -100,3 +100,12 @@ func die() -> void:
 
 	dead = true
 	died.emit()
+
+func heal(amount: int) -> void:
+	if dead:
+		return
+
+	health = min(health + amount, max_health)
+
+	if hud:
+		hud.set_health(health)

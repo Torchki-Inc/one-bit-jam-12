@@ -108,7 +108,7 @@ func shoot(camera:Camera3D):
 
 func shoot_revolver(camera:Camera3D):
 	show_muzzle_flash()
-	AudioManager.play(AudioManager.REVOLVER, -3.0, 0.05)
+	AudioManager.play(AudioManager.REVOLVER, -7.0, 0.05)
 
 	camera.kick(2.0, 0.02)
 	camera.shake(0.01, 0.05)
@@ -129,24 +129,24 @@ func shoot_revolver(camera:Camera3D):
 		var hit_object = result["collider"]
 
 		if hit_object.has_method("take_damage"):
-			AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -4.0, 0.08)
+			AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -8.0, 0.08)
 			hit_object.take_damage(revolver_damage)
 			print("Revolver hit: ", hit_object.name)
 
 		elif hit_object.get_parent().has_method("take_damage"):
-			AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -4.0, 0.08)
+			AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -8.0, 0.08)
 			hit_object.get_parent().take_damage(revolver_damage)
 			print("Revolver hit: ", hit_object.name)
 
 		else:
-			AudioManager.play_3d(AudioManager.HIT_WALL, result["position"], -6.0, 0.08)
+			AudioManager.play_3d(AudioManager.HIT_WALL, result["position"], -9.0, 0.08)
 
 	else:
 		print("Miss")
 
 func shoot_shotgun(camera:Camera3D):
 	show_muzzle_flash()
-	AudioManager.play(AudioManager.SHOTGUN, -2.0, 0.04)
+	AudioManager.play(AudioManager.SHOTGUN, -5.0, 0.04)
 
 	camera.kick(5.0, 0.06)
 	camera.shake(0.03, 0.08)
@@ -183,21 +183,21 @@ func shoot_shotgun(camera:Camera3D):
 
 			if hit_object.has_method("take_damage"):
 				if not sound_played:
-					AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -6.0, 0.08)
+					AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -8.0, 0.08)
 					sound_played = true
 				hit_object.take_damage(shotgun_damage)
 				print("Shotgun hit: ", hit_object.name)
 
 			elif hit_object.get_parent().has_method("take_damage"):
 				if not sound_played:
-					AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -6.0, 0.08)
+					AudioManager.play_3d(AudioManager.HIT_ENEMY, result["position"], -8.0, 0.08)
 					sound_played = true
 				hit_object.take_damage(shotgun_damage)
 				print("Shotgun hit: ", hit_object.name)
 
 			else:
 				if not sound_played:
-					AudioManager.play_3d(AudioManager.HIT_WALL, result["position"], -8.0, 0.08)
+					AudioManager.play_3d(AudioManager.HIT_WALL, result["position"], -9.0, 0.08)
 					sound_played = false
 
 		else:
