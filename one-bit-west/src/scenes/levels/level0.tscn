@@ -177,6 +177,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.007, 2.7385483, 21.87339)
 [node name="Marker3D4" type="Marker3D" parent="SpawnPoints/Waypoints" unique_id=525304819 groups=["waypoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.993, 2.7385483, -19.12661)
 
+[node name="Marker3D5" type="Marker3D" parent="SpawnPoints/Waypoints" unique_id=123791180 groups=["waypoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.993, 2.7385483, 14.87339)
+
 [node name="totem" type="Node3D" parent="SpawnPoints" unique_id=1574052089]
 
 [node name="TotemSpawner" type="Marker3D" parent="SpawnPoints/totem" unique_id=1611001185 groups=["totem"]]

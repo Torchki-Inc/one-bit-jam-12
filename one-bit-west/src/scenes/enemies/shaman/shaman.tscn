@@ -23,8 +23,8 @@ height = 4.311
 [node name="Shaman" type="CharacterBody3D" unique_id=1993316644 groups=["boss"]]
 script = ExtResource("1_1adsi")
 sprites = ExtResource("2_luuom")
-max_hp = 100.0
-totem_respawn_delay = 60.0
+max_hp = 500.0
+totem_respawn_delay = 45.0
 max_enemies = 15
 totem_scene = ExtResource("2_0yj45")
 
