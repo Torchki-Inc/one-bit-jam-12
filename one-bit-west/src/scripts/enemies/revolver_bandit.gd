@@ -32,7 +32,17 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if dead or not is_inside_tree():
+		return
+
+	if sm == null:
+		return
+
 	sm.update(delta)
+
+	if dead or not is_inside_tree():
+		return
+
 	super._physics_process(delta)
 
 func die() -> void:
@@ -47,6 +57,8 @@ func _drop_ammo(amount: int) -> void:
 	pickup.global_position = global_position
 
 func make_shot():
+	if dead or not is_inside_tree():
+			return
 	var space_state := get_world_3d().direct_space_state
 
 	var from := self.shoot_point.global_position
@@ -55,8 +67,6 @@ func make_shot():
 
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
-
-	_draw_ray(from, to)
 
 	var result := space_state.intersect_ray(query)
 
@@ -101,6 +111,10 @@ class BanditRoamState extends EnemyState:
 
 
 	func enter():
+		if !enemy.is_inside_tree():
+				return
+		if enemy.dead:
+				return
 		_pick_new_target()
 
 

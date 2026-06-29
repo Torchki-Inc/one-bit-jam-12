@@ -10,11 +10,18 @@ height = 2.5307922
 
 [node name="RevolverBandit" unique_id=1612062943 instance=ExtResource("1_yhqqd")]
 script = ExtResource("2_0lk27")
-type = 2
+type = null
 health = 60
 move_speed = 3.5
 shoot_radius = 12.0
+damage = null
+touch_damage = null
+touch_cooldown = null
 sprites = ExtResource("3_0lk27")
+dead_sprite_offset = null
+waddle_enabled = null
+waddle_amount_deg = null
+waddle_speed = 100.0
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=1581835243]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04477018, -0.12096691, 0.027178764)

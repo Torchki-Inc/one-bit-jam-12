@@ -98,6 +98,7 @@ func _process(delta: float) -> void:
 			state = State.IDLE
 			_start_boss_sequence()
 		else:
+			clear_dead_bodies()
 			start_cooldown()
 
 func _start_boss_sequence() -> void:
@@ -275,3 +276,9 @@ func _on_boss_defeated() -> void:
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_packed(WIN_SCREEN)
+
+
+func clear_dead_bodies() -> void:
+	for obj in get_tree().get_nodes_in_group("dead"):
+		if is_instance_valid(obj):
+			obj.queue_free()

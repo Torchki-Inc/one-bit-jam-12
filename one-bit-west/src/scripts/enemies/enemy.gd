@@ -1,3 +1,4 @@
+
 class_name BaseEnemy
 extends CharacterBody3D
 
@@ -13,6 +14,7 @@ const GRAVITY := 9.81
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
 @export var sprites: EnemySprites
+@export var dead_sprite_offset := 80.0
 
 @export_group("animation")
 @export var waddle_enabled := true
@@ -43,7 +45,9 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if global_position.y < KILL_DEPTH:
-		die()
+		queue_free()
+		return
+
 	if not is_on_floor():
 		velocity.y -= GRAVITY * _delta
 
@@ -94,6 +98,7 @@ func die():
 	if dead:
 		return
 	dead = true
+	remove_from_group("enemy")
 	var pos := global_position # кешируем до queue_free
 	VfxManager.spawn_death_burst(pos)
 	# TODO:
@@ -102,7 +107,9 @@ func die():
 	leave_body()
 
 
+
 func _update_waddle(_delta: float) -> void:
+	print("waddle spd: ", Vector2(velocity.x, velocity.z).length())
 	if not waddle_enabled:
 		return
 
@@ -144,9 +151,10 @@ func flash_hit() -> void:
 
 
 func leave_body():
-
+	print("called leave body")
 	sprite.texture = sprites.dead
-	sprite.offset.y -= 80
+	sprite.offset.y -= dead_sprite_offset
 	set_process(false)
 	set_physics_process(false)
+	add_to_group("dead")
 	$CollisionShape3D.disabled = true

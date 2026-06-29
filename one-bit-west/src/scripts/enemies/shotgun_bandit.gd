@@ -36,9 +36,18 @@ func die() -> void:
 	super.die()
 
 func _physics_process(delta: float) -> void:
-	sm.update(delta)
-	super._physics_process(delta)
+	if dead or not is_inside_tree():
+		return
 
+	if sm == null:
+		return
+
+	sm.update(delta)
+
+	if dead or not is_inside_tree():
+		return
+
+	super._physics_process(delta)
 func _drop_ammo(amount: int) -> void:
 	var pickup = preload("res://src/scenes/weapons/ammo_pickup.tscn").instantiate()
 	pickup.amount = amount
@@ -46,8 +55,13 @@ func _drop_ammo(amount: int) -> void:
 	pickup.global_position = global_position
 
 func make_shot():
+	if dead or not is_inside_tree():
+			return
 	for i in shotgun_pellets:
+		if dead or not is_inside_tree():
+				return
 		var space_state := get_world_3d().direct_space_state
+
 
 		var from := self.shoot_point.global_position
 		var direction := (player.global_position - from).normalized()
@@ -60,7 +74,6 @@ func make_shot():
 		direction = direction.normalized()
 
 		var to := from + direction * shoot_radius
-		_draw_ray(from, to)
 		var query := PhysicsRayQueryParameters3D.create(from, to)
 		query.exclude = [self]
 
@@ -155,6 +168,10 @@ class BanditShootState extends EnemyState:
 
 
 	func enter():
+		if !enemy.is_inside_tree():
+				return
+		if enemy.dead:
+				return
 		enemy.make_shot()
 
 		pass
