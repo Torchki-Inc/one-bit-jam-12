@@ -1,3 +1,4 @@
+
 class_name BaseEnemy
 extends CharacterBody3D
 
@@ -12,12 +13,19 @@ const GRAVITY := 9.81
 @export var damage := 5.0
 @export var touch_damage := 5.0
 @export var touch_cooldown := 1.0
+@export var sprites: EnemySprites
 
+@export_group("animation")
+@export var waddle_enabled := true
+@export var waddle_amount_deg := 6.0
+@export var waddle_speed := 10.0
+
+var waddle_time := 0.0
+var original_modulate: Color
 var touch_timer := 0.0
 const KILL_DEPTH = -20
 var dead := false
 var stun_timer := 0.0
-
 
 var player: Node3D
 @onready var nav_agent = $NavigationAgent3D
@@ -36,7 +44,10 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if global_position.y < KILL_DEPTH:
-		die()
+		print("enemy killed by depth: ", global_position.y)
+		queue_free()
+		return
+
 	if not is_on_floor():
 		velocity.y -= GRAVITY * _delta
 
@@ -50,7 +61,6 @@ func _physics_process(_delta: float) -> void:
 		var collider = collision.get_collider()
 
 		if collider.is_in_group("player") && collider.has_method("take_damage") && touch_timer <= 0:
-			print("collision: ", collision, " collider: ", collider, "TAKE TOUCH DAMAGE")
 			collider.take_damage(damage)
 			touch_timer = touch_cooldown
 
@@ -58,6 +68,7 @@ func _physics_process(_delta: float) -> void:
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	add_to_group("enemy")
+	original_modulate = sprite.modulate
 
 	await get_tree().physics_frame
 	if nav_agent.get_navigation_map() == RID():
@@ -67,6 +78,10 @@ func _ready() -> void:
 
 	await get_tree().physics_frame
 	nav_agent.max_speed = move_speed
+
+	if sprites.walk != null:
+		sprite.texture = sprites.walk
+
 
 func take_damage(amount: int):
 	if dead or not is_inside_tree():
@@ -82,41 +97,70 @@ func die():
 	if dead:
 		return
 	dead = true
-	var pos := global_position  # кешируем до queue_free
+	remove_from_group("enemy")
+	var pos := global_position
 	VfxManager.spawn_death_burst(pos)
 	# TODO:
 	# play death animation
 	# leave dead spprite
-	queue_free()
-
+	leave_body()
 
 # calculate and move sprite toward player
 func move_toward_target(target_pos: Vector3, _delta: float):
 	nav_agent.target_position = target_pos
 
-	print("nav finished: ", nav_agent.is_navigation_finished(),
-          " dist: ", global_position.distance_to(target_pos))
-
-	var next: Vector3= nav_agent.get_next_path_position()
+	var next: Vector3 = nav_agent.get_next_path_position()
 	var dir := (next - global_position)
 	dir.y = 0
 	dir = dir.normalized()
 
-
 	velocity.x = dir.x * move_speed
 	velocity.z = dir.z * move_speed
-	print("next_pos: ", next, " dir: ", dir, " vel: ", Vector2(velocity.x, velocity.z))
 	face_direction(dir)
 
 
 # prevent sprites from moving backwards
 func face_direction(move_dir: Vector3):
-	if move_dir.x != 0:
+	if move_dir.x != 0 and !dead:
 		$Sprite3D.flip_h = move_dir.x < 0
+
 
 func flash_hit() -> void:
 	if hit_tween:
 		hit_tween.kill()
-	sprite.modulate = Color(1, 1, 1, 1)  # белый флэш
+	sprite.modulate = Color(0, 0, 0, 1) #
 	hit_tween = create_tween()
-	hit_tween.tween_property(sprite, "modulate", Color(0, 0, 0, 1), 0.12)
+	hit_tween.tween_property(sprite, "modulate", original_modulate, 0.12)
+
+
+func leave_body():
+	if sprites.dead == null:
+		queue_free()
+		return
+
+	var floor_y := global_position.y
+
+	var ray := PhysicsRayQueryParameters3D.create(
+		global_position + Vector3.UP,
+		global_position + Vector3.DOWN * 100.0
+	)
+	ray.exclude = [self]
+
+	var hit := get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit:
+		floor_y = hit.position.y
+
+	sprite.reparent(get_tree().current_scene, true)
+	sprite.texture = sprites.dead
+
+	sprite.global_position = Vector3(
+		global_position.x,
+		floor_y + 0.65, # <-- adjust this number
+		global_position.z
+	)
+
+	sprite.modulate = original_modulate
+
+
+	sprite.add_to_group("dead")
+	queue_free()

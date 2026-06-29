@@ -28,12 +28,15 @@ func _ready():
 
 	sm.current = roam
 	sm.enter()
+	self.sprite.texture = sprites.attack
+
 
 
 func _physics_process(delta: float) -> void:
 	if touch_timer > 0:
 		touch_timer -= delta
 
+	sm.update(delta)
 	move_and_slide()
 
 	for i in get_slide_collision_count():
@@ -44,7 +47,6 @@ func _physics_process(delta: float) -> void:
 			print("collision: ", collision, " collider: ", collider, "TAKE TOUCH DAMAGE")
 			collider.take_damage(damage)
 			touch_timer = touch_cooldown
-	sm.update(delta)
 
 
 class HawkRoamState extends EnemyState:
@@ -53,6 +55,7 @@ class HawkRoamState extends EnemyState:
 	var charge_timer := 0.0         # countdown before charging
 
 	func enter() -> void:
+		enemy.sprite.texture = enemy.sprites.attack
 		# Start
 		enemy.velocity = Vector3.ZERO
 		var offset = enemy.global_position - enemy.player.global_position
@@ -85,17 +88,29 @@ class HawkDiveState extends EnemyState:
 	var next: EnemyState
 	var dive_target := Vector3.ZERO
 	var done := false
+	var elapsed := 0.0
+	const MAX_DIVE_TIME := 2.5
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.attack
 		done = false
-		# Пикируем прямо на позицию игрока (включая Y)
+		elapsed = 0.0
 		dive_target = enemy.player.global_position
 
 	func update(_delta) -> EnemyState:
-		var dir = (dive_target - enemy.global_position).normalized()
+		elapsed += _delta
+
+		var to_target = dive_target - enemy.global_position
+		if to_target.length() < 0.01:
+			return next
+
+		var dir = to_target.normalized()
 		enemy.velocity = dir * enemy.CHARGE_SPEED
 
-		# Долетели — переходим обратно
-		if enemy.global_position.distance_to(dive_target) < 1.5:
+		if enemy.global_position.distance_to(dive_target) < 0.2:
 			return next
+
+		if elapsed >= MAX_DIVE_TIME:
+			return next
+
 		return self

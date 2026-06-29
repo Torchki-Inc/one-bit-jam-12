@@ -4,18 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://doyw6ihn5meo5" path="res://src/assets/weapons/shotgun/shotgunammo.png" id="2_jiekx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c8qny"]
-radius = 0.32617188
-height = 1.2452393
+radius = 0.15576172
+height = 0.80178833
 
 [node name="AmmoPickuo" type="Area3D" unique_id=1953726303]
 script = ExtResource("1_jiekx")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1376123381]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.53116584, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53116584, 0)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_jiekx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=933859597]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56256104, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043216318, 0.4610138, 0)
 shape = SubResource("CapsuleShape3D_c8qny")

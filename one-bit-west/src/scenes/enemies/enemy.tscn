@@ -12,7 +12,7 @@ script = ExtResource("1_wkgwi")
 shape = SubResource("CapsuleShape3D_46hs8")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1967239771]
-billboard = 1
+billboard = 2
 texture = ExtResource("2_h36vd")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=979973842]

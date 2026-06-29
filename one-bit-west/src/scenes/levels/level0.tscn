@@ -27,21 +27,21 @@ size = Vector3(70, 50, 1)
 material = ExtResource("2_6imkx")
 
 [node name="SouthWall" type="CSGBox3D" parent="Geometry" unique_id=632750434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 35)
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 25, 35)
 use_collision = true
 size = Vector3(70, 50, 1)
 material = ExtResource("2_6imkx")
 
 [node name="WestWall" type="CSGBox3D" parent="Geometry" unique_id=1323118688]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 25, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -35, 25, 0)
 use_collision = true
-size = Vector3(1, 50, 70)
+size = Vector3(1, 70, 50)
 material = ExtResource("2_6imkx")
 
 [node name="EastWall" type="CSGBox3D" parent="Geometry" unique_id=81453852]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 25, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 35, 25, 0)
 use_collision = true
-size = Vector3(1, 50, 70)
+size = Vector3(1, 70, 50)
 material = ExtResource("2_6imkx")
 
 [node name="building0" type="CSGBox3D" parent="Geometry" unique_id=1169580633]
@@ -149,13 +149,16 @@ script = ExtResource("3_xk08b")
 [node name="PlayerSpawn" type="Marker3D" parent="SpawnPoints" unique_id=453346535]
 
 [node name="EnemySpawner0" type="Marker3D" parent="SpawnPoints" unique_id=1444457717]
-transform = Transform3D(0.99997157, 0.0054681315, -0.005197244, -0.0052999523, 0.99947894, 0.031838484, 0.005368642, -0.03181003, 0.9994795, -38.395, 0, 0)
+transform = Transform3D(0.99997157, 0.0054681315, -0.005197244, -0.0052999523, 0.99947894, 0.031838484, 0.005368642, -0.03181003, 0.9994795, -27.607544, 0, 0)
 
-[node name="EnemySpawner1" type="Marker3D" parent="SpawnPoints" unique_id=695227504 groups=["totem"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.8751, 0.8741989, 39.04391)
+[node name="EnemySpawner1" type="Marker3D" parent="SpawnPoints" unique_id=695227504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.396015, 1.7114639, 28.317757)
 
-[node name="EnemySpawner2" type="Marker3D" parent="SpawnPoints" unique_id=434155518 groups=["totem"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.63874, 0.8741989, -11.435581)
+[node name="EnemySpawner2" type="Marker3D" parent="SpawnPoints" unique_id=434155518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.701427, 0.8741989, -26.135574)
+
+[node name="EnemySpawner3" type="Marker3D" parent="SpawnPoints" unique_id=1497794291]
+transform = Transform3D(0.99997157, 0.0054681315, -0.005197244, -0.0052999523, 0.99947894, 0.031838484, 0.005368642, -0.03181003, 0.9994795, -27.607544, 0, 0)
 
 [node name="Waypoints" type="Node3D" parent="SpawnPoints" unique_id=1944755828]
 
@@ -166,3 +169,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.007, 2.7385483, -15.680063)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.007, 3.9823751, 29.346123)
 
 [node name="totem" type="Node3D" parent="SpawnPoints" unique_id=1574052089]
+
+[node name="TotemSpawner" type="Marker3D" parent="SpawnPoints/totem" unique_id=1611001185 groups=["totem"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70142746, 0.8741989, -13.135574)
+
+[node name="TotemSpawner2" type="Marker3D" parent="SpawnPoints/totem" unique_id=1774395113 groups=["totem"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7014275, 0.8741989, -2.1355743)
+
+[node name="TotemSpawner3" type="Marker3D" parent="SpawnPoints/totem" unique_id=375027719 groups=["totem"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.701427, 0.8741989, -14.135574)
+
+[node name="PlayerSpawn2" type="Marker3D" parent="SpawnPoints" unique_id=1462678898]

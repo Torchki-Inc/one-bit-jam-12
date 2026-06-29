@@ -32,11 +32,21 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if dead or not is_inside_tree():
+		return
+
+	if sm == null:
+		return
+
 	sm.update(delta)
+
+	if dead or not is_inside_tree():
+		return
+
 	super._physics_process(delta)
 
 func die() -> void:
-	if randf() < 0.25:
+	if randf() < 0.5:
 		_drop_ammo(1)
 	super.die()
 
@@ -44,19 +54,35 @@ func _drop_ammo(amount: int) -> void:
 	var pickup = preload("res://src/scenes/weapons/ammo_pickup.tscn").instantiate()
 	pickup.amount = amount
 	get_tree().current_scene.add_child(pickup)
-	pickup.global_position = global_position
+	pickup.global_position = global_position - Vector3(0, 1, 0)
 
 func make_shot():
+	if dead or not is_inside_tree():
+		return
 	var space_state := get_world_3d().direct_space_state
 
-	var from := self.shoot_point.global_position
-	var direction := (player.global_position - from).normalized()
-	var to: Vector3 = from + direction * self.shoot_radius
+	var from := shoot_point.global_position
+
+	# Predict where player will be (crude but effective)
+	var player_vel := Vector3.ZERO
+	if player is CharacterBody3D:
+		player_vel = player.velocity
+
+	var dist := from.distance_to(player.global_position)
+	var travel_time := dist / 200.0  # fake bullet speed for prediction
+	var predicted_pos := player.global_position + player_vel * travel_time
+
+	# Add inaccuracy so it's not perfect prediction
+	var aim_error := Vector3(
+		randf_range(-0.8, 0.8),
+		randf_range(-0.2, 0.2),
+		randf_range(-0.8, 0.8)
+	)
+	var direction := (predicted_pos + aim_error - from).normalized()
+	var to := from + direction * shoot_radius
 
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
-
-	_draw_ray(from, to)
 
 	var result := space_state.intersect_ray(query)
 
@@ -66,12 +92,10 @@ func make_shot():
 		if hit_object.has_method("take_damage"):
 			hit_object.take_damage(self.damage)
 
-			print("Revolver hit: ", hit_object.name)
 
 		elif hit_object.get_parent().has_method("take_damage"):
 			hit_object.get_parent().take_damage(self.damage)
 
-			print("Revolver hit: ", hit_object.name)
 	else:
 		print(self.get_instance_id(), " misses")
 
@@ -103,6 +127,10 @@ class BanditRoamState extends EnemyState:
 
 
 	func enter():
+		if !enemy.is_inside_tree():
+				return
+		if enemy.dead:
+				return
 		_pick_new_target()
 
 
@@ -130,6 +158,7 @@ class BanditPrepareState extends EnemyState:
 
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.attack
 		timer = 0.8
 		# enemy.anim_state.travel("prepare")
 
@@ -148,7 +177,6 @@ class BanditShootState extends EnemyState:
 	func enter():
 		enemy.make_shot()
 
-		pass
 		# enemy.anim_state.travel("shoot")
 		# spawn bullet here
 
@@ -163,6 +191,7 @@ class BanditWaitState extends EnemyState:
 
 
 	func enter():
+		enemy.sprite.texture = enemy.sprites.walk
 		timer = randf_range(1.5, 2.0)
 
 

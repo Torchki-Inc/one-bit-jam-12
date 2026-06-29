@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://qtbim313romk"]
+
+[ext_resource type="Texture2D" uid="uid://drob5f0dqjpk4" path="res://src/assets/sprites/enemies/ghost/ghostengaged.png" id="1_l1pcn"]
+[ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_stclu"]
+[ext_resource type="Texture2D" uid="uid://cyamn5obdur3p" path="res://src/assets/sprites/enemies/ghost/ghostdead.png" id="2_cv56e"]
+[ext_resource type="Texture2D" uid="uid://7cay2ks8ex7p" path="res://src/assets/sprites/enemies/ghost/ghostidle.png" id="4_31pwg"]
+
+[resource]
+script = ExtResource("1_stclu")
+walk = ExtResource("4_31pwg")
+attack = ExtResource("1_l1pcn")
+dead = ExtResource("2_cv56e")
+metadata/_custom_type_script = "uid://cmin7i1si6of8"

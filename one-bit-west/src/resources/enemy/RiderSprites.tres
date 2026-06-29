@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://bjackxsspl3w5"]
+
+[ext_resource type="Texture2D" uid="uid://de62vdakgusp2" path="res://src/assets/sprites/enemies/rider/bastardonahorseengaged.png" id="1_abery"]
+[ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_k3gh7"]
+[ext_resource type="Texture2D" uid="uid://nscjqsvmlpl5" path="res://src/assets/sprites/enemies/rider/bastardonahorsedead.png" id="2_5at22"]
+[ext_resource type="Texture2D" uid="uid://cicd513ldkya0" path="res://src/assets/sprites/enemies/rider/bastardonahorseidle.png" id="4_x5uha"]
+
+[resource]
+script = ExtResource("1_k3gh7")
+walk = ExtResource("4_x5uha")
+attack = ExtResource("1_abery")
+dead = ExtResource("2_5at22")
+metadata/_custom_type_script = "uid://cmin7i1si6of8"

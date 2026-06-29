@@ -98,10 +98,11 @@ func _process(delta: float) -> void:
 			state = State.IDLE
 			_start_boss_sequence()
 		else:
+			clear_dead_bodies()
 			start_cooldown()
 
 func _start_boss_sequence() -> void:
-	# ждём пока враги из последнего burst реально заспавнятся
+	# ждём пок  враги из последнего burst реально заспавнятся
 	await get_tree().process_frame
 	await get_tree().process_frame
 	while get_alive_enemy_count() > 0:
@@ -224,7 +225,7 @@ func get_alive_enemy_count() -> int:
 
 func take_available_spawnpoints() -> void:
 	for child in spawn_point_root.get_children():
-		if child is Marker3D and child.name != "PlayerSpawn":
+		if child is Marker3D and child.name != "PlayerSpawn" and !is_in_group("waypoint") and !is_in_group("totem"):
 			spawn_points.append(child)
 
 func find_valid_spawn(marker: Marker3D) -> Vector3:
@@ -237,29 +238,36 @@ func find_valid_spawn(marker: Marker3D) -> Vector3:
 	params.shape = shape
 	params.collision_mask = 1
 
-	for i in 5:
-		var offset := Vector3(randf_range(-3, 0), 0.5, randf_range(-3, 3))
+	for i in 20:
+		var offset := Vector3(randf_range(-2, 2), 0.5, randf_range(-2, 2))
 		var pos := marker.global_position + offset
+		pos.x = clamp(pos.x, -30.0, 30.0)
+		pos.z = clamp(pos.z, -30.0, 30.0)
+		pos.y = 0.5  # фиксируем Y для shape check — не берём Y маркера
 
-		# Check for collisions with other objects
-		params.transform.origin = pos
-		if !space.intersect_shape(params, 1).is_empty():
-			continue
+		# params.transform.origin = pos
+		# var shape_hits := space.intersect_shape(params, 1)
+		# if !shape_hits.is_empty():
+		# 	print("shape blocked at ", pos, " by ", shape_hits[0].get("collider"))
+		# 	continue
 
-		# Find the floor
 		var ray := PhysicsRayQueryParameters3D.create(
-			pos + Vector3.UP * 5.0,
-			pos + Vector3.DOWN * 10.0
+			pos + Vector3.UP * 10.0,  # было 5 — поднимаем выше крыш
+			pos + Vector3.DOWN * 20.0
 		)
 		ray.collision_mask = 1
-
 		var hit := space.intersect_ray(ray)
 		if hit.is_empty():
 			continue
 
-		return hit.position + Vector3.UP * 0.1
+		if hit.position.y > 1.0:
+			continue
 
-	return marker.global_position
+		return hit.position + Vector3.UP * 1.0  # было 0.1 — враг появляется над полом
+
+	print("FALLBACK triggered for marker: ", marker.name)
+	push_warning("find_valid_spawn: все попытки провалились, маркер: %s" % marker.name)
+	return Vector3(0, 1.0, 0)
 
 func kill_all_ghosts() -> void:
 	for enemy in get_tree().get_nodes_in_group("ghost"):
@@ -275,3 +283,9 @@ func _on_boss_defeated() -> void:
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_packed(WIN_SCREEN)
+
+
+func clear_dead_bodies() -> void:
+	for obj in get_tree().get_nodes_in_group("dead"):
+		if is_instance_valid(obj):
+			obj.queue_free()

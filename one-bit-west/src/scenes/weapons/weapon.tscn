@@ -7,6 +7,9 @@
 [node name="Weapon" type="Sprite3D" unique_id=876486780]
 texture = ExtResource("1_atqnv")
 script = ExtResource("2_atqnv")
+shotgun_damage = 10
+shotgun_range = 100.0
+shotgun_pellets = 20
 
 [node name="MuzzleFlash" type="Sprite3D" parent="." unique_id=1343035353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41873148, 0.35057497, 0)

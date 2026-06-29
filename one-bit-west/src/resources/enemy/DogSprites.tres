@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySprites" format=3 uid="uid://hgkws3syr3gg"]
+
+[ext_resource type="Texture2D" uid="uid://66e8ih1x8xwh" path="res://src/assets/sprites/enemies/dog/dogengaged.png" id="1_tojxi"]
+[ext_resource type="Script" uid="uid://cmin7i1si6of8" path="res://src/scripts/enemies/enemy_sprites.gd" id="1_xdnji"]
+[ext_resource type="Texture2D" uid="uid://b1obahcv17nh1" path="res://src/assets/sprites/enemies/dog/dogdead.png" id="2_00lyp"]
+[ext_resource type="Texture2D" uid="uid://0r1ymiq53ry1" path="res://src/assets/sprites/enemies/dog/dogidle.png" id="4_plmwi"]
+
+[resource]
+script = ExtResource("1_xdnji")
+walk = ExtResource("4_plmwi")
+attack = ExtResource("1_tojxi")
+dead = ExtResource("2_00lyp")
+metadata/_custom_type_script = "uid://cmin7i1si6of8"
