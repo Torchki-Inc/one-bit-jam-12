@@ -4,27 +4,33 @@
 [ext_resource type="Script" uid="uid://c5ejsphh6tqwb" path="res://src/scripts/systems/wave.gd" id="2_6owvl"]
 [ext_resource type="Script" uid="uid://cd5yu6idcqav4" path="res://src/scripts/systems/burst.gd" id="3_dpreg"]
 
+[sub_resource type="Resource" id="Resource_dpreg"]
+script = ExtResource("3_dpreg")
+budget = 0
+metadata/_custom_type_script = "uid://cd5yu6idcqav4"
+
 [sub_resource type="Resource" id="Resource_1dumf"]
 script = ExtResource("3_dpreg")
-budget = 3
+time = 8.0
+budget = 4
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
 [sub_resource type="Resource" id="Resource_yqfra"]
 script = ExtResource("3_dpreg")
-time = 8.0
+time = 15.0
 budget = 3
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
 [sub_resource type="Resource" id="Resource_yhni8"]
 script = ExtResource("3_dpreg")
-time = 18.0
+time = 25.0
 budget = 2
 metadata/_custom_type_script = "uid://cd5yu6idcqav4"
 
 [sub_resource type="Resource" id="Resource_dqyix"]
 script = ExtResource("2_6owvl")
 max_alive = 6
-bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_1dumf"), SubResource("Resource_yqfra"), SubResource("Resource_yhni8")])
+bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_dpreg"), SubResource("Resource_1dumf"), SubResource("Resource_yqfra"), SubResource("Resource_yhni8")])
 allowed_enemies = Dictionary[int, bool]({
 0: true,
 1: false,

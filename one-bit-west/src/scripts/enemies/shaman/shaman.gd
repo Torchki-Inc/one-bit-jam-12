@@ -160,18 +160,47 @@ func _get_pool() -> Array:
 
 
 func _on_teleport() -> void:
-	print("try teleport")
 	if waypoints.is_empty():
-		print("no waypoints")
 		return
+
+	var old_pos := global_position
+
+	# ghost на старом месте — fade out
+	_spawn_ghost(old_pos, true)
+	VfxManager.spawn_death_burst(old_pos)
+
 	waypoint_index = (waypoint_index + 1) % waypoints.size()
 	global_position = waypoints[waypoint_index].global_position
+
+	# ghost на новом месте — fade in
+	_spawn_ghost(global_position, false)
+	VfxManager.spawn_death_burst(global_position)
+
+func _spawn_ghost(pos: Vector3, fade_out: bool) -> void:
+	var ghost := Sprite3D.new()
+	ghost.texture = sprites.dead
+	ghost.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	ghost.pixel_size = sprite.pixel_size
+	get_parent().add_child(ghost)
+	ghost.global_position = pos
+
+	var tween := ghost.create_tween()
+	if fade_out:
+		ghost.modulate.a = 1.0
+		tween.tween_property(ghost, "modulate:a", 0.0, 1)
+	else:
+		ghost.modulate.a = 0.0
+		tween.tween_property(ghost, "modulate:a", 0.6, 0.15)
+		tween.tween_property(ghost, "modulate:a", 0.0, 0.25)
+
+	tween.tween_callback(ghost.queue_free)
+
 
 # ── смерть ─────────────────────────────────────────────────────────────────
 
 
 func _die() -> void:
-	VfxManager.hitstop(0.08, 0.02)
+	VfxManager.hitstop(0.1, 0.02)
 	summon_timer.stop()
 	teleport_timer.stop()
 	emit_signal("shaman_defeated")
