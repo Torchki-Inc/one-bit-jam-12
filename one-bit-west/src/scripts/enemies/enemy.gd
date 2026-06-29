@@ -98,7 +98,7 @@ func die():
 		return
 	dead = true
 	remove_from_group("enemy")
-	var pos := global_position # кешируем до queue_free
+	var pos := global_position
 	VfxManager.spawn_death_burst(pos)
 	# TODO:
 	# play death animation
@@ -128,7 +128,7 @@ func face_direction(move_dir: Vector3):
 func flash_hit() -> void:
 	if hit_tween:
 		hit_tween.kill()
-	sprite.modulate = Color(0, 0, 0, 1) # белый флэш
+	sprite.modulate = Color(0, 0, 0, 1) #
 	hit_tween = create_tween()
 	hit_tween.tween_property(sprite, "modulate", original_modulate, 0.12)
 
@@ -155,7 +155,7 @@ func leave_body():
 
 	sprite.global_position = Vector3(
 		global_position.x,
-		floor_y + 0.7, # <-- adjust this number
+		floor_y + 0.65, # <-- adjust this number
 		global_position.z
 	)
 

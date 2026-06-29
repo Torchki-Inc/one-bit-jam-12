@@ -48,6 +48,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	super._physics_process(delta)
+
 func _drop_ammo(amount: int) -> void:
 	var pickup = preload("res://src/scenes/weapons/ammo_pickup.tscn").instantiate()
 	pickup.amount = amount
@@ -56,62 +57,47 @@ func _drop_ammo(amount: int) -> void:
 
 func make_shot():
 	if dead or not is_inside_tree():
-			return
+		return
+	var space_state := get_world_3d().direct_space_state
+	var from := shoot_point.global_position
+
+	var player_vel := Vector3.ZERO
+	if player is CharacterBody3D:
+		player_vel = player.velocity
+	var dist := from.distance_to(player.global_position)
+	var travel_time := dist / 200.0
+	var predicted_pos := player.global_position + player_vel * travel_time
+	var aim_error := Vector3(
+		randf_range(-0.8, 0.8),
+		randf_range(-0.2, 0.2),
+		randf_range(-0.8, 0.8)
+	)
+	var direction := (predicted_pos + aim_error - from).normalized()
+
 	for i in shotgun_pellets:
 		if dead or not is_inside_tree():
-				return
-		var space_state := get_world_3d().direct_space_state
+			return
 
-
-		var from := self.shoot_point.global_position
-		var direction := (player.global_position - from).normalized()
-
+		# Спред применяется к direction, ПОТОМ считается to
 		var spread_x := deg_to_rad(randf_range(-shotgun_spread, shotgun_spread))
 		var spread_y := deg_to_rad(randf_range(-shotgun_spread, shotgun_spread))
+		var spread_dir := direction.rotated(shoot_point.global_transform.basis.x, spread_y)
+		spread_dir = spread_dir.rotated(shoot_point.global_transform.basis.y, spread_x)
+		spread_dir = spread_dir.normalized()
 
-		direction = direction.rotated(shoot_point.global_transform.basis.x, spread_y)
-		direction = direction.rotated(shoot_point.global_transform.basis.y, spread_x)
-		direction = direction.normalized()
+		var to := from + spread_dir * shoot_radius
 
-		var to := from + direction * shoot_radius
 		var query := PhysicsRayQueryParameters3D.create(from, to)
 		query.exclude = [self]
-
 		var result := space_state.intersect_ray(query)
 
 		if result:
 			var hit_object = result["collider"]
-
 			if hit_object.has_method("take_damage"):
 				hit_object.take_damage(damage)
-
-
-			if hit_object.get_parent().has_method("take_damage"):
+			elif hit_object.get_parent().has_method("take_damage"):
 				hit_object.get_parent().take_damage(damage)
 
-
-		else:
-			print("Miss")
-
-
-func _draw_ray(from: Vector3, to: Vector3):
-	var mesh_instance := MeshInstance3D.new()
-	var mesh := ImmediateMesh.new()
-	var material := StandardMaterial3D.new()
-
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.albedo_color = Color.BLUE
-
-	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
-	mesh.surface_add_vertex(from)
-	mesh.surface_add_vertex(to)
-	mesh.surface_end()
-
-	mesh_instance.mesh = mesh
-	get_tree().root.add_child(mesh_instance)
-
-	await get_tree().create_timer(0.05).timeout
-	mesh_instance.queue_free()
 
 #region States
 

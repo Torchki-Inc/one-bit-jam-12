@@ -32,12 +32,12 @@ script = ExtResource("2_6owvl")
 max_alive = 14
 bursts = Array[ExtResource("3_dpreg")]([SubResource("Resource_pcg63"), SubResource("Resource_7xf3f"), SubResource("Resource_n6c78"), SubResource("Resource_yt4o3")])
 allowed_enemies = Dictionary[int, bool]({
-0: true,
-1: true,
+0: false,
+1: false,
 2: true,
 3: true,
-4: true,
-5: true
+4: false,
+5: false
 })
 spawn_weight = Dictionary[int, int]({
 0: 10,

@@ -58,12 +58,28 @@ func _drop_ammo(amount: int) -> void:
 
 func make_shot():
 	if dead or not is_inside_tree():
-			return
+		return
 	var space_state := get_world_3d().direct_space_state
 
-	var from := self.shoot_point.global_position
-	var direction := (player.global_position - from).normalized()
-	var to: Vector3 = from + direction * self.shoot_radius
+	var from := shoot_point.global_position
+
+	# Predict where player will be (crude but effective)
+	var player_vel := Vector3.ZERO
+	if player is CharacterBody3D:
+		player_vel = player.velocity
+
+	var dist := from.distance_to(player.global_position)
+	var travel_time := dist / 200.0  # fake bullet speed for prediction
+	var predicted_pos := player.global_position + player_vel * travel_time
+
+	# Add inaccuracy so it's not perfect prediction
+	var aim_error := Vector3(
+		randf_range(-0.8, 0.8),
+		randf_range(-0.2, 0.2),
+		randf_range(-0.8, 0.8)
+	)
+	var direction := (predicted_pos + aim_error - from).normalized()
+	var to := from + direction * shoot_radius
 
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
