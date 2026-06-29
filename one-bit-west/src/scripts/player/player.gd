@@ -13,6 +13,9 @@ const SENSITIVITY: float = 0.004
 
 var max_health := 100
 var health := max_health
+var dead := false
+
+signal died
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -77,8 +80,23 @@ func _physics_process(delta: float) -> void:
 
 
 func take_damage(amount: int):
+	if dead:
+		return
+
 	health -= amount
+	health = max(health, 0)
+
 	print(name, " took ", amount, " damage. HP: ", health)
 
 	hud.set_health(health)
 	hud.flash_damage()
+
+	if health <= 0:
+		die()
+
+func die() -> void:
+	if dead:
+		return
+
+	dead = true
+	died.emit()
